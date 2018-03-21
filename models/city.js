@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   City.associate = function(models) {
-    // associations can be defined here
+    const {
+      Country, 
+      CitiesCountry,
+    } = models;
+    City.belongsToMany(Country, {through: CitiesCountry});
+    Country.belongsToMany(City, {through: CitiesCountry});
   };
   return City;
 };
