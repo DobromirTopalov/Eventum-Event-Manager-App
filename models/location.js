@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       City, 
       LocationsCity,
     } = models;
-    Location.belongsToMany(City, {through: LocationsCity});
-    City.belongsToMany(Location, {through: LocationsCity});
+    Location.belongsToMany(City, {through: LocationsCity, onDelete: 'cascade'});
+    City.belongsToMany(Location, {through: LocationsCity, onDelete: 'cascade'});
   };
   return Location;
 };

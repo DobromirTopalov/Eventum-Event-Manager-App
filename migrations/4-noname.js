@@ -5,54 +5,49 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "CitiesCountries", deps: [Cities, Countries]
+ * addColumn "address" to table "Locations"
+ * changeColumn "title" on table "Descriptions"
  * changeColumn "date" on table "Events"
  * changeColumn "name" on table "Locations"
  *
  **/
 
 var info = {
-    "revision": 2,
+    "revision": 4,
     "name": "noname",
-    "created": "2018-03-21T15:08:07.315Z",
+    "created": "2018-03-21T17:14:28.327Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "createTable",
+        fn: "addColumn",
         params: [
-            "CitiesCountries",
+            "Locations",
+            "address",
             {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
+                "type": Sequelize.STRING,
+                "validate": {
+                    "len": [1, 500]
                 },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
+                "allowNull": true
+            }
+        ]
+    },
+    {
+        fn: "changeColumn",
+        params: [
+            "Descriptions",
+            "title",
+            {
+                "type": Sequelize.STRING,
+                "content": {
+                    "allowNull": true
                 },
-                "CityId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Cities",
-                        "key": "id"
-                    },
-                    "primaryKey": true
+                "validate": {
+                    "len": [1, 200]
                 },
-                "CountryId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Countries",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
+                "allowNull": true
+            }
         ]
     },
     {
@@ -82,12 +77,6 @@ var migrationCommands = [{
             "name",
             {
                 "type": Sequelize.STRING,
-                "address": {
-                    "allowNull": true,
-                    "validate": {
-                        "len": [1, 500]
-                    }
-                },
                 "validate": {
                     "len": [1, 100]
                 },
