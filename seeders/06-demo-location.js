@@ -5,16 +5,17 @@ module.exports = {
     return queryInterface.bulkInsert('Locations', [{
         name: 'Wembley Stadium', 
         address: 'London HA9 0WS, UK',
-        createdAt: new Date,
-        updatedAt: new Date,
-      }, 
+      },
       {
         name: 'Mercedes-Benz Arena', 
         address: 'Mercedes-Platz 1, 10243 Berlin, Germany',
-        createdAt: new Date,
-        updatedAt: new Date,
-    }, 
-    ], {});
+      }, 
+      ]
+      .map( (el) => {
+        el.updatedAt =  new Date;
+        el.createdAt =  new Date;
+        return el
+      }), {});
   },
 
   down: (queryInterface, Sequelize) => {

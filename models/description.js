@@ -7,11 +7,11 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1, 200],
       },
+    },
     content: {
         type: DataTypes.TEXT,
         allowNull: true,
-      }
-    }
+      },
   }, {});
   Description.associate = function(models) {
     

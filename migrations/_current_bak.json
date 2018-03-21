@@ -175,11 +175,10 @@
                             200
                         ]
                     },
+                    "content": {
+                        "allowNull": true
+                    },
                     "seqType": "Sequelize.STRING"
-                },
-                "content": {
-                    "allowNull": true,
-                    "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -340,5 +339,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

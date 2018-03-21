@@ -6,7 +6,8 @@
   "scripts": {
     "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "add-seeders": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",
