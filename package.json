@@ -1,0 +1,32 @@
+{
+  "name": "eventum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.3",
+    "sequelize-auto-migrations": "^1.0.2",
+    "sequelize-cli": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.19.0",
+    "eslint-config-google": "^0.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DobromirTopalov/Eventum-Event-Manager-App.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DobromirTopalov/Eventum-Event-Manager-App/issues"
+  },
+  "homepage": "https://github.com/DobromirTopalov/Eventum-Event-Manager-App#readme"
+}
