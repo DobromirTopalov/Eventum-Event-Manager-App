@@ -1,5 +1,39 @@
 {
     "tables": {
+        "CitiesCountries": {
+            "tableName": "CitiesCountries",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "CityId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Cities",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CountryId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Countries",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
         "Cities": {
             "tableName": "Cities",
             "schema": {
@@ -177,5 +211,5 @@
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 2
 }
