@@ -7,14 +7,14 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1, 100],
       },
+    },
     address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: [1, 500],
         },
-      }
-    }
+      },
   }, {});
   Location.associate = function(models) {
     const {

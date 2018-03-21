@@ -1,0 +1,343 @@
+{
+    "tables": {
+        "Categories": {
+            "tableName": "Categories",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            100
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "CategorySubcategories": {
+            "tableName": "CategorySubcategories",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "CategoryId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Categories",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "SubcategoryId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Subcategories",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "CitiesCountries": {
+            "tableName": "CitiesCountries",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "CityId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Cities",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CountryId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Countries",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Cities": {
+            "tableName": "Cities",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            100
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "Countries": {
+            "tableName": "Countries",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            100
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "Descriptions": {
+            "tableName": "Descriptions",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "title": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            200
+                        ]
+                    },
+                    "content": {
+                        "allowNull": true
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "Events": {
+            "tableName": "Events",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "date": {
+                    "allowNull": true,
+                    "validate": {
+                        "isDate": true
+                    },
+                    "coverPhoto": {
+                        "allowNull": true,
+                        "validate": {
+                            "isUrl": true
+                        }
+                    },
+                    "seqType": "Sequelize.DATE"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "LocationId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Locations",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Locations": {
+            "tableName": "Locations",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            100
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "address": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            500
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "LocationsCities": {
+            "tableName": "LocationsCities",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "LocationId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Locations",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "CityId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Cities",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "Subcategories": {
+            "tableName": "Subcategories",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "title": {
+                    "allowNull": true,
+                    "validate": {
+                        "len": [
+                            1,
+                            100
+                        ]
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}
