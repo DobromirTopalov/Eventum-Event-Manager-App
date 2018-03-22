@@ -2,12 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Events', [{
-        date: '2018-02-05 20:00:00', 
+    return queryInterface.bulkInsert('EventArtists', [{
+        EventId: 1,
+        ArtistId: 1,
       }, {
-        date: '2018-05-05 22:30:00', 
+        EventId: 1,
+        ArtistId: 2, 
       }, {
-        date: '2018-11-25 21:00:00', 
+        EventId: 2,
+        ArtistId: 3,
       }].map( (el) => {
         el.updatedAt =  new Date;
         el.createdAt =  new Date;
@@ -16,6 +19,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Events', null, {});
+    return queryInterface.bulkDelete('EventArtists', null, {});
   }
 };
