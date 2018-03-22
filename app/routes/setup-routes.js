@@ -5,7 +5,7 @@ const init = (app, data) => {
 
     app.get('/', async (req, res) => {
         const context = {};
-        res.render('index', context);
+        res.render('./home/home', context);
     });
 
     /** dynamically load all routes */
