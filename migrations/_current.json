@@ -353,16 +353,6 @@
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "CategoryId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Categories",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "ArtistId": {
                     "allowNull": true,
                     "references": {
@@ -707,6 +697,40 @@
                     "primaryKey": true,
                     "references": {
                         "model": "Artists",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "EventSubcategories": {
+            "tableName": "EventSubcategories",
+            "schema": {
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "EventId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Events",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "SubcategoryId": {
+                    "primaryKey": true,
+                    "references": {
+                        "model": "Subcategories",
                         "key": "id"
                     },
                     "onDelete": "CASCADE",

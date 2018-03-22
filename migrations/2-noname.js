@@ -5,8 +5,8 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
+ * createTable "EventSubcategories", deps: [Events, Subcategories]
  * addColumn "DescriptionId" to table "Events"
- * addColumn "CategoryId" to table "Events"
  * addColumn "ArtistId" to table "Events"
  *
  **/
@@ -14,11 +14,48 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 2,
     "name": "noname",
-    "created": "2018-03-22T11:42:22.443Z",
+    "created": "2018-03-22T14:12:49.060Z",
     "comment": ""
 };
 
 var migrationCommands = [{
+        fn: "createTable",
+        params: [
+            "EventSubcategories",
+            {
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "EventId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "CASCADE",
+                    "references": {
+                        "model": "Events",
+                        "key": "id"
+                    },
+                    "primaryKey": true
+                },
+                "SubcategoryId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "CASCADE",
+                    "references": {
+                        "model": "Subcategories",
+                        "key": "id"
+                    },
+                    "primaryKey": true
+                }
+            },
+            {}
+        ]
+    },
+    {
         fn: "addColumn",
         params: [
             "Events",
@@ -29,23 +66,6 @@ var migrationCommands = [{
                 "onDelete": "SET NULL",
                 "references": {
                     "model": "Descriptions",
-                    "key": "id"
-                },
-                "allowNull": true
-            }
-        ]
-    },
-    {
-        fn: "addColumn",
-        params: [
-            "Events",
-            "CategoryId",
-            {
-                "type": Sequelize.INTEGER,
-                "onUpdate": "CASCADE",
-                "onDelete": "SET NULL",
-                "references": {
-                    "model": "Categories",
                     "key": "id"
                 },
                 "allowNull": true
