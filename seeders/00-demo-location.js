@@ -9,6 +9,10 @@ module.exports = {
       {
         name: 'Mercedes-Benz Arena', 
         address: 'Mercedes-Platz 1, 10243 Berlin, Germany',
+      },
+      {
+        name: 'Big Ben', 
+        address: 'Westminster, London, England, UK',
       }, 
       ]
       .map( (el) => {

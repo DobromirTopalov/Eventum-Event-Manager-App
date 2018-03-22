@@ -7,15 +7,15 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: true,
       },
+    },
     coverPhoto: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        validate: {
-          isUrl: true,
-        }
-    }
-  }
-   }, {});
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        isUrl: true,
+      },
+    },
+  }, {});
 
   Event.associate = function(models) {
     const {
@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       Artist,
     } = models;
     Event.belongsTo(Location);
-    Event.belongsToMany(Artist, {through: EventArtists});
-    Artist.belongsToMany(Event, {through: EventArtists});
+    Event.belongsToMany(Artist, {through: 'EventArtists'});
+    Artist.belongsToMany(Event, {through: 'EventArtists'});
 
-    Event.belongsToMany(Comment, {through: EventComments});
-    Comment.belongsToMany(Event, {through: EventComments});
+    Event.belongsToMany(Comment, {through: 'EventComments'});
+    Comment.belongsToMany(Event, {through: 'EventComments'});
   };
   return Event;
 };

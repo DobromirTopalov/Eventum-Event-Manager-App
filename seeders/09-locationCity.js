@@ -2,16 +2,23 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    // return queryInterface.bulkInsert('LocationsCities', [{
-    //     LocationId: 2,
-    //     CityId: 5,
-    //   }, 
-    //   ]
-    //   .map( (el) => {
-    //     el.updatedAt =  new Date;
-    //     el.createdAt =  new Date;
-    //     return el
-    //   }), {});
+    return queryInterface.bulkInsert('LocationsCities', [{
+        LocationId: 1,
+        CityId: 1,
+      },{
+        LocationId: 2,
+        CityId: 2,
+      },
+      {
+        LocationId: 3,
+        CityId: 1,
+      }, 
+      ]
+      .map( (el) => {
+        el.updatedAt =  new Date;
+        el.createdAt =  new Date;
+        return el
+      }), {});
   },
 
   down: (queryInterface, Sequelize) => {
