@@ -175,10 +175,11 @@
                             200
                         ]
                     },
-                    "content": {
-                        "allowNull": true
-                    },
                     "seqType": "Sequelize.STRING"
+                },
+                "content": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -205,13 +206,14 @@
                     "validate": {
                         "isDate": true
                     },
-                    "coverPhoto": {
-                        "allowNull": true,
-                        "validate": {
-                            "isUrl": true
-                        }
-                    },
                     "seqType": "Sequelize.DATE"
+                },
+                "coverPhoto": {
+                    "allowNull": true,
+                    "validate": {
+                        "isUrl": true
+                    },
+                    "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -291,7 +293,7 @@
                         "model": "Locations",
                         "key": "id"
                     },
-                    "onDelete": "CASCADE",
+                    "onDelete": "cascade",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -301,7 +303,7 @@
                         "model": "Cities",
                         "key": "id"
                     },
-                    "onDelete": "CASCADE",
+                    "onDelete": "cascade",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 }
@@ -339,5 +341,5 @@
             "indexes": []
         }
     },
-    "revision": 6
+    "revision": 7
 }

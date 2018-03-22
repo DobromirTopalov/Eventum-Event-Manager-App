@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: true,
       },
+    },
     coverPhoto: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -14,8 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           isUrl: true,
         }
     }
-  }
-   }, {});
+  }, {});
 
   Event.associate = function(models) {
     const {
