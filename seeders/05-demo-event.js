@@ -13,7 +13,7 @@ module.exports = {
       }, {
         LocationId: 3,
         coverPhoto: 'google.com',
-        date: '2018-11-25 21:00:00', 
+        date: '2018-11-25 21:00:00',
       }].map( (el) => {
         el.updatedAt =  new Date;
         el.createdAt =  new Date;

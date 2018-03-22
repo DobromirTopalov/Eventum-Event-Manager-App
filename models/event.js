@@ -20,12 +20,16 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = function(models) {
     const {
       Location,
-      EventArtists,
       Comment,
-      EventComments,
       Artist,
+      Description,
+      Category,
     } = models;
     Event.belongsTo(Location);
+    Event.belongsTo(Description);
+    Event.belongsTo(Category);
+    Event.belongsTo(Artist);
+
     Event.belongsToMany(Artist, {through: 'EventArtists'});
     Artist.belongsToMany(Event, {through: 'EventArtists'});
 
