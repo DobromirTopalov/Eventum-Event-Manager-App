@@ -12,7 +12,7 @@ module.exports = {
       .map( (el) => {
         el.updatedAt =  new Date;
         el.createdAt =  new Date;
-        return el
+        return el;
       }), {});
   },
 
