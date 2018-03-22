@@ -22,6 +22,7 @@ const init = (app) => {
 
     // decorator
     app.use('/static', express.static(path.join(__dirname, '../../public')));
+    app.set('views', path.join(__dirname, '../../views'));
 
     // decorator
     app.use(morgan('combined'));

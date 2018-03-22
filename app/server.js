@@ -17,6 +17,9 @@ require('./config/express').init(app);
         return next();
     });
 */
+// app.get('/', (req, res) => {
+//     res.send(, 'By);
+// })
 
 require('./routes').init(app, data);
 
