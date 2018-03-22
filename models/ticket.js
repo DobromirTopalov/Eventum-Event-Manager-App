@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       TypeTicket, 
       TicketTypeTicket,
     } = models;
-    Ticket.belongsToMany(TypeTicket, {through: TicketTypeTicket});
-    TypeTicket.belongsToMany(Ticket, {through: TicketTypeTicket});
+    Ticket.belongsToMany(TypeTicket, {through: 'TicketTypeTicket'});
+    TypeTicket.belongsToMany(Ticket, {through: 'TicketTypeTicket'});
   };
   return Ticket;
 };

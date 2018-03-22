@@ -46,8 +46,8 @@ module.exports = (sequelize, DataTypes) => {
       TicketUsers,
       Ticket,
     } = models;
-    User.belongsToMany(Artist, {through: UserFollowingArtists});
-    Artist.belongsToMany(User, {through: UserFollowingArtists});
+    User.belongsToMany(Artist, {through: 'UserFollowingArtists'});
+    Artist.belongsToMany(User, {through: 'UserFollowingArtists'});
     User.belongsToMany(Ticket, {through: TicketUsers});
     Ticket.belongsToMany(User, {through: TicketUsers});
   };

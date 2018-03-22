@@ -11,11 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   City.associate = function(models) {
     const {
-      Country, 
-      CitiesCountry,
+      Country,
     } = models;
-    City.belongsToMany(Country, {through: CitiesCountry});
-    Country.belongsToMany(City, {through: CitiesCountry});
+    City.belongsToMany(Country, {through: 'CitiesCountry'});
+    Country.belongsToMany(City, {through: 'CitiesCountry'});
   };
   return City;
 };

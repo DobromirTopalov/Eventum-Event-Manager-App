@@ -12,10 +12,9 @@ module.exports = (sequelize, DataTypes) => {
   Category.associate = function(models) {
     const {
       Subcategory, 
-      CategorySubcategories,
     } = models;
-    Category.belongsToMany(Subcategory, {through: CategorySubcategories});
-    Subcategory.belongsToMany(Category, {through: CategorySubcategories});
+    Category.belongsToMany(Subcategory, {through: 'CategorySubcategories'});
+    Subcategory.belongsToMany(Category, {through: 'CategorySubcategories'});
   };
   return Category;
 };

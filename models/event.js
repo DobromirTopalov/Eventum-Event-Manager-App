@@ -21,18 +21,15 @@ module.exports = (sequelize, DataTypes) => {
     const {
       Location,
       Description,
-      EventArtists,
       Comment,
-      EventCategories,
-      EventComments,
       Category,
       Artist,
     } = models;
     Event.belongsTo(Location);
     Event.belongsTo(Description);
 
-    Event.belongsToMany(Category,  {through: 'EventCategories'});
-    Category.belongsToMany(Event,  {through: 'EventCategories'});
+    Event.belongsToMany(Category, {through: 'EventCategories'});
+    Category.belongsToMany(Event, {through: 'EventCategories'});
 
     Event.belongsTo(Artist);
 
