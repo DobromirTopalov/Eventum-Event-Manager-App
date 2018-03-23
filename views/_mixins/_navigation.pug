@@ -1,21 +1,175 @@
 mixin site-navigation(guest)
-  nav.navbar.navbar-default
-      .container-fluid
-        .navbar-header
-          a.navbar-brand(href="#") EventumLogo
-        ul.nav.navbar-nav
-          li
-            a(href="#") Home
-          li
-            a(href="#") Page 1
-          li
-            a(href="#") Page 2
-        ul.nav.navbar-nav.navbar-right
-          li
-            a(href="#")
-              span.glyphicon.glyphicon-user
-              |  Sign Up
-          li
-            a(href="#")
-              span.glyphicon.glyphicon-log-in
-              |  Login
+    .shortcode_wrapper
+        .container
+        // start menu-area
+        .menu-area.menu--style2
+            // start .top-menu-area
+            .top-menu-area
+                // start .container
+                .container
+                    // start .row
+                    .row
+                        // start .col-md-3
+                        .col-md-3.col-sm-3.col-xs-7.v_middle
+                            .logo
+                                a(href='index.html')
+                                    img(src='static/images/logo.png', alt='logo image', width='120')
+                        // end /.col-md-3
+                        // start .col-md-5
+                        .col-md-8.col-md-offset-1.col-xs-5.col-sm-9.v_middle
+                            // start .author-area
+                            .author-area.not_logged_in
+                                .author__notification_area
+                                    ul
+                                        li.has_dropdown
+                                            .icon_wrap
+                                                span.lnr.lnr-cart
+                                                span.notification_count.purch 2
+                                            .dropdown.dropdown--cart
+                                                .cart_area
+                                                    .cart_product
+                                                        .product__info
+                                                            .thumbn
+                                                                img(src='static/images/capro1.jpg', alt='cart product thumbnail' )
+                                                            .info
+                                                                a.title(href='single-product.html') Finance and Consulting Business Theme
+                                                                .cat
+                                                                    a(href='#')
+                                                                        img(src='images/catword.png', alt='')
+                                                                        | Wordpress
+                                                        .product__action
+                                                            a(href='#')
+                                                                span.lnr.lnr-trash
+                                                            p $60
+                                                    .cart_product
+                                                        .product__info
+                                                            .thumbn
+                                                                img(src='images/capro2.jpg', alt='cart product thumbnail')
+                                                            .info
+                                                                a.title(href='single-product.html') Flounce - Multipurpose OpenCart Theme
+                                                                .cat
+                                                                    a(href='#')
+                                                                        img(src='images/catword.png', alt='')
+                                                                        | Wordpress
+                                                        .product__action
+                                                            a(href='#')
+                                                                span.lnr.lnr-trash
+                                                            p $60
+                                                    .total
+                                                        p
+                                                            span Total :
+                                                            | $80
+                                                    .cart_action
+                                                        a.go_cart(href='cart.html') View Cart
+                                                        a.go_checkout(href='checkout.html') Checkout
+                                .pull-right.join
+                                    a.btn.btn-secondary.btn--xs(href='#') Join Now
+                                    a.btn.btn--xs(href='#') Login
+                            // end .author-area
+                            // author area restructured for mobile
+                            .mobile_content
+                                span.lnr.lnr-user.menu_icon
+                                // offcanvas menu
+                                .offcanvas-menu.closed
+                                    span.lnr.lnr-cross.close_menu
+                                    .author-author__info
+                                        .author__avatar.v_middle
+                                            img(src='images/usr_avatar.png', alt='user avatar')
+                                        .autor__info.v_middle
+                                            p.name
+                                                | Jhon Doe
+                                            p.ammount $20.45
+                                    // end /.author-author__info
+                                    .author__notification_area
+                                        ul
+                                            li
+                                                a(href='notification.html')
+                                                    .icon_wrap
+                                                        span.lnr.lnr-alarm
+                                                        span.notification_count.noti 25
+                                            li
+                                                a(href='message.html')
+                                                    .icon_wrap
+                                                        span.lnr.lnr-envelope
+                                                        span.notification_count.msg 6
+                                            li
+                                                a(href='cart.html')
+                                                    .icon_wrap
+                                                        span.lnr.lnr-cart
+                                                        span.notification_count.purch 2
+                                    // start .author__notification_area
+                                    .dropdown.dropdown--author
+                                        ul
+                                            li
+                                                a(href='author.html')
+                                                    span.lnr.lnr-user
+                                                    | Profile
+                                            li
+                                                a(href='dashboard.html')
+                                                    span.lnr.lnr-home
+                                                    |  Dashboard
+                                            li
+                                                a(href='dashboard-setting.html')
+                                                    span.lnr.lnr-cog
+                                                    |  Setting
+                                            li
+                                                a(href='cart.html')
+                                                    span.lnr.lnr-cart
+                                                    | Purchases
+                                            li
+                                                a(href='favourites.html')
+                                                    span.lnr.lnr-heart
+                                                    |  Favourite
+                                            li
+                                                a(href='dashboard-add-credit.html')
+                                                    span.lnr.lnr-dice
+                                                    | Add Credits
+                                            li
+                                                a(href='dashboard-statement.html')
+                                                    span.lnr.lnr-chart-bars
+                                                    | Sale Statement
+                                            li
+                                                a(href='dashboard-upload.html')
+                                                    span.lnr.lnr-upload
+                                                    | Upload Item
+                                            li
+                                                a(href='dashboard-manage-item.html')
+                                                    span.lnr.lnr-book
+                                                    | Manage Item
+                                            li
+                                                a(href='dashboard-withdrawal.html')
+                                                    span.lnr.lnr-briefcase
+                                                    | Withdrawals
+                                            li
+                                                a(href='#')
+                                                    span.lnr.lnr-exit
+                                                    | Logout
+                                    .text-center
+                                        a.author-area__seller-btn.inline(href='signup.html') Become a Seller
+                            // end /.mobile_content
+                        // end /.col-md-5
+                    // end /.row
+                // end /.container
+            // end
+            // start .mainmenu_area
+            
+//-   nav.navbar.navbar-default
+//-       .container-fluid
+//-         .navbar-header
+//-           a.navbar-brand(href="#") EventumLogo
+//-         ul.nav.navbar-nav
+//-           li
+//-             a(href="#") Home
+//-           li
+//-             a(href="#") Page 1
+//-           li
+//-             a(href="#") Page 2
+//-         ul.nav.navbar-nav.navbar-right
+//-           li
+//-             a(href="#")
+//-               span.glyphicon.glyphicon-user
+//-               |  Sign Up
+//-           li
+//-             a(href="#")
+//-               span.glyphicon.glyphicon-log-in
+//-               |  Login
