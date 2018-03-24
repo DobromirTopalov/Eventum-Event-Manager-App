@@ -1,0 +1,109 @@
+mixin site-footer(guest)
+    footer.footer-area
+        .footer-big.section--padding
+            // start .container
+            .container
+                .row
+                    .col-md-3.col-sm-6
+                        .info-footer
+                            .info__logo
+                                img(src='/static/images/logo.png', alt='footer logo')
+                            p.info--text
+                                | Nunc placerat mi id nisi interdum they mollis. Praesent pharetra, justo ut scel erisque the mattis, leo quam.
+                            ul.info-contact
+                                li
+                                    span.lnr.lnr-phone.info-icon
+                                    span.info Phone: +00000
+                                li
+                                    span.lnr.lnr-envelope.info-icon
+                                    span.info support@eventum.com
+                                li
+                                    span.lnr.lnr-map-marker.info-icon
+                                    span.info Sofia, Telerik
+                        // end /.info-footer
+                    // end /.col-md-3
+                    .col-md-5.col-sm-6
+                        .footer-menu
+                            h4.footer-widget-title.text--white Our Company
+                            ul
+                                li
+                                    a(href='#') How to Join Us
+                                li
+                                    a(href='#') How It Work
+                                li
+                                    a(href='#') Buying and Selling
+                                li
+                                    a(href='#') Testimonials
+                                li
+                                    a(href='#') Copyright Notice
+                                li
+                                    a(href='#') Refund Policy
+                                li
+                                    a(href='#') Affiliates
+                        // end /.footer-menu
+                        .footer-menu
+                            h4.footer-widget-title.text--white Help and FAQs
+                            ul
+                                li
+                                    a(href='#') How to Join Us
+                                li
+                                    a(href='#') How It Work
+                                li
+                                    a(href='#') Buying and Selling
+                                li
+                                    a(href='#') Testimonials
+                                li
+                                    a(href='#') Copyright Notice
+                                li
+                                    a(href='#') Refund Policy
+                                li
+                                    a(href='#') Affiliates
+                        // end /.footer-menu
+                    // end /.col-md-5
+                    .col-md-4.col-sm-12
+                        .newsletter
+                            h4.footer-widget-title.text--white Newsletter
+                            p
+                                | Subscribe to get the latest news, update and offer information. Don't worry, we won't send spam!
+                            .newsletter__form
+                                form(action='#')
+                                    .field-wrapper
+                                        input.relative-field.rounded(type='text', placeholder='Enter email')
+                                        button.btn.btn--round(type='submit') Submit
+                            // start .social
+                            .social.social--color--filled
+                                ul
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-facebook
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-twitter
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-google-plus
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-pinterest
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-linkedin
+                                    li
+                                        a(href='#')
+                                            span.fa.fa-dribbble
+                            // end /.social
+                        // end /.newsletter
+                    // end /.col-md-4
+                // end /.row
+            // end /.container
+        // end /.footer-big
+        .mini-footer
+            .container
+                .row
+                    .col-md-12
+                        .copyright-text
+                            p
+                                | © 2018 
+                                a(href='#') Eventum
+                                | . All rights reserved. Created by 
+                                a(href='#') Telerik

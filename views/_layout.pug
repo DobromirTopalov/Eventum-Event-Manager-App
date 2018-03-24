@@ -1,4 +1,6 @@
 include _mixins/_navigation
+include _mixins/_footer
+
 
 <!DOCTYPE html>
 html(lang="en")
@@ -6,26 +8,23 @@ head
     meta(charset="UTF-8")
     title Eventum2018
         block site-title
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <link rel="stylesheet" href="/static/css/animate.css">
-    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/fontello.css">
-    <link rel="stylesheet" href="/static/css/jquery-ui.css">
-    <link rel="stylesheet" href="/static/css/lnr-icon.css">
-    <link rel="stylesheet" href="/static/css/owl.carousel.css">
-    <link rel="stylesheet" href="/static/css/slick.css">
-    <link rel="stylesheet" href="/static/css/trumbowyg.min.css">
-    <link rel="stylesheet" href="/static/style.css">
-    //- <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
-        block styles
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        block headScripts
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/static/css/animate.css')
+    link(rel='stylesheet', href='/static/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/static/css/fontello.css')
+    link(rel='stylesheet', href='/static/css/jquery-ui.css')
+    link(rel='stylesheet', href='/static/css/lnr-icon.css')
+    link(rel='stylesheet', href='/static/css/owl.carousel.css')
+    link(rel='stylesheet', href='/static/css/slick.css')
+    link(rel='stylesheet', href='/static/css/trumbowyg.min.css')
+    link(rel='stylesheet', href='/static/style.css')
+        //- block styles
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        //- block headScripts
 body
     header
         +site-navigation(user)
-    #content.container
         block content
     footer.text-center
-        h2 Eventum 2018
+        +site-footer(guest)
