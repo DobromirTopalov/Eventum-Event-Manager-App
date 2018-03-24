@@ -1,8 +1,40 @@
 extends ../_layout
 
 block content
-    h1 Welcome to Eventum!
+  section.hero-area.bgimage
+    .bg_image_holder(style='background-image: url("images/hero_area_bg1.jpg"); opacity: 1;')
+      img(src='images/hero_area_bg1.jpg', alt='images/hero_area_bg1.jpg')
+    .hero-content.content_above
+      .content-wrapper
+        .container
+          .row
+            .col-md-12
+              .hero__content__title
+                h1
+                  span.light Looking for event near to you
+                  span.bold Eventum is all you need
+    .search-area
+      .container
+        .row
+          .col-sm-12
+            .search_box
+              form(action='#')
+                input.text_field(type='text', placeholder='Search your products...')
+                .search__select.select-wrap
+                  select#blah.select--field(name='category')
+                    option(value='') All Categories
+                    option(value='') PSD
+                    option(value='') HTML
+                    option(value='') WordPress
+                    option(value='') All Categories
+                  span.lnr.lnr-chevron-down
+                .search__select.select-wrap
+                  select#blah.select--field(name='city')
+                    option(value='') City
+                    option(value='') PSD
+                    option(value='') HTML
+                    option(value='') WordPress
+                    option(value='') All Categories
+                  span.lnr.lnr-chevron-down 
+                button.search-btn.btn--lg(type='submit') Search Now
 
-    aside
-        strong
-            | Today is a good day
