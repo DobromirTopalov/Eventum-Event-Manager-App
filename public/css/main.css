@@ -1,7 +1,19 @@
-.navbar {
-    background:rebeccapurple;
+.register-thumbnail {
+    width: 35%;
+    height: 35%;
     
+    /* border: solid 2px black; */
 }
-.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand  {
-    color: #FFF;
+
+.register-icons {
+    /* border: solid 2px yellow; */
+    /* width: 30%; */
+}
+
+.register-page-title {
+    text-align: center;
+}
+
+.register-page-underTitle {
+    text-align: center;
 }

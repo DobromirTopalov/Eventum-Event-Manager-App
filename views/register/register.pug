@@ -1,0 +1,25 @@
+extends ../_layout
+
+block content
+
+  section.signup_area.section--padding2
+      .container
+        .row
+          .col-xs-12.register-page-title
+            h2
+              |Create Your Account
+          .col-xs-12.register-page-underTitle  
+            p
+              |You can choose to create an user account and have access to hundreds of new events around the globe or be an artist and take part in organizing enormous shows!
+        .row
+          .col-xs-6.register-icons
+            img(src="https://image.flaticon.com/icons/svg/201/201634.svg", alt="user").register-thumbnail.img-responsive.center-block
+          .col-xs-6.register-icons
+            img(src="https://image.flaticon.com/icons/svg/145/145843.svg", alt="artist").register-thumbnail.img-responsive.center-block
+        .row
+          .col-xs-12.col-xs-offset-2.register-icons
+            a(href="/register/user")
+              |Create user acccount
+          .col-xs-12.col-xs-offset-8.register-icons
+            a(href="register/artist")
+              |Create artist account

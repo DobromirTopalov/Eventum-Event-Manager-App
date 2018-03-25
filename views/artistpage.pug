@@ -1,0 +1,334 @@
+extends ./_layout
+
+
+block content
+    section.author-profile-area
+        .container
+            .row
+                .author_module
+                    img(src='images/authcvr.jpg', alt='author image')
+            .row
+                .col-md-4
+                    aside.sidebar.sidebar_author
+                        .author-card.sidebar-card
+                            .author-infos
+                                .author_avatar
+                                    img(src='images/author-avatar.jpg', alt='Presenting the broken author avatar :D')
+                                .author
+                                    h4 AazzTech
+                                    p Signed Up: 08 April 2016
+                                // end /.author
+                                .social.social--color--filled
+                                    ul
+                                        li
+                                            a(href='#')
+                                                span.fa.fa-facebook
+                                        li
+                                            a(href='#')
+                                                span.fa.fa-twitter
+                                        li
+                                            a(href='#')
+                                                span.fa.fa-dribbble
+                                // end /.social
+                                .author-btn
+                                    a.btn.btn--md.btn--round(href='#') Follow
+                                // end /.author-btn
+                            // end /.author-infos
+                        // end /.author-card
+                        .sidebar-card.author-menu
+                            ul
+                                li
+                                    a.active(href='#') Profile
+                                li
+                                    a(href='author-items.html') Author Items
+                                li
+                                    a(href='author-reviews.html') Customer Reviews
+                                li
+                                    a(href='author-followers.html') Followers (67)
+                                li
+                                    a(href='author-following.html') Following (39)
+                        // end /.author-menu
+                        .sidebar-card.freelance-status
+                            .custom-radio
+                                input#opt1(type='radio', name='filter_opt', checked='')
+                                label(for='opt1')
+                                    span.circle
+                                    | Available for Freelance work
+                        // end /.author-card
+                        .sidebar-card.message-card
+                            .card-title
+                                h4 Product Information
+                            .message-form
+                                form(action='#')
+                                    .form-group
+                                        textarea#author-message.text_field(name='message', placeholder='Your message...')
+                                    .msg_submit
+                                        button.btn.btn--md.btn--round(type='submit') send message
+                                p
+                                    | Please 
+                                    a(href='#') sign in
+                                    |  to contact this author.
+                            // end /.message-form
+                        // end /.freelance-status
+                // end /.sidebar
+                .col-md-8
+                    .row
+                        .col-md-4.col-sm-4
+                            .author-info.mcolorbg4
+                                p Total Items
+                                h3 4,369
+                        // end /.col-md-4
+                        .col-md-4.col-sm-4
+                            .author-info.pcolorbg
+                                p Total sales
+                                h3 36,957
+                        // end /.col-md-4
+                        .col-md-4.col-sm-4
+                            .author-info.scolorbg
+                                p Total Items
+                                .rating.product--rating
+                                    ul
+                                        li
+                                            span.fa.fa-star
+                                        li
+                                            span.fa.fa-star
+                                        li
+                                            span.fa.fa-star
+                                        li
+                                            span.fa.fa-star
+                                        li
+                                            span.fa.fa-star-half-o
+                                    span.rating__count (26)
+                        // end /.col-md-4
+                        .col-md-12.col-sm-12
+
+                            .author_module.about_author
+                                h2
+                                    | About 
+                                    span AazzTech
+                                p
+                                    | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra,
+                                    | justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Prae sent pharetra, justo ut scelerisque the mattisleo quam aliquet congue.
+                                p
+                                    | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra.
+                    // end /.row
+                    .row
+                        .col-md-12
+                            .product-title-area
+                                .product__title
+                                    h2 Newest Products
+                                a.btn.btn--sm(href='#') See all Items
+                            // end /.product-title-area
+                        // end /.col-md-12
+                        // start .col-md-4
+                        .col-md-6.col-sm-6
+                            // start .single-product
+                            .product.product--card
+                                .product__thumbnail
+                                    img(src='images/p4.jpg', alt='Product Image')
+                                    .prod_btn
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
+                                    // end /.prod_btn
+                                // end /.product__thumbnail
+                                .product-desc
+                                    a.product_title(href='#')
+                                        h4 Yannan Na nakka muka
+                                    ul.titlebtm
+                                        li
+                                            img.auth-img(src='images/auth3.jpg', alt='author image')
+                                            p
+                                                a(href='#') AazzTech
+                                        li.product_cat
+                                            a(href='#')
+                                                img(src='images/cathtm.png', alt='category image')
+                                                | Plugin
+                                    p
+                                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
+                                        | the mattis, leo quam aliquet congue.
+                                // end /.product-desc
+                                .product-purchase
+                                    .price_love
+                                        span $10
+                                        p
+                                            span.lnr.lnr-heart
+                                            |  48
+                                    .rating.product--rating
+                                        ul
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star-half-o
+                                    .sell
+                                        p
+                                            span.lnr.lnr-cart
+                                            span 50
+                                // end /.product-purchase
+                            // end /.single-product
+                        // end /.col-md-4
+                        // start .col-md-4
+                        .col-md-6.col-sm-6
+                            // start .single-product
+                            .product.product--card
+                                .product__thumbnail
+                                    img(src='images/p2.jpg', alt='Product Image')
+                                    .prod_btn
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
+                                    // end /.prod_btn
+                                // end /.product__thumbnail
+                                .product-desc
+                                    a.product_title(href='#')
+                                        h4 Mccarther Coffee Shop
+                                    ul.titlebtm
+                                        li
+                                            img.auth-img(src='images/auth2.jpg', alt='author image')
+                                            p
+                                                a(href='#') AazzTech
+                                        li.product_cat
+                                            a(href='#')
+                                                img(src='images/catword.png', alt='category image')
+                                                | wordpress
+                                    p
+                                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
+                                        | the mattis, leo quam aliquet congue.
+                                // end /.product-desc
+                                .product-purchase
+                                    .price_love
+                                        span $10
+                                        p
+                                            span.lnr.lnr-heart
+                                            |  48
+                                    .rating.product--rating
+                                        ul
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star-half-o
+                                    .sell
+                                        p
+                                            span.lnr.lnr-cart
+                                            span 50
+                                // end /.product-purchase
+                            // end /.single-product
+                        // end /.col-md-4
+                        // start .col-md-4
+                        .col-md-6.col-sm-6
+                            // start .single-product
+                            .product.product--card
+                                .product__thumbnail
+                                    img(src='images/p2.jpg', alt='Product Image')
+                                    .prod_btn
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
+                                    // end /.prod_btn
+                                // end /.product__thumbnail
+                                .product-desc
+                                    a.product_title(href='#')
+                                        h4 Mccarther Coffee Shop
+                                    ul.titlebtm
+                                        li
+                                            img.auth-img(src='images/auth2.jpg', alt='author image')
+                                            p
+                                                a(href='#') AazzTech
+                                        li.product_cat
+                                            a(href='#')
+                                                img(src='images/catword.png', alt='category image')
+                                                | wordpress
+                                    p
+                                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
+                                        | the mattis, leo quam aliquet congue.
+                                // end /.product-desc
+                                .product-purchase
+                                    .price_love
+                                        span $10
+                                        p
+                                            span.lnr.lnr-heart
+                                            |  48
+                                    .rating.product--rating
+                                        ul
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star-half-o
+                                    .sell
+                                        p
+                                            span.lnr.lnr-cart
+                                            span 50
+                                // end /.product-purchase
+                            // end /.single-product
+                        // end /.col-md-4
+                        // start .col-md-4
+                        .col-md-6.col-sm-6
+                            // start .single-product
+                            .product.product--card
+                                .product__thumbnail
+                                    img(src='images/p6.jpg', alt='Product Image')
+                                    .prod_btn
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
+                                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
+                                    // end /.prod_btn
+                                // end /.product__thumbnail
+                                .product-desc
+                                    a.product_title(href='#')
+                                        h4 The of the century
+                                    ul.titlebtm
+                                        li
+                                            img.auth-img(src='images/auth.jpg', alt='author image')
+                                            p
+                                                a(href='#') AazzTech
+                                        li.product_cat
+                                            a(href='#')
+                                                img(src='images/catph.png', alt='Category Image')
+                                                | PSD
+                                    p
+                                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
+                                        | the mattis, leo quam aliquet congue.
+                                // end /.product-desc
+                                .product-purchase
+                                    .price_love
+                                        span $10
+                                        p
+                                            span.lnr.lnr-heart
+                                            |  48
+                                    .rating.product--rating
+                                        ul
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star
+                                            li
+                                                span.fa.fa-star-half-o
+                                    .sell
+                                        p
+                                            span.lnr.lnr-cart
+                                            span 50
+                                // end /.product-purchase
+                            // end /.single-product
+                        // end /.col-md-4
+                    // end /.row
+                // end /.col-md-8
+            // end /.row
+        // end /.container
