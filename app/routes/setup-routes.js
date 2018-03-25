@@ -7,10 +7,6 @@ const init = (app, data) => {
         const context = {};
         res.render('./home/home', context);
     });
-    app.get('/artist', async (req, res) => {
-        const context = {};
-        res.render('./artistpage', context);
-    });
     /** dynamically load all routes */
     fs.readdirSync(__dirname)
         .filter((filename) => filename !== path.basename(__filename))
