@@ -5883,7 +5883,53 @@ span.counter {
     }
   }
 
+// Choose user or artist
+.register-thumbnail {
+  width: 35%;
+  height: 35%;
+  
+  /* border: solid 2px black; */
+}
 
+.register-icons {
+  
+}
+
+.register-icons-image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.register-icons-middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.register-icons:hover .register-icons-image {
+  opacity: 0.3;
+}
+
+.register-icons:hover .register-icons-middle {
+  opacity: 1;
+}
+
+.register-page-title {
+  text-align: center;
+}
+
+.register-page-underTitle {
+  text-align: center;
+}
 
 
   /***************************************

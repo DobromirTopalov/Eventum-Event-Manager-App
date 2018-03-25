@@ -1,0 +1,259 @@
+extends ../_layout
+
+block content
+  section.dashboard-area
+      .dashboard_contents
+          .container
+            form.setting_form(action='#')
+              .row
+                .col-md-6
+                  .information_module
+                    .toggle_title
+                      h4 Biling Information 
+                    |                                 
+                    .information__set
+                      .information_wrapper.form--fields
+                        .row
+                          .col-md-6
+                            .form-group
+                              label(for='first_name')
+                                | First Name 
+                                sup *
+                              |                                                     
+                              input#first_name.text_field(placeholder='First Name', value='', type='text')
+                          |                                             
+                          .col-md-6
+                            .form-group
+                              label(for='last_name')
+                                | Last Name 
+                                sup *
+                              |                                                     
+                              input#last_name.text_field(placeholder='Last Name', value='', type='text')
+                        // end /.row
+                        .form-group
+                          label(for='email')
+                            | Company Name
+                            sup *
+                          |                                             
+                          input#email.text_field(placeholder='Eventum', value='', type='text')
+                        |                                         
+                        .form-group
+                          label(for='email1')
+                            | Email Adress 
+                            sup *
+                          |                                             
+                          input#email1.text_field(placeholder='Email address', value='contact@somemail.com', type='text')
+                        |                                         
+                        .form-group
+                          label(for='country1')
+                            | Country 
+                            sup *
+                          |                                             
+                          .select-wrap.select-wrap2
+                            select#country1.text_field(name='country')
+                              option(value='') Select one
+                              |                                                     
+                              option(value='bangladesh') Bangladesh
+                              |                                                     
+                              option(value='india') India
+                              |                                                     
+                              option(value='uruguye') Uruguye
+                              |                                                     
+                              option(value='australia') Australia
+                              |                                                     
+                              option(value='neverland') Neverland
+                              |                                                     
+                              option(value='atlantis') Atlantis
+                            |                                                 
+                            span.lnr.lnr-chevron-down
+                        |                                         
+                        .form-group
+                          label(for='address1') Address Line 1
+                          |                                             
+                          input#address1.text_field(placeholder='Address line one', type='text')
+                        |                                         
+                        .form-group
+                          label(for='address2') Address Line 2
+                          |                                             
+                          input#address2.text_field(placeholder='Address line two', type='text')
+                        |                                         
+                        .row
+                          .col-md-6
+                            .form-group
+                              label(for='city')
+                                | City / State 
+                                sup *
+                              |                                                     
+                              .select-wrap.select-wrap2
+                                select#city.text_field(name='city')
+                                  option(value='') Select one
+                                  |                                                             
+                                  option(value='dhaka') Dhaka
+                                  |                                                             
+                                  option(value='sydney') Sydney
+                                  |                                                             
+                                  option(value='newyork') New York
+                                  |                                                             
+                                  option(value='london') London
+                                  |                                                             
+                                  option(value='mexico') New Mexico
+                                |                                                         
+                                span.lnr.lnr-chevron-down
+                          |                                             
+                          .col-md-6
+                            .form-group
+                              label(for='zipcode')
+                                | Zip / Postal Code 
+                                sup *
+                              |                                                     
+                              input#zipcode.text_field(placeholder='zip/postal code', type='text')
+                    // end /.information__set
+                  // end /.information_module
+                // end /.col-md-6
+                .col-md-6
+                  .information_module.order_summary
+                    .toggle_title
+                      h4 Order Summary
+                    |                                 
+                    ul
+                      li.item
+                        a(href='single-product.html', target='_blank') Event ticket 1
+                        span $20.00
+                      |                                     
+                      li.item
+                        a(href='single-product.html', target='_blank') Event ticket 2
+                        span $60.00
+                      |                                     
+                      li
+                        p Pants &amp; 3 x T-Shirt items:
+                        span $12.00
+                      |                                     
+                      li.total_ammount
+                        p Total
+                        span $92.00
+                  // end /.information_module
+                  .information_module.payment_options
+                    .toggle_title
+                      h4 Select Payment Method
+                    |                                 
+                    ul
+                      li
+                        .custom-radio
+                          input#opt1(name='filter_opt', type='radio')
+                          |                                             
+                          label(for='opt1')
+                            span.circle
+                            | Credit Card
+                        |                                         
+                        img(src='images/cards.png', alt='Visa Cards')
+                      |                                     
+                      li
+                        .custom-radio
+                          input#opt2(name='filter_opt', type='radio')
+                          |                                             
+                          label(for='opt2')
+                            span.circle
+                            | Paypal
+                        |                                         
+                        img(src='images/paypal.png', alt='Visa Cards')
+                      |                                     
+                      li
+                        .custom-radio
+                          input#opt3(name='filter_opt', type='radio')
+                          |                                             
+                          label(for='opt3')
+                            span.circle
+                            | Martplace Credit
+                        |                                         
+                        p
+                          | Balance 
+                          span.bold $180
+                    |                                 
+                    .payment_info.modules__content
+                      .form-group
+                        label(for='card_number') Card Number
+                        |                                         
+                        input#card_number.text_field(placeholder='Enter your card number here...', type='text')
+                      // lebel for date selection
+                      label(for='name') Expire Date
+                      |                                     
+                      .row
+                        .col-md-6.col-sm-6
+                          .form-group
+                            .select-wrap.select-wrap2
+                              select#name(name='months')
+                                option(value='') Month
+                                |                                                         
+                                option(value='jan') jan
+                                |                                                         
+                                option(value='feb') Feb
+                                |                                                         
+                                option(value='mar') Mar
+                                |                                                         
+                                option(value='apr') Apr
+                                |                                                         
+                                option(value='may') May
+                                |                                                         
+                                option(value='jun') Jun
+                                |                                                         
+                                option(value='jul') Jul
+                                |                                                         
+                                option(value='aug') Aug
+                                |                                                         
+                                option(value='sep') Sep
+                                |                                                         
+                                option(value='oct') Oct
+                                |                                                         
+                                option(value='nov') Nov
+                                |                                                         
+                                option(value='dec') Dec
+                              |                                                     
+                              span.lnr.lnr-chevron-down
+                            // end /.select-wrap
+                          // end /.form-group
+                        // end /.col-md-6
+                        .col-md-6.col-sm-6
+                          .form-group
+                            .select-wrap.select-wrap2
+                              select#years(name='years')
+                                option(value='') Year
+                                |                                                         
+                                option(value='28') 2028
+                                |                                                         
+                                option(value='27') 2027
+                                |                                                         
+                                option(value='26') 2026
+                                |                                                         
+                                option(value='25') 2025
+                                |                                                         
+                                option(value='24') 2024
+                                |                                                         
+                                option(value='23') 2023
+                                |                                                         
+                                option(value='22') 2022
+                                |                                                         
+                                option(value='21') 2021
+                                |                                                         
+                                option(value='20') 2020
+                                |                                                         
+                                option(value='19') 2019
+                                |                                                         
+                                option(value='18') 2018
+                                |                                                         
+                                option(value='17') 2017
+                              |                                                     
+                              span.lnr.lnr-chevron-down
+                            // end /.select-wrap
+                          // end /.form-group
+                        // end /.col-md-6
+                      // end /.row
+                      .row
+                        .col-md-6
+                          .form-group
+                            label(for='cv_code') CVV Code
+                            |                                                 
+                            input#cv_code.text_field(placeholder='Enter code here...', type='text')
+                          |                                             
+                          button.btn.btn--round.btn--default(type='submit') Confirm Order
+
+

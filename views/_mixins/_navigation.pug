@@ -12,7 +12,7 @@ mixin site-navigation(guest)
                         // start .col-md-3
                         .col-md-3.col-sm-3.col-xs-7.v_middle
                             .logo
-                                a(href='index.html')
+                                a(href='/')
                                     img(src='static/images/logo.png', alt='logo image', width='120')
                         // end /.col-md-3
                         // start .col-md-5
@@ -61,10 +61,10 @@ mixin site-navigation(guest)
                                                             | $80
                                                     .cart_action
                                                         a.go_cart(href='cart.html') View Cart
-                                                        a.go_checkout(href='checkout.html') Checkout
+                                                        a.go_checkout(href='/checkout') Checkout
                                 .pull-right.join
-                                    a.btn.btn-secondary.btn--xs(href='#') Join Now
-                                    a.btn.btn--xs(href='#') Login
+                                    a.btn.btn-secondary.btn--xs(href='/register') Join Now
+                                    a.btn.btn--xs(href='/login') Login
                             // end .author-area
                             // author area restructured for mobile
                             .mobile_content

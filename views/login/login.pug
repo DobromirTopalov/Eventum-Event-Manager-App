@@ -21,7 +21,7 @@ block content
                     .form-group
                       label(for='pass') Password
                       |                                     
-                      input#pass.text_field(placeholder='Enter your password...', type='text')
+                      input#pass.text_field(placeholder='Enter your password...', type='password')
                     |                                 
                     .form-group
                       .custom_checkbox
@@ -36,12 +36,12 @@ block content
                     .login_assist
                       p.recover
                         | Lost your 
-                        a(href='pass-recovery.html') username
+                        a(href='/recovery') username
                         |  or 
-                        a(href='pass-recovery.html') password
+                        a(href='/recovery') password
                         | ?
                       |                                     
                       p.signup
                         | Don&apos;t have an 
-                        a(href='signup.html') account
+                        a(href='/register') account
                         | ?
