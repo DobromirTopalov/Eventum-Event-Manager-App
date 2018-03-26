@@ -1,0 +1,44 @@
+mixin user-bio()
+    .author_module.about_author
+        .row.text-center
+            .col-md-4
+                h2
+                    strong #{followers}
+                p
+                    small Followers
+            .col-md-4
+                h2
+                    strong #{events}
+                p
+                    small Events
+            .col-md-4
+                h2
+                    .rating.product--rating
+                        - var starIndex = 0;
+                        ul
+                            while starIndex < starRating-1
+                                li 
+                                    span.fa.fa-star
+                                    - starIndex+=2
+                                
+                            if starRating%2 === 1
+                                li
+                                    span.fa.fa-star-half-o 
+                                    - starIndex+=2   
+                            while starIndex < 10
+                                li 
+                                    span.fa.fa-star-o
+                                    - starIndex+=2
+                p
+                    small Average Rating
+        .row
+            .col-md-12
+                h2
+                    | About 
+                    span #{username}
+                p
+                    | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra,
+                    | justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Prae sent pharetra, justo ut scelerisque the mattisleo quam aliquet congue.
+                p
+                    | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque the mattisleo quam aliquet congue. Nunc placerat mi id nisi interdum mollis. Praesent pharetra.
+        // end /.row 

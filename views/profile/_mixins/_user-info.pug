@@ -1,0 +1,27 @@
+mixin user-info()
+    aside.sidebar.sidebar_author
+        .author-card.sidebar-card
+            .author-infos
+                .author_avatar
+                    img(src= profilepicUrl, alt='Presenting the broken author avatar :D')
+                .author
+                    h4 #{username}
+                    p #{dateSignup}
+                // end /.author
+                .social.social--color--filled
+                    ul
+                        li
+                            a(href='#')
+                                span.fa.fa-facebook
+                        li
+                            a(href='#')
+                                span.fa.fa-twitter
+                        li
+                            a(href='#')
+                                span.fa.fa-dribbble
+                // end /.social
+                .author-btn
+                    a.btn.btn--md.btn--round(href='#') Follow
+                // end /.author-btn
+            // end /.author-infos
+        // end /.author-card
