@@ -1,23 +1,15 @@
 mixin site-navigation(guest)
     .shortcode_wrapper
         .container
-        // start menu-area
         .menu-area.menu--style2
-            // start .top-menu-area
             .top-menu-area
-                // start .container
                 .container
-                    // start .row
                     .row
-                        // start .col-md-3
-                        .col-md-3.col-sm-3.col-xs-7.v_middle
+                        .col-md-4.col-sm-4.col-xs-7.v_middle
                             .logo
                                 a(href='/')
-                                    img(src='static/images/logo.png', alt='logo image', width='120')
-                        // end /.col-md-3
-                        // start .col-md-5
-                        .col-md-8.col-md-offset-1.col-xs-5.col-sm-9.v_middle
-                            // start .author-area
+                                    img(src='/static/images/logo-h.png', alt='logo image', width='200')
+                        .col-md-7.col-md-offset-1.col-xs-4.col-sm-8.v_middle
                             .author-area.not_logged_in
                                 .author__notification_area
                                     ul
@@ -65,7 +57,7 @@ mixin site-navigation(guest)
                                 if user
                                     .author-author__info.inline.has_dropdown
                                         .author__avatar
-                                            img(src='static/images/usr_avatar.png', alt='user avatar')
+                                            img(src='/static/images/usr_avatar.png', alt='user avatar')
                                         .autor__info
                                             p.name
                                             | #{user.name}
@@ -87,23 +79,19 @@ mixin site-navigation(guest)
                                                         | Logout
                                 else
                                     .pull-right.join
-                                    a.btn.btn-secondary.btn--xs(href='/register') Join Now
-                                    a.btn.btn--xs(href='/login') Login
-                            // end .author-area
-                            // author area restructured for mobile
+                                    a.header-register-button.btn.btn-secondary.btn--xs(href='/register') Join Now
+                                    a.header-login-buttom.btn.btn--xs(href='/login') Login
                             .mobile_content
                                 span.lnr.lnr-user.menu_icon
-                                // offcanvas menu
                                 .offcanvas-menu.closed
                                     span.lnr.lnr-cross.close_menu
                                     .author-author__info
                                         .author__avatar.v_middle
-                                            img(src='static/images/usr_avatar.png', alt='user avatar')
+                                            img(src='/static/images/usr_avatar.png', alt='user avatar')
                                         .autor__info.v_middle
                                             p.name
                                                 | Jhon Doe
                                             p.ammount $20.45
-                                    // end /.author-author__info
                                     .author__notification_area
                                         ul
                                             li
@@ -121,7 +109,6 @@ mixin site-navigation(guest)
                                                     .icon_wrap
                                                         span.lnr.lnr-cart
                                                         span.notification_count.purch 2
-                                    // start .author__notification_area
                                     .dropdown.dropdown--author
                                         ul
                                             li
@@ -170,9 +157,3 @@ mixin site-navigation(guest)
                                                     | Logout
                                     .text-center
                                         a.author-area__seller-btn.inline(href='signup.html') Become a Seller
-                            // end /.mobile_content
-                        // end /.col-md-5
-                    // end /.row
-                // end /.container
-            // end
-            // start .mainmenu_area

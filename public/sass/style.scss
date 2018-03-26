@@ -158,6 +158,9 @@
   padding: 24px 0;
   float: right;
 }
+.header-register-button {
+  margin-right: 20px;
+}
 
 /* start notification dropdown area */
 .has_dropdown{
@@ -336,7 +339,7 @@
     height: 100%;
     width: 100%;
     content: '';
-    background: linear-gradient(to left, #0030de, #0030de);
+    background: linear-gradient(to left, #000, #2e2b2b);
     top: 0;
     left: 0;
     opacity: 0.8;
@@ -5931,6 +5934,13 @@ span.counter {
   text-align: center;
 }
 
+
+/***************************************
+        Custom color here
+****************************************/
+.color-logo {
+  color: #0674ec;
+}
 
   /***************************************
         RESPONSIVE CSS GOES HERE
