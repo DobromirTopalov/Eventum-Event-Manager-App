@@ -1,1 +1,1 @@
-module.exports = require('.data-class')
+module.exports = require('.data-class');

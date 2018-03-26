@@ -5,19 +5,15 @@ class Artist extends User {
         this.setJobPosition(jobPosition);
     }
     setjobPosition(jobPosition) {
-        if(jobPosition.trim().length>0){
+        if (jobPosition.trim().length>0) {
             this.jobPosition = jobPosition;
         }
     }
     getjobPosition(jobPosition) {
         return this.jobPosition;
     }
-    getAll() {
-        return 
-            {
-               super.getAll()
-            }
-    }
 }
 
-module.exports = Artist;
+// module.exports = {
+//     Artist,
+// };

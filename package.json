@@ -6,7 +6,8 @@
   "scripts": {
     "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "migrate": "./node_modules/.bin/sequelize db:migrate",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha test/**/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'",
     "add-seeders": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
   "author": "",
@@ -40,6 +41,7 @@
     "gulp-uglify": "^3.0.0",
     "jquery": "^3.3.1",
     "merge-stream": "^1.0.1",
+    "mocha": "^5.0.5",
     "stream-series": "^0.1.1"
   },
   "repository": {
