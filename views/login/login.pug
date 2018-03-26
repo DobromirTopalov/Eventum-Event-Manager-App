@@ -1,47 +1,47 @@
 extends ../_layout
 
 block content
-  section.login_area.section--padding2
-      .container
-          .row
-            .col-md-6.col-md-offset-3
-              form(action="/login", method="post")
-                .cardify.login
-                  .login--header
-                    h3 Welcome Back
-                    |                                 
-                    p You can sign in with your username
-                  // end .login_header
-                  .login--form
-                    .form-group
-                      label(for='user_name') Username
-                      |                                     
-                      input#user_name.text_field(placeholder='Enter your username...', type='text', name='username')
-                    |                                 
-                    .form-group
-                      label(for='pass') Password
-                      |                                     
-                      input#pass.text_field(placeholder='Enter your password...', type='password', name='password')
-                    |                                 
-                    .form-group
-                      .custom_checkbox
-                        input#ch2(type='checkbox')
-                        |                                         
-                        label(for='ch2')
-                          span.shadow_checkbox
-                          span.label_text Remember me
-                    |                                 
-                    button.btn.btn--md.btn--round(type='submit') Login Now
-                    |                                 
-                    .login_assist
-                      p.recover
-                        | Lost your 
-                        a(href='/recovery') username
-                        |  or 
-                        a(href='/recovery') password
-                        | ?
-                      |                                     
-                      p.signup
-                        | Don&apos;t have an 
-                        a(href='/register') account
-                        | ?
+    section.login_area.section--padding2
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    form(action="/login", method="post")
+                        .cardify.login
+                            .login--header
+                                h3 Welcome Back
+                                |                                 
+                                p You can sign in with your username
+                            // end .login_header
+                            .login--form
+                                .form-group
+                                    label(for='user_name') Username
+                                    |                                     
+                                    input#user_name.text_field(placeholder='Enter your username...', type='text', name='username')
+                                |                                 
+                                .form-group
+                                    label(for='pass') Password
+                                    |                                     
+                                    input#pass.text_field(placeholder='Enter your password...', type='password', name='password')
+                                |                                 
+                                .form-group
+                                    .custom_checkbox
+                                        input#ch2(type='checkbox')
+                                        |                                         
+                                        label(for='ch2')
+                                            span.shadow_checkbox
+                                            span.label_text Remember me
+                                |                                 
+                                button.btn.btn--md.btn--round(type='submit') Login Now
+                                |                                 
+                                .login_assist
+                                    p.recover
+                                        | Lost your 
+                                        a(href='/recovery') username
+                                        |  or 
+                                        a(href='/recovery') password
+                                        | ?
+                                    |                                     
+                                p.signup
+                                    | Don&apos;t have an 
+                                    a(href='/register') account
+                                    | ?
