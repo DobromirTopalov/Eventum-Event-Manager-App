@@ -2,7 +2,7 @@ const {
   Router,
 } = require('express');
 
-const init = (app, data) => { 
+const init = (app, data) => {
   const router = new Router();
 
   router
@@ -10,10 +10,9 @@ const init = (app, data) => {
     const context = {};
     res.render('./home/home', context);
   });
-  
-  app.use('/', router);
 
-}
+  app.use('/', router);
+};
 
 module.exports = {
   init,

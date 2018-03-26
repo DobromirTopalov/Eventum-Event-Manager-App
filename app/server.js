@@ -1,25 +1,17 @@
 const express = require('express');
 
-// const data = require('./data');
-const data = [];
-
+const data = require('./data');
 const config = require('./config');
 
 const app = express();
 
 require('./config/express').init(app);
+require('./config/auth').init(app, data);
 
-/*
-    From Doch's demo
-
-    app.use((req, res, next) => {
-        res.locals.user = req.user || null;
-        return next();
-    });
-*/
-// app.get('/', (req, res) => {
-//     res.send(, 'By);
-// })
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    return next();
+});
 
 require('./routes').init(app, data);
 

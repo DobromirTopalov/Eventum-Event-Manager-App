@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
+  const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -41,15 +41,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     const {
-      Artist, 
+      Artist,
       UserFollowingArtists,
       TicketUsers,
       Ticket,
     } = models;
-    User.belongsToMany(Artist, {through: 'UserFollowingArtists'});
-    Artist.belongsToMany(User, {through: 'UserFollowingArtists'});
-    User.belongsToMany(Ticket, {through: TicketUsers});
-    Ticket.belongsToMany(User, {through: TicketUsers});
+
+    User.belongsToMany(Artist, { through: 'UserFollowingArtists' });
+    Artist.belongsToMany(User, { through: 'UserFollowingArtists' });
+    User.belongsToMany(Ticket, { through: TicketUsers });
+    Ticket.belongsToMany(User, { through: TicketUsers });
   };
   return User;
 };

@@ -5,7 +5,7 @@ block content
       .container
           .row
             .col-md-6.col-md-offset-3
-              form(action='#')
+              form(action="/login", method="post")
                 .cardify.login
                   .login--header
                     h3 Welcome Back
@@ -16,12 +16,12 @@ block content
                     .form-group
                       label(for='user_name') Username
                       |                                     
-                      input#user_name.text_field(placeholder='Enter your username...', type='text')
+                      input#user_name.text_field(placeholder='Enter your username...', type='text', name='username')
                     |                                 
                     .form-group
                       label(for='pass') Password
                       |                                     
-                      input#pass.text_field(placeholder='Enter your password...', type='password')
+                      input#pass.text_field(placeholder='Enter your password...', type='password', name='password')
                     |                                 
                     .form-group
                       .custom_checkbox

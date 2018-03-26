@@ -58,7 +58,7 @@ const init = (app, data) => {
     const folder = __dirname.split('\\');
     const lastSlash = folder.length - 1;
     const fullroute = __dirname;
-    
+
     dfsDirectory(folder[lastSlash], fullroute);
 };
 
