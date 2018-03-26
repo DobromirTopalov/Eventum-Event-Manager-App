@@ -1,4 +1,5 @@
 extends ../_layout
+include ../_mixins/_termsConditions
 
 block content
 
@@ -34,20 +35,23 @@ block content
                     .form-group
                       label(for='password') Password
                       |                                     
-                      input#password.text_field(placeholder='Enter your password...', type='text')
+                      input#password.text_field(placeholder='Enter your password...', type='password')
                     |                                 
                     .form-group
                       label(for='con_pass') Confirm Password
                       |                                     
-                      input#con_pass.text_field(placeholder='Confirm password', type='text')
+                      input#con_pass.text_field(placeholder='Confirm password', type='password')
                     div.custom-checkbox2
                       input#opt1(name='filter_opt', type='checkbox')  
                       label(for='opt1')
                         span.circle
-                        | I have read and agree to the terms and conditions
+                        | I have read and agree to the 
+                        a(href='#', data-target='#myModal2', data-toggle='modal')
+                          | terms and conditions
                       button.btn.btn--md.btn--round.register_btn(type='submit') Next
                       |                                 
                     .login_assist
                       p
                         | Already have an account? 
                         a(href='/login') Login
+  +terms-conditions(user)
