@@ -2,6 +2,7 @@ const Data = require('./main.data');
 
 const {
     User,
+    UserInfo,
 } = require('../../models/database/models');
 
 class UsersData extends Data {
@@ -14,6 +15,18 @@ class UsersData extends Data {
             where: {
                 username,
             },
+        });
+    }
+
+    getAllInformation(username) {
+        return this.Model.findAll({
+            where: {
+                username: username,
+            }, include: [
+                {
+                    model: UserInfo
+                },
+            ]
         });
     }
 }

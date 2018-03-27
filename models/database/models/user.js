@@ -31,13 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         isAlpha: true,
       },
     },
-    city: {
+    role: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        len: [1, 100],
-      },
-    },
+      allowNull: false,
+    }
   }, {});
   User.associate = function(models) {
     const {
@@ -45,12 +42,14 @@ module.exports = (sequelize, DataTypes) => {
       UserFollowingArtists,
       TicketUsers,
       Ticket,
+      UserInfo,
     } = models;
 
-    User.belongsToMany(Artist, { through: 'UserFollowingArtists' });
-    Artist.belongsToMany(User, { through: 'UserFollowingArtists' });
-    User.belongsToMany(Ticket, { through: TicketUsers });
-    Ticket.belongsToMany(User, { through: TicketUsers });
+    User.belongsTo(UserInfo);
+    // User.belongsToMany(Artist, { through: 'UserFollowingArtists' });
+    // Artist.belongsToMany(User, { through: 'UserFollowingArtists' });
+    // User.belongsToMany(Ticket, { through: TicketUsers });
+    // Ticket.belongsToMany(User, { through: TicketUsers });
   };
   return User;
 };

@@ -38,7 +38,7 @@ const init = (app, data) => {
   const router = new Router();
 
   router
-  .get('/settings/:id', async (req, res) => {
+  .get('/settings', async (req, res) => {
     const account = randomArtist;
     console.log(account);
     const context = {
@@ -46,7 +46,7 @@ const init = (app, data) => {
     };
     res.render('./profile/settings', context);
   })
-  .post('/settings/:id', async (req, res) => {
+  .post('/settings', async (req, res) => {
     const id = +((req.rawHeaders)[11].split('/').splice(-1, 1));
     const info = req.body;
 

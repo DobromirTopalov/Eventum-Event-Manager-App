@@ -439,6 +439,12 @@
         "TicketUsers": {
             "tableName": "TicketUsers",
             "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "amount": {
                     "allowNull": true,
                     "seqType": "Sequelize.INTEGER"
@@ -450,26 +456,6 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
-                },
-                "UserId": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "Users",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "TicketId": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "Tickets",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -549,15 +535,59 @@
                     },
                     "seqType": "Sequelize.STRING"
                 },
-                "city": {
-                    "allowNull": true,
-                    "validate": {
-                        "len": [
-                            1,
-                            100
-                        ]
-                    },
+                "role": {
+                    "allowNull": false,
                     "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "UserInfoId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "UserInfos",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "UserInfos": {
+            "tableName": "UserInfos",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "address": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.STRING"
+                },
+                "avatar": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.STRING"
+                },
+                "coverPhoto": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.STRING"
+                },
+                "website": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.STRING"
+                },
+                "biography": {
+                    "allowNull": true,
+                    "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -768,40 +798,6 @@
                         "key": "id"
                     },
                     "onDelete": "cascade",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                }
-            },
-            "indexes": []
-        },
-        "UserFollowingArtists": {
-            "tableName": "UserFollowingArtists",
-            "schema": {
-                "createdAt": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.DATE"
-                },
-                "UserId": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "Users",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "ArtistId": {
-                    "primaryKey": true,
-                    "references": {
-                        "model": "Artists",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 }
