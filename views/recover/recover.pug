@@ -1,22 +1,22 @@
 extends ../_layout
 
 block content
-  section.pass_recover_area.section--padding2
-    .container
-      .row
-        .col-md-6.col-md-offset-3
-          form(action='#')
-            .cardify.recover_pass
-              .login--header
-                p
-                  | Please enter the email address for your account. A verification
-                  | code will be sent to you. Once you have received the
-                  | verification code, you will be able to choose a new password
-                  | for your account.
-              .login--form
-                .form-group
-                  label(for='email_ad') Email Address
-                  |                                     
-                  input#email_ad.text_field(placeholder='Enter your email address', type='text')
-                |                                 
-                button.btn.btn--md.btn--round.register_btn(type='submit') Submit
+    section.pass_recover_area.section--padding2
+        .container
+            .row
+                .col-md-6.col-md-offset-3
+                    form(action='/recovery')
+                        .cardify.recover_pass
+                            .login--header
+                                p
+                                    | Please enter the email address for your account. A verification
+                                    | code will be sent to you. Once you have received the
+                                    | verification code, you will be able to choose a new password
+                                    | for your account.
+                            .login--form
+                                .form-group
+                                    label(for='email_ad') Email Address
+                                    |                                     
+                                    input#email_ad.text_field(placeholder='Enter your email address', name='email' type='text')
+                                |                                 
+                                button.btn.btn--md.btn--round.register_btn Submit

@@ -21,7 +21,7 @@ block content
           .col-sm-12
             .search_box
               form(action='#')
-                input.text_field(type='text', placeholder='Search your products...')
+                input.text_field(type='text', name='keywords', placeholder='Search for events...')
                 .search__select.select-wrap
                   select#blah.select--field(name='category')
                     option(value='') All Categories
@@ -38,5 +38,5 @@ block content
                     option(value='') WordPress
                     option(value='') All Categories
                   span.lnr.lnr-chevron-down 
-                button.search-btn.btn--lg(type='submit') Search Now
+                button.search-btn.btn--lg Search Now
 

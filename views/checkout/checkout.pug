@@ -20,7 +20,7 @@ block content
                                                         | First Name 
                                                         sup *
                                                     |                                                     
-                                                    input#first_name.text_field(placeholder='First Name', value='', type='text')
+                                                    input#first_name.text_field(placeholder='First Name', value='', name='firstname', type='text')
                                             |                                             
                                             .col-md-6
                                                 .form-group
@@ -28,21 +28,21 @@ block content
                                                         | Last Name 
                                                         sup *
                                                     |                                                     
-                                                    input#last_name.text_field(placeholder='Last Name', value='', type='text')
+                                                    input#last_name.text_field(placeholder='Last Name', value='', name='lastname', type='text')
                                             // end /.row
                                         .form-group
                                             label(for='email')
                                                 | Company Name
                                                 sup *
                                             |                                             
-                                            input#email.text_field(placeholder='Eventum', value='', type='text')
+                                            input#email.text_field(placeholder='Eventum', value='', name='company', type='text')
                                         |                                         
                                         .form-group
                                             label(for='email1')
                                                 | Email Adress 
                                                 sup *
                                             |                                             
-                                            input#email1.text_field(placeholder='Email address', value='contact@somemail.com', type='text')
+                                            input#email1.text_field(placeholder='Email address', value='contact@somemail.com', name='email', type='text')
                                         |                                         
                                         .form-group
                                             label(for='country1')
@@ -70,12 +70,12 @@ block content
                                             .form-group
                                                 label(for='address1') Address Line 1
                                                 |                                             
-                                                input#address1.text_field(placeholder='Address line one', type='text')
+                                                input#address1.text_field(placeholder='Address line one', name='addressLineOne', type='text')
                                             |                                         
                                             .form-group
                                                 label(for='address2') Address Line 2
                                                 |                                             
-                                                input#address2.text_field(placeholder='Address line two', type='text')
+                                                input#address2.text_field(placeholder='Address line two', name='addressLineTwo', type='text')
                                             |                                         
                                             .row
                                                 .col-md-6
@@ -106,7 +106,7 @@ block content
                                                             | Zip / Postal Code 
                                                             sup *
                                                         |                                                     
-                                                        input#zipcode.text_field(placeholder='zip/postal code', type='text')
+                                                        input#zipcode.text_field(placeholder='zip/postal code', name='zipcode', type='text')
                                     // end /.information__set
                                 // end /.information_module
                             // end /.col-md-6
@@ -139,7 +139,7 @@ block content
                                 ul
                                     li
                                         .custom-radio
-                                            input#opt1(name='filter_opt', type='radio')
+                                            input#opt1(name='filter_opt', name='paymentMethod1',type='radio')
                                             |                                             
                                             label(for='opt1')
                                                 span.circle
@@ -149,7 +149,7 @@ block content
                                         |                                     
                                     li
                                         .custom-radio
-                                            input#opt2(name='filter_opt', type='radio')
+                                            input#opt2(name='filter_opt', name='paymentMethod2', type='radio')
                                             |                                             
                                             label(for='opt2')
                                                 span.circle
@@ -159,7 +159,7 @@ block content
                                         |                                     
                                     li
                                         .custom-radio
-                                            input#opt3(name='filter_opt', type='radio')
+                                            input#opt3(name='filter_opt', name='paymentMethod3', type='radio')
                                             |                                             
                                             label(for='opt3')
                                                 span.circle
@@ -173,7 +173,7 @@ block content
                                     .form-group
                                         label(for='card_number') Card Number
                                         |                                         
-                                        input#card_number.text_field(placeholder='Enter your card number here...', type='text')
+                                        input#card_number.text_field(placeholder='Enter your card number here...', name='cardnumber', type='text')
                                     // lebel for date selection
                                     label(for='name') Expire Date
                                     |                                     
@@ -249,6 +249,6 @@ block content
                                             .form-group
                                                 label(for='cv_code') CVV Code
                                                 |                                                 
-                                                input#cv_code.text_field(placeholder='Enter code here...', type='text')
+                                                input#cv_code.text_field(placeholder='Enter code here...', name='cvcode' type='text')
                                             |                                             
                                             button.btn.btn--round.btn--default(type='submit') Confirm Order
