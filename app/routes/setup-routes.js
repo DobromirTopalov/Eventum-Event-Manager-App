@@ -23,7 +23,7 @@ const init = (app, data) => {
             // relative to absolute path
             .map((filename) => path.join(routepath, filename))
             .forEach((modulePath) => {
-                if (modulePath.slice(-3) === '.js') {
+                if (modulePath.slice(-9) === '.route.js') {
                     const route = require(modulePath);
                     route.init(app, data);
                 }
