@@ -3,15 +3,16 @@ extends ../_layout
 block content
 
   section.signup_area.section--padding2
-      .container
+    .container
         .row
-          .col-xs-12.register-page-title
-            h2
-              |Create Your Account
-          .col-xs-12.register-page-underTitle  
-            p
-              |You can choose to create an user account and have access to hundreds of new events around the globe or be an artist and take part in organizing enormous shows!
+            .col-xs-12.register-page-title
+                h2
+                    |Create Your Account
+            .col-xs-12.register-page-underTitle  
+                p
+                    |You can choose to create an user account and have access to hundreds of new events around the globe or be an artist and take part in organizing enormous shows!
         .row
+<<<<<<< HEAD
           .col-xs-6.register-icons
             a(href="/register/user")
               img(src='/static/images/svg/user.svg', width='300').center-block 
@@ -22,6 +23,17 @@ block content
             a(href="/register/artist")
               img(src='/static/images/svg/artist.svg', width='300').center-block 
               .register-icons-middle
+=======
+            .col-xs-6.register-icons
+                a(href="/register/user")
+                    img.register-icons-image(src='/static/images/svg/user.svg', style='width:45%').register-thumbnail.img-responsive.center-block 
+                    .register-icons-middle
+                        a(href="/register/user")
+                            button.btn.btn-sm.btn-primary User
+            .col-xs-6.register-icons
+>>>>>>> 7f448f98380a2de299d7b3cb280f12334a4e43e4
                 a(href="/register/artist")
-                  button.btn.btn-sm.btn-primary Artist
-
+                    img.register-icons-image(src='/static/images/svg/artist.svg', style='width:45%').register-thumbnail.img-responsive.center-block 
+                    .register-icons-middle
+                        a(href="/register/artist")
+                            button.btn.btn-sm.btn-primary Artist
