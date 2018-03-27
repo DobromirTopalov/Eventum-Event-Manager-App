@@ -2,6 +2,8 @@ const {
   Router,
 } = require('express');
 
+const passport = require('passport');
+
 const init = (app, data) => { 
     const router = new Router();
 
@@ -18,11 +20,22 @@ const init = (app, data) => {
         const context = {};
         res.render('./register/artist-register', context);
     })
-
-    app.post('/register/artist', function(req, res, next) {
+    .post('/register/user', async (req, res, next) => {
         let username = req.body.username;
+        let email= req.body.email;
+        let password = req.body.password;
+        let passwordRepeat = req.body.paswordRepeat;
+        let name = req.body.urname;
         console.log(username);
+        // app.post('/login',
+        // passport.authenticate('local', {
+        //     successRedirect: '/',
+        //     failureRedirect: '/login',
+        //     failureFlash: false,
+        // }));
         // window.alert(username);
+        res.send('Hello, ' + name + username + password + passwordRepeat + name)
+        // res.redirect()
     });
     app.use('/', router);
     }
