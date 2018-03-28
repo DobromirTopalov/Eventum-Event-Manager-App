@@ -34,22 +34,14 @@ module.exports = (sequelize, DataTypes) => {
     role: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   }, {});
   User.associate = function(models) {
     const {
-      Artist,
-      UserFollowingArtists,
-      TicketUsers,
-      Ticket,
       UserInfo,
     } = models;
 
     User.belongsTo(UserInfo);
-    // User.belongsToMany(Artist, { through: 'UserFollowingArtists' });
-    // Artist.belongsToMany(User, { through: 'UserFollowingArtists' });
-    // User.belongsToMany(Ticket, { through: TicketUsers });
-    // Ticket.belongsToMany(User, { through: TicketUsers });
   };
   return User;
 };

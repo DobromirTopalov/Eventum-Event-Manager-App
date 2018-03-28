@@ -1,12 +1,20 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Event = sequelize.define('Event', {
-    date: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      validate: {
-        isDate: true,
-      },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    describe: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    creator: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    capacity: {
+      type: DataTypes.INTEGER,
     },
     coverPhoto: {
       type: DataTypes.STRING,
@@ -15,29 +23,27 @@ module.exports = (sequelize, DataTypes) => {
         isUrl: true,
       },
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      validate: {
+        isDate: true,
+      },
+    },
   }, {});
 
-  Event.associate = function(models) {
+  Event.associate = (models) => {
     const {
       Location,
-      Description,
-      Comment,
       Category,
-      Artist,
+      User,
+      Subcategory,
     } = models;
+
     Event.belongsTo(Location);
-    Event.belongsTo(Description);
-
-    Event.belongsToMany(Category, { through: 'EventCategories' });
-    Category.belongsToMany(Event, { through: 'EventCategories' });
-
-    Event.belongsTo(Artist);
-
-    Event.belongsToMany(Artist, { through: 'EventArtists' });
-    Artist.belongsToMany(Event, { through: 'EventArtists'});
-
-    Event.belongsToMany(Comment, { through: 'EventComments' });
-    Comment.belongsToMany(Event, { through: 'EventComments' });
+    Event.belongsTo(User);
+    Event.belongsTo(Category);
+    Event.belongsTo(Subcategory);
   };
   return Event;
 };

@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       User,
     } = models;
 
-    UserInfo.hasOne(User);
+    
     // User.belongsToMany(Artist, { through: 'UserFollowingArtists' });
     // Artist.belongsToMany(User, { through: 'UserFollowingArtists' });
     // User.belongsToMany(Ticket, { through: TicketUsers });

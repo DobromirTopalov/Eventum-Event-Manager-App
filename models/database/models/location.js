@@ -1,27 +1,23 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Location = sequelize.define('Location', {
+  const Location = sequelize.define('Location', {
     name: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        len: [1, 100],
-      },
     },
     address: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        validate: {
-          len: [1, 500],
-        },
-      },
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   }, {});
-  Location.associate = function(models) {
+
+  Location.associate = (models) => {
     const {
-      City, 
+      City,
     } = models;
-    Location.belongsToMany(City, {through: 'LocationsCity', onDelete: 'cascade'});
-    City.belongsToMany(Location, {through: 'LocationsCity', onDelete: 'cascade'});
+
+    Location.belongsTo(City);
   };
+
   return Location;
 };

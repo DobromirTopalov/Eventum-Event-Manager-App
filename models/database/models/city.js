@@ -1,20 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var City = sequelize.define('City', {
+  const City = sequelize.define('City', {
     name: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
         len: [1, 100],
       },
-    }
+    },
   }, {});
   City.associate = function(models) {
     const {
       Country,
     } = models;
-    City.belongsToMany(Country, {through: 'CitiesCountry'});
-    Country.belongsToMany(City, {through: 'CitiesCountry'});
+    City.belongsTo(Country);
   };
   return City;
 };
