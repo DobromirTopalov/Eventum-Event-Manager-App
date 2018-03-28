@@ -7,11 +7,13 @@ module.exports = {
       SubcategoryId: 1,
     }, {
       name: 'Music',
-      SubcategoryId: 2,
+      SubcategoryId: 3,
     }, {
       name: 'Art',
+      SubcategoryId: 5,
     }, {
       name: 'Culture',
+      SubcategoryId: 8,
     }].map((el) => {
       el.updatedAt = new Date;
       el.createdAt = new Date;

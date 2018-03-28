@@ -29,10 +29,6 @@
                     "allowNull": false,
                     "seqType": "Sequelize.STRING"
                 },
-                "capacity": {
-                    "allowNull": true,
-                    "seqType": "Sequelize.STRING"
-                },
                 "createdAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
@@ -224,10 +220,6 @@
                 "describe": {
                     "allowNull": false,
                     "seqType": "Sequelize.STRING"
-                },
-                "creator": {
-                    "allowNull": false,
-                    "seqType": "Sequelize.INTEGER"
                 },
                 "capacity": {
                     "seqType": "Sequelize.INTEGER"
