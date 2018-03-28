@@ -36,14 +36,22 @@ const randomArtist = {
 };
 const init = (app, data) => {
   const router = new Router();
+  const profileSettingsController = require('./profile.settings.controller');
 
   router
   .get('/settings', async (req, res) => {
-    const account = randomArtist;
-    console.log(account);
+    let account;
+    if (req.user) {
+      account = profileSettingsController.test(data, req.user);
+    }
+
     const context = {
       account,
     };
+
+    console.log('***************************');
+    console.log(account);
+    
     res.render('./profile/settings', context);
   })
   .post('/settings', async (req, res) => {
