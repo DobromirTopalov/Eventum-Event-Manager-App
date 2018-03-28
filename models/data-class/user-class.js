@@ -1,18 +1,22 @@
 class User {
-    constructor(username, email, password, name, city, country, profilePicture, coverPhoto, socialProfileLinkOne, socialProfileLinkTwo, socialProfileLinkThree ) {
-        this.setUsername(username);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setName(name);
-        this.setCity(city);
-        this.setCountry(country);
-        this.setProfilePicture(profilePicture);
-        this.setCoverPhoto(coverPhoto);
-        this.setSocialProfileLink(socialProfileLinkOne);
-        this.setSocialProfileLink(socialProfileLinkTwo);
-        this.setSocialProfileLink(socialProfileLinkThree);
+    constructor(username = '', email = '', 
+    password ='', name ='' , city = '', country = '',
+    profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
+    socialProfileLinkTwo = '', socialProfileLinkThree = '') {
+            this.setUsername(username);
+            this.setEmail(email);
+            this.setPassword(password);
+            this.setName(name);
+            this.setCity(city);
+            this.setCountry(country);
+            this.setProfilePicture(profilePicture);
+            this.setCoverPhoto(coverPhoto);
+            this.setSocialProfileLink(socialProfileLinkOne);
+            this.setSocialProfileLink(socialProfileLinkTwo);
+            this.setSocialProfileLink(socialProfileLinkThree);
     }
     setUsername(username) {
+
         const usernameRegex = /^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$/;
         const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         username = username.trim();
@@ -23,11 +27,12 @@ class User {
             || (username.length > 30)
             // || (username.match(symbolRestrictRegex))
         ) {
-            return null;
-        }
-        
+            throw new Error('Invalid username length')
+        }      
         if (username.match(usernameRegex)) {
             this.username = username;
+        } else {
+            throw new Error('Username includes symbols that are not allowed')
         }
     }
     setEmail(email) {
@@ -37,11 +42,13 @@ class User {
             || !email
             || (email.length > 100)
         ) {
-            return null;
+            throw new Error('Invalid email length')
         }
 
         if (email.match(emailRegex)) {
             this.email = email;
+        } else {
+            throw new Error('Email includes symbols that are not allowed')
         }
     }
     setName(name) {
@@ -52,26 +59,29 @@ class User {
         if (!name.length
             || !name
             || (name.length > 100)
-        ) {
-            return null;
+        ) { console.log(name)
+            throw new Error('Invalid name length')
         }
 
         if (name.match(nameRegex)) {
             this.name = name;
+        } else {
+            throw new Error('Name includes symbols that are not allowed')
         }
     }
     setPassword(password) {
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    
         if (!password.length
             || !password
             || (password.length > 32)
         ) {
-            return null;
+            throw new Error('Invalid password length')
         }
 
         if (password.match(passwordRegex)) {
             this.password = password;
+        } else {
+            throw new Error('Password includes symbols that are not allowed')
         }
     }
     setCountry(country) {

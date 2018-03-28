@@ -1,11 +1,17 @@
 const {
   Router,
 } = require('express');
+const {
+    User,
+    Artist
+} = require('../../../models/data-class')
 
 const passport = require('passport');
+const UserController = require('./register.controller');
 
-const init = (app, data) => { 
+const init = (app, data) => {
     const router = new Router();
+    let userController = new UserController(data);
 
     router
     .get('/register', async (req, res) => {
@@ -21,22 +27,25 @@ const init = (app, data) => {
         res.render('./register/artist-register', context);
     })
     .post('/register/user', async (req, res, next) => {
-        let username = req.body.username;
-        let email= req.body.email;
-        let password = req.body.password;
-        let passwordRepeat = req.body.paswordRepeat;
-        let name = req.body.urname;
-        console.log(username);
-        // app.post('/login',
-        // passport.authenticate('local', {
-        //     successRedirect: '/',
-        //     failureRedirect: '/login',
-        //     failureFlash: false,
-        // }));
-        // window.alert(username);
-        res.send('Hello, ' + name + username + password + passwordRepeat + name)
-        // res.redirect()
-    });
+       const userData = req.body;
+       try {
+            await userController.createUser(userData);
+        } catch (err) {
+            let someError = err;
+            res.status(400).json({"err": err.message});
+        }
+        res.status(200).json({"success":true});
+    })
+    .post('/register/artist', async (req, res, next) => {
+        const userData = req.body;
+        try {
+             await userController.createUser(userData);
+         } catch (err) {
+             let someError = err;
+             res.status(400).json({"err": err.message});
+         }
+         res.status(200).json({"success":true});
+     });
     app.use('/', router);
     }
 
