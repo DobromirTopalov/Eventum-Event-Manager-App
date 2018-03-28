@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js",
-    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "migrate": "cd models/database && ../../node_modules/.bin/sequelize db:migrate",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha test/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'",
     "add-seeders": "sequelize db:seed:undo:all && sequelize db:seed:all"

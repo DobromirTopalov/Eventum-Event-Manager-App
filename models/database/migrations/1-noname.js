@@ -5,135 +5,29 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "Artists", deps: []
- * createTable "Cities", deps: []
  * createTable "Countries", deps: []
- * createTable "Descriptions", deps: []
- * createTable "Locations", deps: []
- * createTable "Subcategories", deps: []
- * createTable "Tickets", deps: []
  * createTable "Categories", deps: []
- * createTable "TypeTickets", deps: []
- * createTable "Users", deps: []
- * createTable "UserFollowingArtists", deps: [Users, Artists]
- * createTable "TicketUsers", deps: [Users, Tickets]
+ * createTable "UserInfos", deps: []
+ * createTable "Cities", deps: [Countries]
+ * createTable "Locations", deps: [Cities]
+ * createTable "Subcategories", deps: [Categories]
+ * createTable "BillingInfos", deps: [Countries, Cities]
+ * createTable "Users", deps: [UserInfos]
+ * createTable "Events", deps: [Locations, Users, Categories, Subcategories]
+ * createTable "Tickets", deps: [Events]
  * createTable "Comments", deps: [Users]
- * createTable "Events", deps: [Locations, Descriptions, Artists]
- * createTable "CategorySubcategories", deps: [Categories, Subcategories]
- * createTable "CitiesCountry", deps: [Cities, Countries]
- * createTable "EventCategories", deps: [Events, Categories]
- * createTable "EventArtists", deps: [Events, Artists]
- * createTable "EventComments", deps: [Events, Comments]
- * createTable "LocationsCity", deps: [Locations, Cities]
- * createTable "TicketTypeTickets", deps: [Tickets, TypeTickets]
+ * createTable "UserPurches", deps: [Users, Tickets, BillingInfos]
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-03-22T16:00:25.256Z",
+    "created": "2018-03-28T17:26:33.556Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "createTable",
-        params: [
-            "Artists",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "username": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 30]
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "email": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isEmail": true
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "password": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [6, 30]
-                    },
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isAlpha": true
-                    },
-                    "allowNull": true
-                },
-                "city": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "job_possition": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Cities",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
         fn: "createTable",
         params: [
             "Countries",
@@ -148,144 +42,6 @@ var migrationCommands = [{
                     "type": Sequelize.STRING,
                     "validate": {
                         "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Descriptions",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "title": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 200]
-                    },
-                    "allowNull": true
-                },
-                "content": {
-                    "type": Sequelize.TEXT,
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Locations",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "address": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 500]
-                    },
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Subcategories",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "title": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 100]
-                    },
-                    "allowNull": true
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Tickets",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "price": {
-                    "type": Sequelize.FLOAT,
-                    "validate": {
-                        "isFloat": true
-                    },
-                    "allowNull": true
-                },
-                "capacity": {
-                    "type": Sequelize.INTEGER,
-                    "validate": {
-                        "isInt": true
                     },
                     "allowNull": true
                 },
@@ -334,7 +90,7 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "TypeTickets",
+            "UserInfos",
             {
                 "id": {
                     "type": Sequelize.INTEGER,
@@ -342,7 +98,50 @@ var migrationCommands = [{
                     "primaryKey": true,
                     "allowNull": false
                 },
-                "type": {
+                "address": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "avatar": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "coverPhoto": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "website": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "biography": {
+                    "type": Sequelize.TEXT,
+                    "allowNull": true
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Cities",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "name": {
                     "type": Sequelize.STRING,
                     "validate": {
                         "len": [1, 100]
@@ -356,6 +155,160 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
+                },
+                "CountryId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Countries",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Locations",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "name": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "address": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "CityId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Cities",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Subcategories",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "title": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "len": [1, 100]
+                    },
+                    "allowNull": true
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "CategoryId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Categories",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "BillingInfos",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "firstName": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "lastName": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "email": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "address": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "postCode": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "CountryId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Countries",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                },
+                "CityId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Cities",
+                        "key": "id"
+                    },
+                    "allowNull": true
                 }
             },
             {}
@@ -402,10 +355,65 @@ var migrationCommands = [{
                     },
                     "allowNull": true
                 },
-                "city": {
+                "role": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "UserInfoId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "UserInfos",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Events",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "title": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "describe": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "capacity": {
+                    "type": Sequelize.INTEGER
+                },
+                "coverPhoto": {
                     "type": Sequelize.STRING,
                     "validate": {
-                        "len": [1, 100]
+                        "isUrl": true
+                    },
+                    "allowNull": true
+                },
+                "date": {
+                    "type": Sequelize.DATE,
+                    "validate": {
+                        "isDate": true
                     },
                     "allowNull": true
                 },
@@ -416,43 +424,46 @@ var migrationCommands = [{
                 "updatedAt": {
                     "type": Sequelize.DATE,
                     "allowNull": false
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "UserFollowingArtists",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
                 },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
+                "LocationId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Locations",
+                        "key": "id"
+                    },
+                    "allowNull": true
                 },
                 "UserId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "references": {
                         "model": "Users",
                         "key": "id"
                     },
-                    "primaryKey": true
+                    "allowNull": true
                 },
-                "ArtistId": {
+                "CategoryId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "references": {
-                        "model": "Artists",
+                        "model": "Categories",
                         "key": "id"
                     },
-                    "primaryKey": true
+                    "allowNull": true
+                },
+                "SubcategoryId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Subcategories",
+                        "key": "id"
+                    },
+                    "allowNull": true
                 }
             },
             {}
@@ -461,10 +472,26 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "TicketUsers",
+            "Tickets",
             {
-                "amount": {
+                "id": {
                     "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "price": {
+                    "type": Sequelize.FLOAT,
+                    "validate": {
+                        "isFloat": true
+                    },
+                    "allowNull": true
+                },
+                "capacity": {
+                    "type": Sequelize.INTEGER,
+                    "validate": {
+                        "isInt": true
+                    },
                     "allowNull": true
                 },
                 "createdAt": {
@@ -475,25 +502,15 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
-                "UserId": {
+                "EventId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "references": {
-                        "model": "Users",
+                        "model": "Events",
                         "key": "id"
                     },
-                    "primaryKey": true
-                },
-                "TicketId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Tickets",
-                        "key": "id"
-                    },
-                    "primaryKey": true
+                    "allowNull": true
                 }
             },
             {}
@@ -539,7 +556,7 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "Events",
+            "UserPurches",
             {
                 "id": {
                     "type": Sequelize.INTEGER,
@@ -547,18 +564,8 @@ var migrationCommands = [{
                     "primaryKey": true,
                     "allowNull": false
                 },
-                "date": {
-                    "type": Sequelize.DATE,
-                    "validate": {
-                        "isDate": true
-                    },
-                    "allowNull": true
-                },
-                "coverPhoto": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isUrl": true
-                    },
+                "quantity": {
+                    "type": Sequelize.INTEGER,
                     "allowNull": true
                 },
                 "createdAt": {
@@ -569,294 +576,35 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
-                "LocationId": {
+                "UserId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
                     "onDelete": "SET NULL",
                     "references": {
-                        "model": "Locations",
+                        "model": "Users",
                         "key": "id"
                     },
                     "allowNull": true
-                },
-                "DescriptionId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "Descriptions",
-                        "key": "id"
-                    },
-                    "allowNull": true
-                },
-                "ArtistId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "Artists",
-                        "key": "id"
-                    },
-                    "allowNull": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "CategorySubcategories",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "CategoryId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Categories",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "SubcategoryId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Subcategories",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "CitiesCountry",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "CityId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Cities",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "CountryId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Countries",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "EventCategories",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "EventId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Events",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "CategoryId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Categories",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "EventArtists",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "EventId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Events",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "ArtistId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Artists",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "EventComments",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "EventId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Events",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "CommentId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
-                    "references": {
-                        "model": "Comments",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "LocationsCity",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "LocationId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "cascade",
-                    "references": {
-                        "model": "Locations",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                },
-                "CityId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "cascade",
-                    "references": {
-                        "model": "Cities",
-                        "key": "id"
-                    },
-                    "primaryKey": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "TicketTypeTickets",
-            {
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
                 },
                 "TicketId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "references": {
                         "model": "Tickets",
                         "key": "id"
                     },
-                    "primaryKey": true
+                    "allowNull": true
                 },
-                "TypeTicketId": {
+                "BillingInfoId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "references": {
-                        "model": "TypeTickets",
+                        "model": "BillingInfos",
                         "key": "id"
                     },
-                    "primaryKey": true
+                    "allowNull": true
                 }
             },
             {}

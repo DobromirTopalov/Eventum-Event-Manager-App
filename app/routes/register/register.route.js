@@ -11,7 +11,11 @@ const UserController = require('./register.controller');
 
 const init = (app, data) => {
     const router = new Router();
+<<<<<<< HEAD
     let userController = new UserController(data);
+=======
+    const registerControler = require('./register.controller');
+>>>>>>> fdf8da62ef1429674b7cae0eeff8f80d305fd1ba
 
     router
     .get('/register', async (req, res) => {
@@ -47,7 +51,7 @@ const init = (app, data) => {
          res.status(200).json({"success":true});
      });
     app.use('/', router);
-    }
+    };
 
 module.exports = {
   init,

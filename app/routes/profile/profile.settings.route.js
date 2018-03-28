@@ -32,22 +32,27 @@ const randomArtist = {
   mailOnApproval: 'on',
   mailOnReview: '',
   mailOnExpire: 'on',
-  mailOnUpdates: 'on' 
+  mailOnUpdates: 'on', 
 };
-
-const init = (app, data) => { 
+const init = (app, data) => {
   const router = new Router();
+  const profileSettingsController = require('./profile.settings.controller');
 
   router
-  .get('/settings/:id', async (req, res) => {
-    const account = randomArtist;
-    console.log(account);
+  .get('/settings', async (req, res) => {
+    let account;
+    if (req.user) {
+      account = profileSettingsController.test(data, req.user);
+    }
+
+    account = randomArtist;
     const context = {
-      account
+      account,
     };
+
     res.render('./profile/settings', context);
   })
-  .post('/settings/:id', async (req, res) => {
+  .post('/settings', async (req, res) => {
     const id = +((req.rawHeaders)[11].split('/').splice(-1, 1));
     const info = req.body;
 
@@ -86,8 +91,7 @@ const init = (app, data) => {
   });
 
   app.use('/', router);
-
-}
+};
 
 module.exports = {
   init,

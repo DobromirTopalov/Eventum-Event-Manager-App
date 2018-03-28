@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Ticket = sequelize.define('Ticket', {
+  const Ticket = sequelize.define('Ticket', {
     price: {
       type: DataTypes.FLOAT,
       allowNull: true,
@@ -16,13 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   }, {});
-  Ticket.associate = function(models) {
+  Ticket.associate = (models) => {
     const {
-      TypeTicket, 
-      TicketTypeTicket,
+      Event,
     } = models;
-    Ticket.belongsToMany(TypeTicket, {through: 'TicketTypeTicket'});
-    TypeTicket.belongsToMany(Ticket, {through: 'TicketTypeTicket'});
+    Ticket.belongsTo(Event);
   };
+
   return Ticket;
 };

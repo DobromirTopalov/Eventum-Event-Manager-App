@@ -10,6 +10,12 @@ const init = (app, data) => {
   router
   .get('/login', async (req, res) => {
     const context = {};
+
+    // If the user is logged, redirect him
+    if (req.user) {
+      res.redirect('/profile');
+    }
+
     res.render('./login/login', context);
   });
 

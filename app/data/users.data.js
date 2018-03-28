@@ -2,6 +2,7 @@ const Data = require('./main.data');
 
 const {
     User,
+    UserInfo,
 } = require('../../models/database/models');
 
 class UsersData extends Data {
