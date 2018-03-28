@@ -24,9 +24,9 @@ class UsersData extends Data {
                 username: username,
             }, include: [
                 {
-                    model: UserInfo
+                    model: UserInfo,
                 },
-            ]
+            ],
         });
     }
 }

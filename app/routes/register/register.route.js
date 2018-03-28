@@ -4,8 +4,9 @@ const {
 
 const passport = require('passport');
 
-const init = (app, data) => { 
+const init = (app, data) => {
     const router = new Router();
+    const registerControler = require('./register.controller');
 
     router
     .get('/register', async (req, res) => {
@@ -21,11 +22,8 @@ const init = (app, data) => {
         res.render('./register/artist-register', context);
     })
     .post('/register/user', async (req, res, next) => {
-        let username = req.body.username;
-        let email= req.body.email;
-        let password = req.body.password;
-        let passwordRepeat = req.body.paswordRepeat;
-        let name = req.body.urname;
+        const username = registerControler.checkData(req.body, data);
+
         console.log(username);
         // app.post('/login',
         // passport.authenticate('local', {
@@ -34,11 +32,11 @@ const init = (app, data) => {
         //     failureFlash: false,
         // }));
         // window.alert(username);
-        res.send('Hello, ' + name + username + password + passwordRepeat + name)
+        res.send('Hello');
         // res.redirect()
     });
     app.use('/', router);
-    }
+    };
 
 module.exports = {
   init,

@@ -42,7 +42,7 @@ const init = (app, data) => {
     const account = randomArtist;
     console.log(account);
     const context = {
-      account
+      account,
     };
     res.render('./profile/settings', context);
   })

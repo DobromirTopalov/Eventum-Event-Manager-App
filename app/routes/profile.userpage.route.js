@@ -8,13 +8,15 @@ const init = (app, data) => {
     router
     .get('/profile', async (req, res) => {
         // let username = req.params.username;
-        if (req.user) {
-          const user = await data.users.getAllInformation(req.user.username);
-          console.log('******************');
-          console.log(user);
-          console.log('@@@@@@@@@@@@@@@@@@@@@@@');
-          console.log(user[0].UserInfo);
+        if (!req.user) {
+          return res.redirect('/login');
         }
+
+        const user = await data.users.getAllInformation(req.user.username);
+        console.log('******************');
+        console.log(user);
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@');
+        console.log(user[0].UserInfo);
 
         const context = {
             username: 'cgfd',
