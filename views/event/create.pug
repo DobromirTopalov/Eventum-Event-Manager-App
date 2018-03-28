@@ -1,0 +1,31 @@
+extends ../_layout
+
+block content
+    section.job_hero_area.event_detail_breadcrumb.bgimage
+        .bg_image_holder(style='background-image: url("images/ev_bg.jpg"); opacity: 1;')
+            img(src='images/ev_bg.jpg', alt='images/ev_bg.jpg')
+        .container.content_above
+            .row
+                .col-md-8.col-md-offset-2
+                    .job_hero_content
+                        h1 MartPlace Upcoming Event in Bangladesh
+                        .job_date
+                            p
+                                span.lnr.lnr-map-marker
+                                    |  November 27, 2017
+                            p
+                                span.lnr.lnr-calendar-full
+                                    |  Dhaka, Bangladesh
+                    a.btn.btn--round.btn--lg(href='#') Signup Now
+        .social.social--color--filled.content_above
+            p Share on:
+            ul
+                li
+                    a(href='#')
+                        span.fa.fa-facebook
+                li
+                    a(href='#')
+                        span.fa.fa-twitter
+                li
+                    a(href='#')
+                        span.fa.fa-google-plus

@@ -14,14 +14,14 @@ module.exports = {
         coverPhoto: 'https://avatars1.githubusercontent.com/u/1265470?s=40&v=4',
         website: 'superhero.bg',
         biography: 'I\'m superhero DonchBg ',
-      }, ].map( (el) => {
-        el.updatedAt =  new Date;
-        el.createdAt =  new Date;
+      }].map( (el) => {
+        el.updatedAt = new Date;
+        el.createdAt = new Date;
         return el;
       }), {});
   },
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('UserInfos', null, {});
-  }
+  },
 };

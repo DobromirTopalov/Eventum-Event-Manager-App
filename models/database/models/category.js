@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     const {
       Subcategory,
     } = models;
-    Category.belongsTo(Subcategory);
+
+    Category.hasMany(Subcategory);
   };
   return Category;
 };

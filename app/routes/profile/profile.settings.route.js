@@ -32,7 +32,7 @@ const randomArtist = {
   mailOnApproval: 'on',
   mailOnReview: '',
   mailOnExpire: 'on',
-  mailOnUpdates: 'on' 
+  mailOnUpdates: 'on', 
 };
 const init = (app, data) => {
   const router = new Router();
@@ -45,13 +45,11 @@ const init = (app, data) => {
       account = profileSettingsController.test(data, req.user);
     }
 
+    account = randomArtist;
     const context = {
       account,
     };
 
-    console.log('***************************');
-    console.log(account);
-    
     res.render('./profile/settings', context);
   })
   .post('/settings', async (req, res) => {

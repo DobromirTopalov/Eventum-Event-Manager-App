@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   }, {});
-  Subcategory.associate = function(models) {
-    /* -------- */
+  Subcategory.associate = (models) => {
+    const {
+      Category,
+    } = models;
+
+    Subcategory.belongsTo(Category);
   };
   return Subcategory;
 };

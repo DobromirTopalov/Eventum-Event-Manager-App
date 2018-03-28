@@ -90,16 +90,6 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
-                },
-                "SubcategoryId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Subcategories",
-                        "key": "id"
-                    },
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -361,6 +351,16 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
+                },
+                "CategoryId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Categories",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []

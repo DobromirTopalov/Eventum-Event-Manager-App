@@ -6,13 +6,13 @@ var Sequelize = require('sequelize');
  * Actions summary:
  *
  * createTable "Countries", deps: []
- * createTable "Subcategories", deps: []
+ * createTable "Categories", deps: []
  * createTable "UserInfos", deps: []
  * createTable "Cities", deps: [Countries]
  * createTable "Locations", deps: [Cities]
- * createTable "Categories", deps: [Subcategories]
- * createTable "Users", deps: [UserInfos]
+ * createTable "Subcategories", deps: [Categories]
  * createTable "BillingInfos", deps: [Countries, Cities]
+ * createTable "Users", deps: [UserInfos]
  * createTable "Events", deps: [Locations, Users, Categories, Subcategories]
  * createTable "Tickets", deps: [Events]
  * createTable "Comments", deps: [Users]
@@ -23,7 +23,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-03-28T14:52:41.778Z",
+    "created": "2018-03-28T15:25:06.356Z",
     "comment": ""
 };
 
@@ -60,7 +60,7 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "Subcategories",
+            "Categories",
             {
                 "id": {
                     "type": Sequelize.INTEGER,
@@ -68,7 +68,7 @@ var migrationCommands = [{
                     "primaryKey": true,
                     "allowNull": false
                 },
-                "title": {
+                "name": {
                     "type": Sequelize.STRING,
                     "validate": {
                         "len": [1, 100]
@@ -214,7 +214,7 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
-            "Categories",
+            "Subcategories",
             {
                 "id": {
                     "type": Sequelize.INTEGER,
@@ -222,7 +222,7 @@ var migrationCommands = [{
                     "primaryKey": true,
                     "allowNull": false
                 },
-                "name": {
+                "title": {
                     "type": Sequelize.STRING,
                     "validate": {
                         "len": [1, 100]
@@ -237,79 +237,12 @@ var migrationCommands = [{
                     "type": Sequelize.DATE,
                     "allowNull": false
                 },
-                "SubcategoryId": {
+                "CategoryId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
                     "onDelete": "SET NULL",
                     "references": {
-                        "model": "Subcategories",
-                        "key": "id"
-                    },
-                    "allowNull": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Users",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "username": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 30]
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "email": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isEmail": true
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "password": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [6, 30]
-                    },
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isAlpha": true
-                    },
-                    "allowNull": true
-                },
-                "role": {
-                    "type": Sequelize.STRING,
-                    "allowNull": false
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "UserInfoId": {
-                    "type": Sequelize.INTEGER,
-                    "onUpdate": "CASCADE",
-                    "onDelete": "SET NULL",
-                    "references": {
-                        "model": "UserInfos",
+                        "model": "Categories",
                         "key": "id"
                     },
                     "allowNull": true
@@ -377,6 +310,73 @@ var migrationCommands = [{
                     "onDelete": "SET NULL",
                     "references": {
                         "model": "Cities",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "Users",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "username": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "len": [1, 30]
+                    },
+                    "unique": true,
+                    "allowNull": false
+                },
+                "email": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "isEmail": true
+                    },
+                    "unique": true,
+                    "allowNull": false
+                },
+                "password": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "len": [6, 30]
+                    },
+                    "allowNull": false
+                },
+                "name": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "isAlpha": true
+                    },
+                    "allowNull": true
+                },
+                "role": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "UserInfoId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "UserInfos",
                         "key": "id"
                     },
                     "allowNull": true
