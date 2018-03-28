@@ -3,10 +3,16 @@
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Cities', [{
-            name: 'London',
+            name: 'Sofia',
+            CountryId: 1,
         },
         {
             name: 'Berlin',
+            CountryId: 3,
+        },
+        {
+            name: 'Moscow',
+            CountryId: 5,
         },
         ]
             .map((el) => {

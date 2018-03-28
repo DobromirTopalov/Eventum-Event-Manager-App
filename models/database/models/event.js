@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    creator: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     capacity: {
       type: DataTypes.INTEGER,
     },

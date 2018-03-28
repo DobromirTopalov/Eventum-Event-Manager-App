@@ -2,22 +2,22 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Subcategories', [{
-        title: 'Popping',
+    return queryInterface.bulkInsert('Countries', [{
+      name: 'Bulgaria',
       }, {
-        title: 'Tango',
+        name: 'Israel',
       }, {
-        title: 'Rap',
+        name: 'Germany',
       }, {
-        title: 'Techno',
+        name: 'USA',
       }, {
-        title: 'Baroque',
+        name: 'Russia',
       }, {
-        title: 'Modern Art',
+        name: 'Denmark',
       }, {
-        title: 'Indian',
+        name: 'Chile',
       }, {
-        title: 'Chinese',
+        name: 'Malta',
       }].map( (el) => {
         el.updatedAt = new Date;
         el.createdAt = new Date;
@@ -26,6 +26,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Subcategories', null, {});
+    return queryInterface.bulkDelete('Countries', null, {});
   },
 };

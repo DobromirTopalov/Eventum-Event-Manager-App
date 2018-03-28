@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        capacity: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
     }, {});
 
     BillingInfo.associate = (models) => {
