@@ -44,8 +44,10 @@ class User {
         const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         username = username.trim();
 
-        if (!username.length || !username
-            || (username.length <= 3) || (username.length > 30)
+        if (!username.length
+            || !username
+            || (username.length <= 3)
+            || (username.length > 30)
             // || (username.match(symbolRestrictRegex))
         ) {
             throw new Error('Invalid username length')
