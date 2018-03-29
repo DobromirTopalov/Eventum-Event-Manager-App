@@ -1,4 +1,5 @@
-const userObject = require('../../../models/data-class/user-class')
+const userObject = require('../../../models/data-class/user-class');
+
 class UserController {
     constructor(data) {
         this.data = data;

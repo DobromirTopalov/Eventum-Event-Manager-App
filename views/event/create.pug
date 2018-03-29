@@ -1,31 +1,294 @@
 extends ../_layout
 
 block content
-    section.job_hero_area.event_detail_breadcrumb.bgimage
-        .bg_image_holder(style='background-image: url("images/ev_bg.jpg"); opacity: 1;')
-            img(src='images/ev_bg.jpg', alt='images/ev_bg.jpg')
-        .container.content_above
-            .row
-                .col-md-8.col-md-offset-2
-                    .job_hero_content
-                        h1 MartPlace Upcoming Event in Bangladesh
-                        .job_date
-                            p
-                                span.lnr.lnr-map-marker
-                                    |  November 27, 2017
-                            p
-                                span.lnr.lnr-calendar-full
-                                    |  Dhaka, Bangladesh
-                    a.btn.btn--round.btn--lg(href='#') Signup Now
-        .social.social--color--filled.content_above
-            p Share on:
-            ul
-                li
-                    a(href='#')
-                        span.fa.fa-facebook
-                li
-                    a(href='#')
-                        span.fa.fa-twitter
-                li
-                    a(href='#')
-                        span.fa.fa-google-plus
+  .dashboard_contents
+    .container
+      .row
+        .col-md-12
+          .dashboard_title_area
+            .dashboard__title
+              h3 Account Settings
+        // end /.col-md-12
+      // end /.row
+      form.setting_form(action='#')
+        .row
+          .col-md-6
+            .information_module
+              a.toggle_title(href='#collapse2', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                h4
+                  | Personal Information 
+                  span.lnr.lnr-chevron-down
+              #collapse2.information__set.toggle_module.collapse.in
+                .information_wrapper.form--fields
+                  .form-group
+                    label(for='acname')
+                      | Account Name
+                      sup *
+                    input#acname.text_field(type='text', placeholder='First Name', value='Aazz Tech')
+                  .form-group
+                    label(for='usrname')
+                      | Username 
+                      sup *
+                    input#usrname.text_field(type='text', placeholder='Account name', value='aazztech')
+                    p
+                      | Your MartPlace URL: https://martplace.com/
+                      span aazztech
+                  .form-group
+                    label(for='emailad')
+                      | Email Address 
+                      sup *
+                    input#emailad.text_field(type='text', placeholder='Email address', value='contact@aazztech.com')
+                  .row
+                    .col-md-6
+                      .form-group
+                        label(for='password')
+                          | Password 
+                          sup *
+                        input#password.text_field(type='password', placeholder='Email address')
+                    .col-md-6
+                      .form-group
+                        label(for='conpassword')
+                          | Confirm Password 
+                          sup *
+                        input#conpassword.text_field(type='password', placeholder='re-enter password')
+                  .form-group
+                    label(for='website') Website
+                    input#website.text_field(type='password', placeholder='Website')
+                  .form-group
+                    label(for='country')
+                      | Country 
+                      sup *
+                    .select-wrap.select-wrap2
+                      select#country.text_field(name='country')
+                        option(value='') Select one
+                        option(value='bangladesh') Bangladesh
+                        option(value='india') India
+                        option(value='uruguye') Uruguye
+                        option(value='australia') Australia
+                        option(value='neverland') Neverland
+                        option(value='atlantis') Atlantis
+                      span.lnr.lnr-chevron-down
+                  .form-group
+                    label(for='prohead') Profile Heading
+                    input#prohead.text_field(type='text', placeholder='Ex: Webdesign & Development Service')
+                  .form-group
+                    label(for='authbio') Author Bio
+                    textarea#authbio.text_field(name='author_bio', placeholder='Short brief about yourself or your account...')
+                // end /.information_wrapper
+              // end /.information__set
+            // end /.information_module
+            .information_module
+              a.toggle_title(href='#collapse1', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                h4
+                  | Biling Information 
+                  span.lnr.lnr-chevron-down
+              #collapse1.information__set.toggle_module.collapse
+                .information_wrapper.form--fields
+                  .row
+                    .col-md-6
+                      .form-group
+                        label(for='first_name')
+                          | First Name 
+                          sup *
+                        input#first_name.text_field(type='text', placeholder='First Name', value='Ron')
+                    .col-md-6
+                      .form-group
+                        label(for='last_name')
+                          | last Name 
+                          sup *
+                        input#last_name.text_field(type='text', placeholder='last name', value='Doe')
+                  // end /.row
+                  .form-group
+                    label(for='email')
+                      | Company Name
+                      sup *
+                    input#email.text_field(type='text', placeholder='AazzTech', value='AazzTech')
+                  .form-group
+                    label(for='email1')
+                      | Email Adress 
+                      sup *
+                    input#email1.text_field(type='text', placeholder='Email address', value='contact@aazztech.com')
+                  .form-group
+                    label(for='country1')
+                      | Country 
+                      sup *
+                    .select-wrap.select-wrap2
+                      select#country.text_field(name='country')
+                        option(value='') Select one
+                        option(value='bangladesh') Bangladesh
+                        option(value='india') India
+                        option(value='uruguye') Uruguye
+                        option(value='australia') Australia
+                        option(value='neverland') Neverland
+                        option(value='atlantis') Atlantis
+                      span.lnr.lnr-chevron-down
+                  .form-group
+                    label(for='address1') Address Line 1
+                    input#address1.text_field(type='text', placeholder='Address line one')
+                  .form-group
+                    label(for='address2') Address Line 2
+                    input#address2.text_field(type='text', placeholder='Address line two')
+                  .row
+                    .col-md-6
+                      .form-group
+                        label(for='city')
+                          | City / State 
+                          sup *
+                        .select-wrap.select-wrap2
+                          select#city.text_field(name='city')
+                            option(value='') Select one
+                            option(value='dhaka') Dhaka
+                            option(value='sydney') Sydney
+                            option(value='newyork') New York
+                            option(value='london') London
+                            option(value='mexico') New Mexico
+                          span.lnr.lnr-chevron-down
+                    .col-md-6
+                      .form-group
+                        label(for='zipcode')
+                          | Zip / Postal Code 
+                          sup *
+                        input#zipcode.text_field(type='text', placeholder='zip/postal code')
+              // end /.information__set
+            // end /.information_module
+          // end /.col-md-6
+          .col-md-6
+            .information_module
+              a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                h4
+                  | Profile Image & Cover 
+                  span.lnr.lnr-chevron-down
+              #collapse3.information__set.profile_images.toggle_module.collapse
+                .information_wrapper
+                  .profile_image_area
+                    img(src='images/authplc.png', alt='Author profile area')
+                    .img_info
+                      p.bold Profile Image
+                      p.subtitle JPG, GIF or PNG 100x100 px
+                    label.upload_btn(for='cover_photo')
+                      input#cover_photo(type='file')
+                      span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
+                  .prof_img_upload
+                    p.bold Cover Image
+                    img(src='images/cvrplc.jpg', alt='The great warrior of China')
+                    .upload_title
+                      p JPG, GIF or PNG 750x370 px
+                      label.upload_btn(for='dp')
+                        input#dp(type='file')
+                        span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
+            // end /.information_module
+            .information_module
+              a.toggle_title(href='#collapse5', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                h4
+                  | Social Profiles 
+                  span.lnr.lnr-chevron-down
+              #collapse5.information__set.social_profile.toggle_module.collapse
+                .information_wrapper
+                  .social__single
+                    .social_icon
+                      span.fa.fa-facebook
+                    .link_field
+                      input.text_field(type='text', placeholder='ex: www.facebook.com/aazztech')
+                  // end /.social__single
+                  .social__single
+                    .social_icon
+                      span.fa.fa-twitter
+                    .link_field
+                      input.text_field(type='text', placeholder='ex: www.twitter.com/aazztech')
+                  // end /.social__single
+                  .social__single
+                    .social_icon
+                      span.fa.fa-google-plus
+                    .link_field
+                      input.text_field(type='text', placeholder='ex: www.google.com/aazztech')
+                  // end /.social__single
+                  .social__single
+                    .social_icon
+                      span.fa.fa-behance
+                    .link_field
+                      input.text_field(type='text', placeholder='ex: www.behance.com/aazztech')
+                  // end /.social__single
+                  .social__single
+                    .social_icon
+                      span.fa.fa-dribbble
+                    .link_field
+                      input.text_field(type='text', placeholder='ex: www.dribbble.com/aazztech')
+                  // end /.social__single
+                // end /.information_wrapper
+              // end /.social_profile
+            // end /.information_module
+            .information_module
+              a.toggle_title(href='#collapse4', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                h4
+                  | Email Settings 
+                  span.lnr.lnr-chevron-down
+              #collapse4.information__set.mail_setting.toggle_module.collapse
+                .information_wrapper
+                  .custom_checkbox
+                    input#opt1(type='checkbox', name='mail_rating_reminder', checked='')
+                    label(for='opt1')
+                      span.shadow_checkbox
+                      span.radio_title Rating Reminders
+                      span.desc Send an email reminding me to rate an item after purchase
+                  // end /.custom-radio
+                  .custom_checkbox
+                    input#opt2(type='checkbox', name='mail_update_noti', checked='')
+                    label(for='opt2')
+                      span.shadow_checkbox
+                      span.radio_title Item Update Notifications
+                      span.desc Send an email when an item I've purchased is updated
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt3(type='checkbox', name='mail_comment_noti', checked='')
+                    label(for='opt3')
+                      span.shadow_checkbox
+                      span.radio_title Item Comment Notifications
+                      span.desc Send me an email when someone comments on one of my items
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt4(type='checkbox', name='mail_item_review_noti', checked='')
+                    label(for='opt4')
+                      span.shadow_checkbox
+                      span.radio_title Item Review Notifications
+                      span.desc Send me an email when my items are approved or rejected
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt5(type='checkbox', name='mail_review_noti', checked='')
+                    label(for='opt5')
+                      span.shadow_checkbox
+                      span.radio_title Buyer Review Notifications
+                      span.desc Send me an email when someone leaves a review with their rating
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt6(type='checkbox', name='mail_support_noti', checked='')
+                    label(for='opt6')
+                      span.shadow_checkbox
+                      span.radio_title Support Notifications
+                      span.desc Send me emails showing my soon to expire support entitlements
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt7(type='checkbox', name='mail_weekly')
+                    label(for='opt7')
+                      span.shadow_checkbox
+                      span.radio_title Weekly Summary Emails
+                      span.desc Send me emails showing my soon to expire support entitlements
+                  // end /.custom_checkbox
+                  .custom_checkbox
+                    input#opt8(type='checkbox', name='mail_newsletter')
+                    label(for='opt8')
+                      span.shadow_checkbox
+                      span.radio_title MartPlace Newsletter
+                      span.desc Get update about latest news, update and more.
+                  // end /.custom_checkbox
+                // end /.information_wrapper
+              // end /.information_module
+            // end /.information_module
+          // end /.col-md-6
+          .col-md-12
+            .dashboard_setting_btn
+              button.btn.btn--round.btn--md(type='submit') Save Change
+          // end /.col-md-12
+        // end /.row
+      // end /form
+    // end /.container
+

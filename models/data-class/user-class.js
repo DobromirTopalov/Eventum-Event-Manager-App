@@ -1,19 +1,19 @@
 class User {
-    constructor(username = '', email = '', 
-    password ='', name ='' , city = '', country = '',
-    profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
-    socialProfileLinkTwo = '', socialProfileLinkThree = '') {
-            this.setUsername(username);
-            this.setEmail(email);
-            this.setPassword(password);
-            this.setName(name);
-            this.setCity(city);
-            this.setCountry(country);
-            this.setProfilePicture(profilePicture);
-            this.setCoverPhoto(coverPhoto);
-            this.setSocialProfileLink(socialProfileLinkOne);
-            this.setSocialProfileLink(socialProfileLinkTwo);
-            this.setSocialProfileLink(socialProfileLinkThree);
+    constructor(username = '', email = '',
+        password = '', name = '', city = '', country = '',
+        profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
+        socialProfileLinkTwo = '', socialProfileLinkThree = '') {
+        this.setUsername(username);
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setName(name);
+        this.setCity(city);
+        this.setCountry(country);
+        this.setProfilePicture(profilePicture);
+        this.setCoverPhoto(coverPhoto);
+        this.setSocialProfileLink(socialProfileLinkOne);
+        this.setSocialProfileLink(socialProfileLinkTwo);
+        this.setSocialProfileLink(socialProfileLinkThree);
     }
     setUsername(username) {
 
@@ -21,28 +21,24 @@ class User {
         const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         username = username.trim();
 
-        if (!username.length
-            || !username
-            || (username.length <= 3)
-            || (username.length > 30)
+        if (!username.length || !username
+            || (username.length <= 3) || (username.length > 30)
             // || (username.match(symbolRestrictRegex))
         ) {
-            throw new Error('Invalid username length')
-        }      
+            throw new Error('Invalid username length');
+        }
+
         if (username.match(usernameRegex)) {
             this.username = username;
         } else {
-            throw new Error('Username includes symbols that are not allowed')
+            throw new Error('Username includes symbols that are not allowed');
         }
     }
     setEmail(email) {
         email = email.trim();
-        const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-        if (!email.length
-            || !email
-            || (email.length > 100)
-        ) {
-            throw new Error('Invalid email length')
+        const emailRegex = (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+        if (!email.length || !email || (email.length > 100)) {
+            throw new Error('Invalid email length');
         }
 
         if (email.match(emailRegex)) {
@@ -55,27 +51,23 @@ class User {
         name = name.trim();
         const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         const nameRegex = /^[a-zA-Z ]{1,100}$/;
-    
-        if (!name.length
-            || !name
-            || (name.length > 100)
-        ) { console.log(name)
-            throw new Error('Invalid name length')
+
+        if (!name.length || !name || (name.length > 100)) {
+            console.log(name);
+            throw new Error('Invalid name length');
         }
 
         if (name.match(nameRegex)) {
             this.name = name;
         } else {
-            throw new Error('Name includes symbols that are not allowed')
+            throw new Error('Name includes symbols that are not allowed');
         }
     }
     setPassword(password) {
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-        if (!password.length
-            || !password
-            || (password.length > 32)
-        ) {
-            throw new Error('Invalid password length')
+
+        if (!password.length || !password || (password.length > 32)) {
+            throw new Error('Invalid password length');
         }
 
         if (password.match(passwordRegex)) {
@@ -87,13 +79,11 @@ class User {
     setCountry(country) {
         country = country.trim();
         const alphaRegex = /^[a-zA-Z]+$/;
-        
-        if (!country.length
-            || !country
-            || (country.length > 100)
-        ) {
+
+        if (!country.length || !country || (country.length > 100)) {
             return null;
         }
+
         if (country.match(alphaRegex)) {
             this.country = country;
         }
@@ -101,12 +91,11 @@ class User {
     setCity(city) {
         city = city.trim();
         const alphaRegex = /^[a-zA-Z]+$/;
-        if (!city.length
-            || !city
-            || (city.length > 100)
-        ) {
+
+        if (!city.length || !city || (city.length > 100)) {
             return null;
         }
+
         if (city.match(alphaRegex)) {
             this.city = city;
         }
@@ -115,13 +104,10 @@ class User {
         profilePicture = profilePicture.trim();
         const urlRegex = /(ftp|http|https|static):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
-        if (!profilePicture.length
-            || !profilePicture
-        ) {
+        if (!profilePicture.length || !profilePicture) {
             return null;
         }
 
-        
         if (profilePicture.match(urlRegex)) {
             this.profilePicture = profilePicture;
         }
@@ -130,9 +116,7 @@ class User {
         coverPhoto = coverPhoto.trim();
         const urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
-        if (!coverPhoto.length
-            || !coverPhoto
-        ) {
+        if (!coverPhoto.length || !coverPhoto) {
             return null;
         }
 
@@ -144,17 +128,14 @@ class User {
         socialProfileLink = socialProfileLink.trim();
 
         const urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-            if (!socialProfileLink.length
-                || !socialProfileLink
-            ) {
-                return null;
-            }
-    
-            if (socialProfileLink.match(urlRegex)) {
-                this.socialProfileLink = socialProfileLink;
-            }
-    }
+        if (!socialProfileLink.length || !socialProfileLink) {
+            return null;
+        }
 
+        if (socialProfileLink.match(urlRegex)) {
+            this.socialProfileLink = socialProfileLink;
+        }
+    }
 
     getUsername() {
         return this.username;
@@ -189,7 +170,7 @@ class User {
     }
     getAllInfo() {
         return {
-            'username': this.getUsername(), 
+            'username': this.getUsername(),
             'email': this.getEmail(),
             'name': this.getName(),
             'password': this.getPassword(),
@@ -198,8 +179,8 @@ class User {
             'profilePicture': this.getProfilePicture(),
             'coverPicture': this.getCoverPicture(),
             'socialProfileLinks': this.getSocialProfileLinks(),
-        }
+        };
     }
 }
 
-module.exports = User
+module.exports = User;
