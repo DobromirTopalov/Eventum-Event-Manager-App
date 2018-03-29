@@ -441,6 +441,9 @@
                 },
                 "name": {
                     "allowNull": true,
+                    "validate": {
+                        "isAlpha": true
+                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "role": {
@@ -563,5 +566,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

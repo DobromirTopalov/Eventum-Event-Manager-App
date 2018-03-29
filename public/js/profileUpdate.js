@@ -38,7 +38,7 @@ $(document).ready(function(e) {
             !name ||
             (name.length > 100)
         ) {
-            throw new Error('Name must consist of letters only!Max 100 characters allowed!');
+            throw new Error('Name must consist of letters only! Max 100 characters allowed!');
         }
 
         if (name.match(nameRegex)) {
@@ -68,7 +68,7 @@ $(document).ready(function(e) {
             !Address ||
             (Address.length > 100)
         ) {
-            throw new Error('Address must be between 0 and  100 characters!');
+            throw new Error('Address must be between 1 and  100 characters!');
         }
         if (Address.match(alphaRegex)) {
             return true;
@@ -175,7 +175,7 @@ $(document).ready(function(e) {
         return true;
     }
 
-    $('button').click( function (event) {
+    $('#settingsForm').find('button').click( function (event) {
 
         var validObj = {
             name: $('input[name=fullname]').val(),
@@ -183,14 +183,15 @@ $(document).ready(function(e) {
             email: $('input[name=email]').val(),
             password: $('input[name=passwordMain]').val(),
             passwordRepeat: $('input[name=passwordSecondary]').val(),
-            webpage: $('input[name=website]').val(),
-            address: $('input[name=address]').val(),
-            coverPhoto: $('input[name=cover_photo]').val(),
-            coverImg: $('input[name=dp]').val(),
-            autoBio: $('input[name=authbio]').val(),
-            // socialProf1: $("#socialOne").val(),
-            // socialProf2: $("#socialTwo").val(),
-            // socialProf3: $("#socialThree").val(),
+            webpage: $('input[name=webpage]').val() || '',
+            address: $('input[name=address]').val() || '',
+            coverPhoto: $('input[name=cover_photo]').val() || '',
+            profilePic: $('input[name=dp]').val() || '',
+            autoBio: $('[name=authorBio]').val() || '',
+            socialProf1: $("input[socialWebFb]").val() || '',
+            socialProf2: $("input[socialWebTwt]").val() || '',
+            socialProf3: $("input[socialWebGgl]").val() || '',
+            // city:
         };
 
         // try {

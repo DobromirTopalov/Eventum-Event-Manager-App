@@ -32,7 +32,7 @@ const init = (app, data) => {
         const user = await data.users.findByUsername(username);
 
         if (!user) {
-            return done(new Error('invalid used'));
+            return done(new Error('Invalid user'));
         }
 
         return done(null, user);

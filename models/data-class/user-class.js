@@ -2,18 +2,41 @@ class User {
     constructor(username = '', email = '', 
     password ='', name ='' , city = '', country = '',
     profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
-    socialProfileLinkTwo = '', socialProfileLinkThree = '') {
+    socialProfileLinkTwo = '', socialProfileLinkThree = '', address ='', webpage = '', bio = '') {
             this.setUsername(username);
             this.setEmail(email);
             this.setPassword(password);
             this.setName(name);
-            // this.setCity(city);
-            // this.setCountry(country);
-            // this.setProfilePicture(profilePicture);
-            // this.setCoverPhoto(coverPhoto);
-            // this.setSocialProfileLink(socialProfileLinkOne);
-            // this.setSocialProfileLink(socialProfileLinkTwo);
-            // this.setSocialProfileLink(socialProfileLinkThree);
+            if (city.length>0) {
+                this.setCity(city);
+            }
+            if (address.length>0) {
+                this.setAddress(address);
+            }
+            if (country.length>0) {
+                this.setCountry(country);
+            }
+            if (profilePicture.length>0) {
+                this.setProfilePicture(profilePicture);
+            }
+            if (coverPhoto.length>0) {
+                this.setCoverPhoto(coverPhoto);
+            }
+            if (socialProfileLinkOne.length>0) {
+                this.setSocialProfileLink(socialProfileLinkOne);
+            }
+            if (socialProfileLinkTwo.length>0) {
+                this.setSocialProfileLink(socialProfileLinkTwo);
+            }
+            if (socialProfileLinkThree.length>0) {
+                this.setSocialProfileLink(socialProfileLinkThree);
+            }
+            if (webpage.length>0) {
+                this.setWebpage(webpage);
+            }
+            if (bio.length>0) {
+                this.setBio(bio);
+            }
     }
     setUsername(username) {
 
@@ -71,9 +94,9 @@ class User {
     }
     setPassword(password) {
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        console.log(password)
         if (!password.length
             || !password
-            || password.length<8
             || (password.length > 32)
         ) {
             throw new Error('Invalid password length')
@@ -94,11 +117,27 @@ class User {
             || (country.length > 100)
         ) {
             throw new Error('Country name is not valid')
+            
         }
         if (country.match(alphaRegex)) {
             this.country = country;
         } else {
             throw new Error('Please include only valid symbols in the country name')
+        }
+    }
+    setAddress(address) {
+        address = address.trim();
+        const alphaRegex = /^[a-zA-Z]+$/;
+        if (!address.length
+            || !address
+            || (address.length > 100)
+        ) {
+            throw new Error('Address is too long ')
+        }
+        if (address.match(alphaRegex)) {
+            this.address = address;
+        } else {
+            throw new Error('Please include only valid symbols in the address name')
         }
     }
     setCity(city) {
@@ -113,7 +152,7 @@ class User {
         if (city.match(alphaRegex)) {
             this.city = city;
         } else {
-            throw new Error('Please include only valid symbols in the country name')
+            throw new Error('Please include only valid symbols in the city name')
         }
     }
     setProfilePicture(profilePicture) {
@@ -159,6 +198,34 @@ class User {
                 this.socialProfileLink = socialProfileLink;
             }
     }
+    setWebpage(webpage) {
+        webpage = webpage.trim();
+
+        const urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+            if (!webpage.length
+                || !webpage
+            ) {
+                throw new Error('Website is a valid URL');
+            }
+    
+            if (webpage.match(urlRegex)) {
+                this.webpage = webpage;
+            } else {
+                throw new Error('Website is a not valid URL');
+            }
+    }
+    setBio(bio) {
+        bio = bio.trim();
+        if (!bio.length
+            || !bio
+            || (bio.length > 600)
+        ) {
+            throw new Error('Bio is too long ')
+        } else {
+            this.bio = bio;
+        }
+        
+    }
 
 
     getUsername() {
@@ -174,23 +241,32 @@ class User {
         return this.password;
     }
     getCity() {
-        return this.city;
+        return this.city || null;
     }
     getCountry() {
-        return this.country;
+        return this.country || null;
+    }
+    getAddress() {
+        return this.address || null;
     }
     getProfilePicture() {
-        return this.profilePicture;
+        return this.profilePicture || null;
     }
     getCoverPicture() {
-        return this.coverPhoto;
+        return this.coverPhoto || null;
     }
     getSocialProfileLinks() {
         return [
-            this.socialProfileLinkOne,
-            this.socialProfileLinkTwo,
-            this.socialProfileLinkThree,
+            this.socialProfileLinkOne || null,
+            this.socialProfileLinkTwo || null,
+            this.socialProfileLinkThree || null,
         ];
+    }
+    getWebpage() {
+        return this.webpage || null;
+    }
+    getBio() {
+        return this.bio || null;
     }
     getAllInfo() {
         return {

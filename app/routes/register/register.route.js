@@ -27,7 +27,8 @@ const init = (app, data) => {
         res.render('./register/artist-register', context);
     })
     .post('/register/user', async (req, res, next) => {
-       const userData = req.body;
+       let userData = await req.body;
+       await console.log(userData)
        try {
             await userController.createUser(userData);
         } catch (err) {
@@ -40,6 +41,7 @@ const init = (app, data) => {
         const userData = req.body;
         try {
              await userController.createUser(userData);
+
          } catch (err) {
              let someError = err;
              res.status(400).json({"err": err.message});

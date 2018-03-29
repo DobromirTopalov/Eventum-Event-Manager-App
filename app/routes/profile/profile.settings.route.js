@@ -13,24 +13,27 @@ const UserController = require('../register/register.controller');
 const init = (app, data) => {
     const router = new Router();
     let userController = new UserController(data);
-    let usernameAccount = 'lachi_93'; //will be replace with the loged user data
-    let userID = 2;
+    // let usernameAccount = 'lll'; //will be replace with the loged user data
+    
     router
-    .get('/settings', async (req, res) => {
-  
+    .get('/settings', async (req, res, next) => {
+        let userID = await req.user.id;
         // req.userID = userID;
-
-        req.userTest = await data.users.findById(userID);
-
-        
-        // await console.log(req.userTest)
-        let account = await req.userTest
-        
+        console.log(req.user)
+        // req.userTest = await data.users.findById(userID);
+        req.userInfo = await data.users.getUserInfoById(userID)
+        req.userExtraInfo = await data.users.getUserExtraInfoById(userID)
+        account = Object.assign(req.userInfo, req.userExtraInfo );
+        console.log(account)
         res.render('./profile/settings', {account});
     })
     .post('/settings', async (req, res, next) => {
         const userData = req.body;
-        await console.log (userData)
+        await console.log('dsa')
+        // await console.log(userData)
+        await console.log(req.user)
+        await console.log('dsa')
+        let userID = await req.user.id;
         try {
             await userController.updateUser(userID, userData);
         } catch (err) {
