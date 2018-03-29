@@ -7,13 +7,13 @@ class User {
             this.setEmail(email);
             this.setPassword(password);
             this.setName(name);
-            this.setCity(city);
-            this.setCountry(country);
-            this.setProfilePicture(profilePicture);
-            this.setCoverPhoto(coverPhoto);
-            this.setSocialProfileLink(socialProfileLinkOne);
-            this.setSocialProfileLink(socialProfileLinkTwo);
-            this.setSocialProfileLink(socialProfileLinkThree);
+            // this.setCity(city);
+            // this.setCountry(country);
+            // this.setProfilePicture(profilePicture);
+            // this.setCoverPhoto(coverPhoto);
+            // this.setSocialProfileLink(socialProfileLinkOne);
+            // this.setSocialProfileLink(socialProfileLinkTwo);
+            // this.setSocialProfileLink(socialProfileLinkThree);
     }
     setUsername(username) {
 
@@ -93,10 +93,12 @@ class User {
             || !country
             || (country.length > 100)
         ) {
-            return null;
+            throw new Error('Country name is not valid')
         }
         if (country.match(alphaRegex)) {
             this.country = country;
+        } else {
+            throw new Error('Please include only valid symbols in the country name')
         }
     }
     setCity(city) {
@@ -106,10 +108,12 @@ class User {
             || !city
             || (city.length > 100)
         ) {
-            return null;
+            throw new Error('City name is too long')
         }
         if (city.match(alphaRegex)) {
             this.city = city;
+        } else {
+            throw new Error('Please include only valid symbols in the country name')
         }
     }
     setProfilePicture(profilePicture) {
