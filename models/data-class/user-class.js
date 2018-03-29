@@ -73,6 +73,7 @@ class User {
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
         if (!password.length
             || !password
+            || password.length<8
             || (password.length > 32)
         ) {
             throw new Error('Invalid password length')
@@ -81,7 +82,7 @@ class User {
         if (password.match(passwordRegex)) {
             this.password = password;
         } else {
-            throw new Error('Password includes symbols that are not allowed')
+            throw new Error('Password does not match all the security requirements')
         }
     }
     setCountry(country) {
