@@ -18,7 +18,8 @@ $(document).ready(function(e) {
             dataType: 'json',
             data: userInfo,
             error: function (error) {
-                console.log(error)
+                $('#alertdiv')
+                .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] +'</span></div>')
             },
             success: function (data) {
                 window.location.href = '/login';

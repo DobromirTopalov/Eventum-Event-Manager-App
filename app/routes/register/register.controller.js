@@ -5,21 +5,56 @@ class UserController {
         this.data = data;
     }
 
-    createUser(userData) {
-        const thisUser = null;
+    async createUser(userData) {
+        let thisUser = null;
         try {
-            let thisUser = new userObject(userData.username, userData.email, userData.password, userData.name, 
+            if(userData.password !== userData.passwordRepeat) {
+                throw new Error('The two passwords do not match');
+            }
+
+            thisUser = await new userObject(userData.username, userData.email, userData.password, userData.name, 
                 '', '', '', '', '', '', '', '');
+            let usernamesArray = await this.data.users.getAllUsernames();
+            if(usernamesArray.includes(thisUser.getUsername())) {
+                throw new Error('Existing username');
+            }
 
-            this.data.createNewUser(thisUser);
+            let emailsArray = await this.data.users.getAllEmails();
+            if(emailsArray.includes(thisUser.getEmail())) {
+                throw new Error('This email is already taken');
+            }
 
+            await this.data.users.addNewUser(thisUser);
         }
         catch (err) {
             throw err;
         }
     }
-    // checkExisting
 
+    async updateUser(userID, userData) {
+        let thisUser = null;
+
+        try {
+            if(userData.password !== userData.passwordRepeat) {
+                throw new Error('The two passwords do not match');
+            }
+            await console.log(userData)
+            thisUser = await new userObject(userData.username, userData.email, userData.password, userData.name, 
+                '', '', '', '', '', '', '', '');
+            let usernamesArray = await this.data.users.getAllUsernames();
+            // if(usernamesArray.includes(thisUser.getUsername())) {
+            //     throw new Error('Existing username');
+            // }
+            // let emailsArray = await this.data.users.getAllEmails();
+            // if(emailsArray.includes(thisUser.getEmail())) {
+            //     throw new Error('This email is already registered');
+            // }
+            await this.data.users.updateUserInfo(userID,thisUser);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = UserController;

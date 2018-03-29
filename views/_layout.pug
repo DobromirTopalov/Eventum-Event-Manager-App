@@ -17,6 +17,8 @@ html(lang="en")
         link(rel='stylesheet', href='/static/css/trumbowyg.min.css')
         link(rel='stylesheet', href='/static/style.css')
         
+        block extracss
+
             //- block styles
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
@@ -29,4 +31,8 @@ html(lang="en")
             block content
         footer.text-center
             +site-footer(guest)
+    
+    block extrastuff
+
     script(src='/static/js/register.js')
+    script(src='/static/js/profileUpdate.js')

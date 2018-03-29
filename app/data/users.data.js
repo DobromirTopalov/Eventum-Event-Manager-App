@@ -9,7 +9,16 @@ class UsersData extends Data {
     constructor() {
         super(User);
     }
-
+    findById(id) {
+        return this.Model.findOne({
+            where: {
+                id: id,
+            },
+        })
+        .then((item) =>  {
+            return item.dataValues
+        })
+    }
     findByUsername(username) {
         return this.Model.findOne({
             where: {
@@ -18,14 +27,64 @@ class UsersData extends Data {
         });
     }
     getAllUsernames() {
-        return this.Model.findAll({
+        return  this.Model.findAll({
             attributes: ['username'],
-        });
+        })
+        .then((items) =>  {
+            return items.map((item) => item.dataValues['username'])
+        })
     }
     getAllEmails() {
         return this.Model.findAll({
             attributes: ['email'],
-        });
+        })
+        .then((items) =>  {
+            return items.map((item) => item.dataValues['email'])
+        })
+    }
+     async addNewUser(userObject) {
+        try {
+            let seqError;
+            await this.Model
+            .build({ username: userObject.getUsername(),
+                 email: userObject.getEmail(),
+                 password: userObject.getPassword(),
+                 name: userObject.getName(),
+                 role: 'User' })
+            .save()
+            .catch(err => {
+                    seqError = err; //sequelize error handling issue with save
+                  });
+            if(seqError && seqError.name === 'SequelizeValidationError') {
+                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+        async updateUserInfo(id, userObject) {
+            try {
+                let seqError;
+                await this.Model
+                .update(
+                    { username: userObject.getUsername(),
+                     email: userObject.getEmail(),
+                     password: userObject.getPassword(),
+                     name: userObject.getName(),
+                     role: 'User' },
+                     { where: { id: id} }
+                    )
+                .catch(err => {
+                        seqError = err; //sequelize error handling issue with save
+                      });
+                if(seqError && seqError.name === 'SequelizeValidationError') {
+                    throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
+                }
+            } catch (err) {
+                throw err;
+            }
+
+        
     }
 }
 

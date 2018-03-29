@@ -1,19 +1,19 @@
 class User {
-    constructor(username = '', email = '',
-        password = '', name = '', city = '', country = '',
-        profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
-        socialProfileLinkTwo = '', socialProfileLinkThree = '') {
-        this.setUsername(username);
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setName(name);
-        this.setCity(city);
-        this.setCountry(country);
-        this.setProfilePicture(profilePicture);
-        this.setCoverPhoto(coverPhoto);
-        this.setSocialProfileLink(socialProfileLinkOne);
-        this.setSocialProfileLink(socialProfileLinkTwo);
-        this.setSocialProfileLink(socialProfileLinkThree);
+    constructor(username = '', email = '', 
+    password ='', name ='' , city = '', country = '',
+    profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
+    socialProfileLinkTwo = '', socialProfileLinkThree = '') {
+            this.setUsername(username);
+            this.setEmail(email);
+            this.setPassword(password);
+            this.setName(name);
+            // this.setCity(city);
+            // this.setCountry(country);
+            // this.setProfilePicture(profilePicture);
+            // this.setCoverPhoto(coverPhoto);
+            // this.setSocialProfileLink(socialProfileLinkOne);
+            // this.setSocialProfileLink(socialProfileLinkTwo);
+            // this.setSocialProfileLink(socialProfileLinkThree);
     }
     setUsername(username) {
 
@@ -65,15 +65,18 @@ class User {
     }
     setPassword(password) {
         const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-
-        if (!password.length || !password || (password.length > 32)) {
-            throw new Error('Invalid password length');
+        if (!password.length
+            || !password
+            || password.length<8
+            || (password.length > 32)
+        ) {
+            throw new Error('Invalid password length')
         }
 
         if (password.match(passwordRegex)) {
             this.password = password;
         } else {
-            throw new Error('Password includes symbols that are not allowed')
+            throw new Error('Password does not match all the security requirements');
         }
     }
     setCountry(country) {
@@ -86,6 +89,8 @@ class User {
 
         if (country.match(alphaRegex)) {
             this.country = country;
+        } else {
+            throw new Error('Please include only valid symbols in the country name');
         }
     }
     setCity(city) {
@@ -98,6 +103,8 @@ class User {
 
         if (city.match(alphaRegex)) {
             this.city = city;
+        } else {
+            throw new Error('Please include only valid symbols in the country name')
         }
     }
     setProfilePicture(profilePicture) {
