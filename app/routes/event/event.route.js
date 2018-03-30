@@ -2,8 +2,12 @@ const {
     Router,
 } = require('express');
 
+const EventController = require('./event.controller');
+
 const init = (app, data) => {
     const router = new Router();
+    const controller = new EventController(data);
+
     router
         .get('/:ID/:TITLE', async (req, res) => {
             const context = {};
@@ -11,6 +15,10 @@ const init = (app, data) => {
         })
         .get('/create', async (req, res) => {
             const context = {};
+            context.countries = await controller.getCountries();
+    
+            console.log(context);
+            // res.status(200).json(context);
             res.render('./event/create', context);
         })
         .get('/overview', async (req, res) => {
