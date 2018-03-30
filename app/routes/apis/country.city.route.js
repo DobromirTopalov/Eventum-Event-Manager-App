@@ -23,6 +23,18 @@ const init = (app, data) => {
       }
 
       res.status(200).json(result);
+    })
+    .get('/countryByName', async (req, res) => {
+      const country = req.query.country;
+      const result = await controller.getCountry(country);
+
+      res.status(200).json(result);
+    })
+    .get('/cityByName', async (req, res) => {
+      const city = req.query.city;
+      const result = await controller.getCity(city);
+
+      res.status(200).json(result);
     });
 
   app.use('/', router);

@@ -10,6 +10,17 @@ class CountryData {
 
         return result;
     }
+
+    getByName(country) {
+        const result = this.Model.findOne({
+            attributes: ['name'],
+            where: {
+                name: country
+            }
+        });
+
+        return result;
+    }
 }
 
 module.exports = CountryData;
