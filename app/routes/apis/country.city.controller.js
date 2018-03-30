@@ -20,6 +20,12 @@ class CountryCityController {
 
         return result;
     }
+
+    getCity(city) {
+        const result = this.data.city.getByName(city);
+
+        return result;
+    }
 }
 
 module.exports = CountryCityController;
