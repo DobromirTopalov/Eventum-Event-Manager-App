@@ -5,7 +5,7 @@ class CountryData {
 
     getAll() {
         const result = this.Model.findAll({
-            attributes: ['Name'],
+            attributes: ['name'],
         });
 
         return result;

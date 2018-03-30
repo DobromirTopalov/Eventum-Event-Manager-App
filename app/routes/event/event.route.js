@@ -16,9 +16,8 @@ const init = (app, data) => {
         .get('/create', async (req, res) => {
             const context = {};
             context.countries = await controller.getCountries();
-    
-            console.log(context);
-            // res.status(200).json(context);
+            context.categories = await controller.getCategories();
+
             res.render('./event/create', context);
         })
         .get('/overview', async (req, res) => {

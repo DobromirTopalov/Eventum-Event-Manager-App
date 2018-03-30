@@ -4,10 +4,16 @@ class EventController {
     }
 
     getCountries() {
-        const reuslt = this.data.country.getAll();
+        const result = this.data.country.getAll();
 
-        return reuslt;
+        return result;
     };
+
+    getCategories() {
+        const result = this.data.categories.getAllCategories();
+
+        return result;
+    }
 }
 
 module.exports = EventController;
