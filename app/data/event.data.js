@@ -44,7 +44,7 @@ class EventData extends Data {
     
     async addNewEvent(userId, eventObject) {
         try {
-            console.log( eventObject.getDate())
+            console.log( eventObject)
             let seqError;
             await this.Model
             .build({ title: eventObject.getTitle(), 

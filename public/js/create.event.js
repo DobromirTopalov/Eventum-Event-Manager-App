@@ -78,7 +78,11 @@ $(function () {
             description: $('#event-desc-input').val(),
             category: $('#category-input').val(),
             subcategory: $('#subcategory-input').val(),
+<<<<<<< HEAD
             capacity: $('#category-input').val(),
+=======
+            capacity: $('#capacity-input').val(),
+>>>>>>> 49740419be52815014ec8d4b6288b5a44169278b
             price: $('#price-input').val(),
 
         }
