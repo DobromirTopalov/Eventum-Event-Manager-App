@@ -24,8 +24,8 @@ class EventController {
             // console.log('2313')
             // await console.log(eventData.date)
             thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
-                eventData.address, eventData.title, eventData.description, eventData.price, eventData.category);
-
+                eventData.address, eventData.title, eventData.description, eventData.category, eventData.price, eventData.capacity);
+            console.log(thisEvent)
             await this.data.events.addNewEvent(userId, thisEvent);
         }
         catch (err) {

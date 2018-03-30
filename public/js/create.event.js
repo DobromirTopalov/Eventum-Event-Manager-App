@@ -78,8 +78,8 @@ $(function () {
             description: $('#event-desc-input').val(),
             category: $('#category-input').val(),
             subcategory: $('#subcategory-input').val(),
-            capacity: $('#category-input').val(),
-            price: $('#capacity-input').val(),
+            capacity: $('#capacity-input').val(),
+            price: $('#price-input').val(),
 
         }
         debugger;
