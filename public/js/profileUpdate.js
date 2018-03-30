@@ -215,7 +215,9 @@ $(document).ready(function(e) {
                 .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] +'</span></div>')
             },
             success: function (data) {
-                // window.location.href = '///';
+                var messageAlert = 'Good job! You successfully updated your profile!';
+                $('#alertdiv')
+                .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
             }
         });
     });
