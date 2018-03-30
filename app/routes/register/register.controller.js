@@ -42,12 +42,7 @@ class UserController {
             thisUser = await new userObject(userData.username, userData.email, userData.password, userData.name, 
                 'userDatacity', 'userDatacountry', userData.profilePic, userData.coverPhoto, '', '' , '', '', userData.webpage, userData.autoBio)
             let usernamesArray = await this.data.users.getAllUsernames();
-            console.log("DSADA")
-            await console.log(thisUser)
-            console.log("123321")
-            await console.log(userData)
-            console.log("DSADA")
-
+            
             // if(usernamesArray.includes(thisUser.getUsername())) {
             //     throw new Error('Existing username');
             // }

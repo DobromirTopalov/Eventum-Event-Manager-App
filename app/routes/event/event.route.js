@@ -3,6 +3,7 @@ const {
 } = require('express');
 
 const EventController = require('./event.controller');
+const passport = require('passport');
 
 const init = (app, data) => {
     const router = new Router();
@@ -24,41 +25,68 @@ const init = (app, data) => {
         })
         .post('/create', async (req, res, next) => {
             let eventInfo = await req.body;
-            console.log(23)
-            // await console.log(eventInfo);
+            console.log(eventInfo)
+            // if (!req.user) {
+            //     return res.redirect('/login');
+            // }
+            let userID = await req.user.id;
+            
             try {
-                 await eventController.createEvent(eventInfo);
+                 await eventController.createEvent(userID, eventInfo);
              } catch (err) {
                  const someError = err;
                  res.status(400).json({ 'err': err.message });
              }
              res.status(200).json({ 'success': true });
-         });
-        //  .get('/overview', async (req, res, next) => {
-        //     const context = {};
-        //     context.countries =['Bulgaria'];
-        //     const event = {
-        //     title: 'Soundwave - experience the best audio!',
-        //     date: 'November, 27 2018',
-        //     location: 'NDK',
-        //     city: 'Sofia',
-        //     country: 'Bulgaria',
-        //     authorPhoto: 'photo.com',
-        //     description: 'Ultra new, bleeding edge sound equipment and a lot of music, drink and fun!',
-        //     socialFb: 'asd.bg',
-        //     socialTwt: 'asd.com',
-        //     socialGgl: 'asd.net',
-        //     price: '15.99',
-        //     capacity: '120',
-        //     placename: 'Sofia Live Club',
-        //     category: 'Music',
-        //     subcategories: ['Modern', 'Techno', 'Trap'],
-        //     hours: '21:30',
-
-        //         //     };
+         })
+         .get('/overview', async (req, res, next) => {
+            let eventId = 34;
+            let event = await Object.assign(await data.events.getEventInfoById(eventId), {category: 'Music',
+            subcategories: ['Modern', 'Techno', 'Trap']} );
+            // let userExtraInfo = await data.users.getUserExtraInfoById(userID)
+            // eventInfo = Object.assign(userInfo, userExtraInfo );
+            console.log(event)
+            // const context = {};
+            // context.countries =['Bulgaria'];
+            // const event = {
+            // title: 'Soundwave - experience the best audio!',
+            // date: 'November, 27 2018',
+            // location: 'NDK',
+            // city: 'Sofia',
+            // country: 'Bulgaria',
+            // authorPhoto: 'photo.com',
+            // description: 'Ultra new, bleeding edge sound equipment and a lot of music, drink and fun!',
+            // socialFb: 'asd.bg',
+            // socialTwt: 'asd.com',
+            // socialGgl: 'asd.net',
+            // price: '15.99',
+            // capacity: '120',
+            // placename: 'Sofia Live Club',
+            // category: 'Music',
+            // subcategories: ['Modern', 'Techno', 'Trap'],
+            // hours: '21:30',
+            // }
+            const comments = [{
+                            img: 'photo.com',
+                            owner: 'Ivan Ivanov',
+                            date: '23.12.16 23:45',
+                            content: 'Fantastic show!',
+                        },
+                        {
+                            img: 'photos.com',
+                            owner: 'Mitko Mitev',
+                            date: '02.08.16 02:45',
+                            content: 'Awesome!',
+                        },
+                    ];
         
-        //     res.render('./event/create', context);
-        // })
+            const context = await {
+                event,
+                comments,
+            };
+        
+            res.render('./event/event-overview', context);
+        })
         // // .get('/overview', async (req, res) => {
         // //     const event = {
         // //         title: 'Soundwave - experience the best audio!',

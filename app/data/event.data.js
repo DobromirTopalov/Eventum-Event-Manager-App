@@ -30,7 +30,7 @@ class EventData extends Data {
     }
    
     
-    async addNewEvent(eventObject) {
+    async addNewEvent(userId, eventObject) {
         try {
             console.log( eventObject.getDate())
             let seqError;
@@ -38,7 +38,8 @@ class EventData extends Data {
             .build({ title: eventObject.getTitle(), 
                  describe: eventObject.getDescription(),
                  capacity: eventObject.getCapacity(),
-                 date: eventObject.getDate()
+                 date: eventObject.getDate(),
+                 UserId: userId
                 })
             .save()
             .catch(err => {

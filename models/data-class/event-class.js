@@ -36,6 +36,7 @@ class Event{
             || (date.length > 11)
             || (date.length < 4)
         ) {
+            
             throw new Error('Please add a date in the required format');
         }
         if (date.match(dateReg)) {
@@ -161,11 +162,11 @@ class Event{
   
 
   getDate() {
-    let dateFormatted = this.date.split('.')
+    let dateFormatted = this.date.split('/')
     console.log(dateFormatted)
     let finalDate = new Date();
-    finalDate.setDate(dateFormatted[0]);
-    finalDate.setMonth(dateFormatted[1]-1);
+    finalDate.setMonth(dateFormatted[0]-1);
+    finalDate.setDay(dateFormatted[1]);
     finalDate.setFullYear(dateFormatted[2]);
     return finalDate;
   }
