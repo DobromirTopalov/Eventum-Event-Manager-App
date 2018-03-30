@@ -19,7 +19,6 @@ class EventController {
 
     async createEvent(userId, eventData) {
         try {
-<<<<<<< HEAD
             const thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
                 eventData.address, eventData.title, eventData.description, eventData.price, eventData.category);
 
@@ -43,14 +42,6 @@ class EventController {
                 throw new Error('The subcategory is not correct');
             }
 
-=======
-            //    console.log(eventData);
-            // console.log('2313')
-            // await console.log(eventData.date)
-            thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
-                eventData.address, eventData.title, eventData.description, eventData.category, eventData.price, eventData.capacity);
-            console.log(thisEvent)
->>>>>>> 49740419be52815014ec8d4b6288b5a44169278b
             await this.data.events.addNewEvent(userId, thisEvent);
         }
         catch (err) {
