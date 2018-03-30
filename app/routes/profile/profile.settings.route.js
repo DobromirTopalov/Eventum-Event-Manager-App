@@ -13,11 +13,14 @@ const multer = require('multer');
 const init = (app, data) => {
     const router = new Router();
     let userController = new UserController(data); 
-    let uploading = multer({
-        dest: __dirname + '../../uploads/',
-      });
+    // let uploading = multer({
+    //     dest: __dirname + '../../uploads/',
+    //   });
     router
     .get('/settings', async (req, res, next) => {
+        if (!req.user) {
+            return res.redirect('/login');
+          }
         let userID = await req.user.id;
 
         req.userInfo = await data.users.getUserInfoById(userID)

@@ -13,147 +13,148 @@ block content
               h3 Create an Event
         // end /.col-md-12
       // end /.row
-      form.setting_form(action='#')
-        .row
-          .col-md-6
-            .information_module
-              a.toggle_title(href='#collapse2', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                h4
-                  | Event info 
-                  span.lnr.lnr-chevron-down
-              #collapse2.information__set.toggle_module.collapse.in
-                .information_wrapper.form--fields
-                  .form-group
-                    label(for='acname')
-                      | Title
-                      sup *
-                    input#acname.text_field(type='text', placeholder='First Name', value='Aazz Tech')
-                  .form-group
-                    label(for='usrname')
-                      | Date of Event 
-                      sup *
-                    .input_with_icon
-                      input.text_field.dattaPikkara.hasDatepicker(type='text', placeholder='Date', id='dp1522324281206')
-                      span.lnr.lnr-calendar-full
-                  .form-group
-                    label(for='start-time-input')
-                      | Start Time
-                      sup *
-                    input#start-time-input.text_field(type='text', placeholder='Hours:Minutes', value='')
-                  .row
-                    .col-md-6
-                      .form-group
-                        label(for='country-input')
-                          | Country
-                          sup *
-                        .select-wrap.select-wrap2
-                          //- script.
-                          //-  console.log(!{JSON.stringify(countries[1]name)})
-                          select#country-input.text_field(name='country')
-                            for val in countries
-                              script.
-                                console.log(!{JSON.stringify(val)})
-                              option(value='1') #{val.Name}
-                          span.lnr.lnr-chevron-down
-                    .col-md-6
-                      .form-group
-                        label(for='city-input')
-                          | City 
-                          sup *
-                        .select-wrap.select-wrap2
-                          select#city-input.text_field(name='city')
-                            option(value='') Select one
-                            option(value='bangladesh') Bangladesh
-                            option(value='india') India
-                            option(value='uruguye') Uruguye
-                            option(value='australia') Australia
-                            option(value='neverland') Neverland
-                            option(value='atlantis') Atlantis
-                          span.lnr.lnr-chevron-down
-                  .form-group
-                    label(for='place-name-input') 
-                      | Place's name
-                      sup *
-                    input#place-name-input.text_field(type='password', placeholder='Place\'s name')
-                  .form-group
-                    label(for="address-input")
-                      | Address
-                      sup *
-                    input#address-input.text_field(type="text", placeholder='Place\'s address')
-                  .form-group
-                    label(for='authbio')
-                      | Event Description
-                      sup *
-                    textarea#authbio.text_field(name='author_bio', placeholder='Description about the event')
-                  .row
-                    .col-md-6
-                      .form-group
-                        label(for='categorie-input')
-                          | Categorie 
-                          sup *
-                        .select-wrap.select-wrap2
-                          select#categorie-input.text_field(name='categorie')
-                            option(value='') Select one
-                            option(value='bangladesh') Bangladesh
-                            option(value='india') India
-                            option(value='uruguye') Uruguye
-                            option(value='australia') Australia
-                            option(value='neverland') Neverland
-                            option(value='atlantis') Atlantis
-                          span.lnr.lnr-chevron-down
-                    .col-md-6
-                      .form-group
-                        label(for='subcategorie-input')
-                          | SubCategorie
-                          sup *
-                        .select-wrap.select-wrap2
-                          select#subcategorie-input.text_field(name='subcategorie')
-                            option(value='') Select one
-                            option(value='bangladesh') Bangladesh
-                            option(value='india') India
-                            option(value='uruguye') Uruguye
-                            option(value='australia') Australia
-                            option(value='neverland') Neverland
-                            option(value='atlantis') Atlantis
-                          span.lnr.lnr-chevron-down
-                  
-          .col-md-6
-            .information_module
-              a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                h4
-                  | Cover Photo 
-                  span.lnr.lnr-chevron-down
-              #collapse3.information__set.profile_images.toggle_module.collapse.in
-                .information_wrapper
-                  .prof_img_upload
-                    p.bold Cover Image
-                    img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
-                    .upload_title
-                      p JPG, GIF or PNG 1600x400px
-                      label.upload_btn(for='dp')
-                        input#dp(type='file')
-                        span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
-            .information_module
-              a.toggle_title(href='#collapse5', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                h4
-                  | Tickets Information 
-                  span.lnr.lnr-chevron-down
-              #collapse5.information__set.social_profile.toggle_module.collapse.in
-                .information_wrapper
-                  .form-group
-                    label(for='capacity-input')
-                      | Capacity
-                      sup *
-                    input#capacity-input.text_field(type='text', placeholder='Capacity', value='')
-                  .form-group
-                    label(for='price-input')
-                      | Price BGN
-                      sup *
-                    input#price-input.text_field(type='text', placeholder='Price', value='')
-          .col-md-12
-            .dashboard_setting_btn
-              button#create-event-button.btn.btn--round.btn--md(type='submit') Create
+      #alertdiv
+      form.setting_form
+        #createEventForm
+          .row
+            .col-md-6
+              .information_module
+                a.toggle_title(href='#collapse2', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                  h4
+                    | Event info 
+                    span.lnr.lnr-chevron-down
+                #collapse2.information__set.toggle_module.collapse.in
+                  .information_wrapper.form--fields
+                    .form-group
+                      label(for='acname')
+                        | Title
+                        sup *
+                      input#acname.text_field(type='text', placeholder='First Name', value='Aazz Tech', name='title')
+                    .form-group
+                      label(for='usrname')
+                        | Date of Event 
+                        sup *
+                      .input_with_icon
+                        input.text_field.dattaPikkara.hasDatepicker(type='text', name='date', placeholder='Date', id='dp1522324281206')
+                        span.lnr.lnr-calendar-full
+                    .form-group
+                      label(for='start-time-input')
+                        | Start Time
+                        sup *
+                      input#start-time-input.text_field(type='text', placeholder='Hours:Minutes', name = 'time' value='')
+                    .row
+                      .col-md-6
+                        .form-group
+                          label(for='country-input')
+                            | Country
+                            sup *
+                          .select-wrap.select-wrap2
+                            //- script.
+                            //-  console.log(!{JSON.stringify(countries[1]name)})
+                            select#country-input.text_field(name='country')
+                              for val in countries
+                                script.
+                                  console.log(!{JSON.stringify(val)})
+                                option(value='1') #{val.Name}
+                            span.lnr.lnr-chevron-down
+                      .col-md-6
+                        .form-group
+                          label(for='city-input')
+                            | City 
+                            sup *
+                          .select-wrap.select-wrap2
+                            select#city-input.text_field(name='city')
+                              option(value='') Select one
+                              option(value='bangladesh') Bangladesh
+                              option(value='india') India
+                              option(value='uruguye') Uruguye
+                              option(value='australia') Australia
+                              option(value='neverland') Neverland
+                              option(value='atlantis') Atlantis
+                            span.lnr.lnr-chevron-down
+                    .form-group
+                      label(for='place-name-input') 
+                        | Place's name
+                        sup *
+                      input#place-name-input.text_field(type='text', name = 'placeName', placeholder='Place\'s name')
+                    .form-group
+                      label(for="address-input")
+                        | Address
+                        sup *
+                      input#address-input.text_field(type="text", name = 'address' placeholder='Place\'s address')
+                    .form-group
+                      label(for='authbio')
+                        | Event Description
+                        sup *
+                      textarea#authbio.text_field(name='author_bio', placeholder='Description about the event')
+                    .row
+                      .col-md-6
+                        .form-group
+                          label(for='categorie-input')
+                            | Category 
+                            sup *
+                          .select-wrap.select-wrap2
+                            select#categorie-input.text_field(name='category')
+                              option(value='') Select one
+                              option(value='bangladesh') Bangladesh
+                              option(value='india') India
+                              option(value='uruguye') Uruguye
+                              option(value='australia') Australia
+                              option(value='neverland') Neverland
+                              option(value='atlantis') Atlantis
+                            span.lnr.lnr-chevron-down
+                      .col-md-6
+                        .form-group
+                          label(for='subcategorie-input')
+                            | SubCategory
+                            sup *
+                          .select-wrap.select-wrap2
+                            select#subcategorie-input.text_field(name='subcategory')
+                              option(value='') Select one
+                              option(value='bangladesh') Bangladesh
+                              option(value='india') India
+                              option(value='uruguye') Uruguye
+                              option(value='australia') Australia
+                              option(value='neverland') Neverland
+                              option(value='atlantis') Atlantis
+                            span.lnr.lnr-chevron-down
+                    
+            .col-md-6
+              .information_module
+                a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                  h4
+                    | Cover Photo 
+                    span.lnr.lnr-chevron-down
+                #collapse3.information__set.profile_images.toggle_module.collapse.in
+                  .information_wrapper
+                    .prof_img_upload
+                      p.bold Cover Image
+                      img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
+                      .upload_title
+                        p JPG, GIF or PNG 1600x400px
+                        label.upload_btn(for='dp')
+                          input#dp(type='file')
+                          span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
+              .information_module
+                a.toggle_title(href='#collapse5', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+                  h4
+                    | Tickets Information 
+                    span.lnr.lnr-chevron-down
+                #collapse5.information__set.social_profile.toggle_module.collapse.in
+                  .information_wrapper
+                    .form-group
+                      label(for='capacity-input')
+                        | Capacity
+                        sup *
+                      input#capacity-input.text_field(type='text', name = 'capacity' placeholder='Capacity', value='')
+                    .form-group
+                      label(for='price-input')
+                        | Price BGN
+                        sup *
+                      input#price-input.text_field(type='text', name = 'price', placeholder='Price', value='')
+            .col-md-12
+              .dashboard_setting_btn
+                button#create-event-button.btn.btn--round.btn--md(type='button') Create
 
 block extrastuff
   script(src='/static/js/vendor/datepicker.js')
-  script(src='/static/js/create.event.js')

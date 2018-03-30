@@ -56,6 +56,7 @@ class UserController {
             //     throw new Error('This email is already registered');
             // }
             // await this.data.users.updateUserData(userID, thisUser);
+            // createCity( thisCity, id = findCountryID(thisCity.getCountry()))
             await this.data.users.updateUserData(userID, thisUser);
             await this.data.users.updateUserInfo(userID, thisUser);
         }
