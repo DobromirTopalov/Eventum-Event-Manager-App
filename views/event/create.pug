@@ -43,26 +43,25 @@ block content
                   .row
                     .col-md-6
                       .form-group
-                        label(for='city-input')
-                          | City 
-                          sup *
-                        .select-wrap.select-wrap2
-                          select#country.text_field(name='country')
-                            option(value='') Select one
-                            option(value='bangladesh') Bangladesh
-                            option(value='india') India
-                            option(value='uruguye') Uruguye
-                            option(value='australia') Australia
-                            option(value='neverland') Neverland
-                            option(value='atlantis') Atlantis
-                          span.lnr.lnr-chevron-down
-                    .col-md-6
-                      .form-group
                         label(for='country-input')
                           | Country
                           sup *
                         .select-wrap.select-wrap2
-                          select#country.text_field(name='country')
+                          //- script.
+                          //-  console.log(!{JSON.stringify(countries[1]name)})
+                          select#country-input.text_field(name='country')
+                            for val in countries
+                              script.
+                                console.log(!{JSON.stringify(val)})
+                              option(value='1') #{val.Name}
+                          span.lnr.lnr-chevron-down
+                    .col-md-6
+                      .form-group
+                        label(for='city-input')
+                          | City 
+                          sup *
+                        .select-wrap.select-wrap2
+                          select#city-input.text_field(name='city')
                             option(value='') Select one
                             option(value='bangladesh') Bangladesh
                             option(value='india') India
@@ -72,10 +71,10 @@ block content
                             option(value='atlantis') Atlantis
                           span.lnr.lnr-chevron-down
                   .form-group
-                    label(for='website') 
+                    label(for='place-name-input') 
                       | Place's name
                       sup *
-                    input#website.text_field(type='password', placeholder='Website')
+                    input#place-name-input.text_field(type='password', placeholder='Place\'s name')
                   .form-group
                     label(for="address-input")
                       | Address
@@ -89,11 +88,11 @@ block content
                   .row
                     .col-md-6
                       .form-group
-                        label(for='city-input')
+                        label(for='categorie-input')
                           | Categorie 
                           sup *
                         .select-wrap.select-wrap2
-                          select#country.text_field(name='country')
+                          select#categorie-input.text_field(name='categorie')
                             option(value='') Select one
                             option(value='bangladesh') Bangladesh
                             option(value='india') India
@@ -104,11 +103,11 @@ block content
                           span.lnr.lnr-chevron-down
                     .col-md-6
                       .form-group
-                        label(for='country-input')
+                        label(for='subcategorie-input')
                           | SubCategorie
                           sup *
                         .select-wrap.select-wrap2
-                          select#country.text_field(name='country')
+                          select#subcategorie-input.text_field(name='subcategorie')
                             option(value='') Select one
                             option(value='bangladesh') Bangladesh
                             option(value='india') India
@@ -142,18 +141,18 @@ block content
               #collapse5.information__set.social_profile.toggle_module.collapse.in
                 .information_wrapper
                   .form-group
-                    label(for='capacity')
+                    label(for='capacity-input')
                       | Capacity
                       sup *
-                    input#capacity.text_field(type='text', placeholder='Capacity', value='')
+                    input#capacity-input.text_field(type='text', placeholder='Capacity', value='')
                   .form-group
-                    label(for='capacity')
+                    label(for='price-input')
                       | Price BGN
                       sup *
-                    input#capacity.text_field(type='text', placeholder='Price', value='')
+                    input#price-input.text_field(type='text', placeholder='Price', value='')
           .col-md-12
             .dashboard_setting_btn
-              button.btn.btn--round.btn--md(type='submit') Create
+              button#create-event-button.btn.btn--round.btn--md(type='submit') Create
 
 block extrastuff
   script(src='/static/js/vendor/datepicker.js')
