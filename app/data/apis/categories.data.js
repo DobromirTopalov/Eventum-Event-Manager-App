@@ -9,7 +9,7 @@ class Category {
 
     getAllCategories() {
         const result = this.Model.findAll({
-            attributes: ['Name'],
+            attributes: ['name'],
         });
 
         return result;

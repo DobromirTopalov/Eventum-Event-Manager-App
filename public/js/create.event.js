@@ -1,28 +1,88 @@
-/* eslint-disable */
-$(document).ready(function(e) {
+$(function () {
     /* date picker js */
     $('.dattaPikkara').datepicker({
         autoclose: true
     });
 
-    $('#createEventForm').find('#create-event-button').click(function(e){
+    /* Country - City */
+    var changeOptionCitues = function (cities) {
+        var $cityInput = $('#city-input');
+
+        // Clear old data
+        $cityInput.empty();
+
+        // Set the new data
+        $(`<option value="">Select one</option>`).appendTo($cityInput);
+        Object.keys(cities).forEach((city) => {
+            $(`<option value="${cities[city].name}" >${cities[city].name}</option>`).appendTo($cityInput);
+        });
+    }
+
+    $('#country-input').change(function () {
+        var country = $(this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/cities",
+            data: {
+                country: country,
+            },
+            success: function (data) {
+                changeOptionCitues(data);
+            }
+        });
+    });
+
+
+    /* Categories - SubCategories */
+    var changeOptionSubCategories = function (categories) {
+        var $subCategorieInput = $('#subcategory-input');
+
+        // Clear old data
+        $subCategorieInput.empty();
+
+        // Set the new data
+        $(`<option value="">Select one</option>`).appendTo($subCategorieInput);
+        Object.keys(categories).forEach((categorie) => {
+            $(`<option value="${categories[categorie].title}" >${categories[categorie].title}</option>`).appendTo($subCategorieInput);
+        });
+    }
+
+    $('#category-input').change(function () {
+        var categorie = $(this).val();
+
+        $.ajax({
+            type: "GET",
+            url: '/subCategories',
+            data: {
+                categorie: categorie
+            },
+            success: function (data) {
+                changeOptionSubCategories(data);
+            }
+        });
+
+    });
+
+    /* Get data from inputs and send it */
+    $('#createEventForm').find('#create-event-button').click(function (e) {
         console.log('dib')
         var eventInfo = {
-            title: $('input[name=title]').val(),
-            date: $('input[name=date]').val(),
-            time:  $('input[name=time]').val(),
-            country: $('select[name=country]').val(),
-            city: $('select[name=city]').val(),
-            placeName: $('input[name=placeName]').val(),
-            address: $('input[name=address]').val(),
-            description: $('textarea[name=author_bio]').val(),
-            category: $('select[name=category]').val(),
-            subcategory: $('select[name=subcategory]').val(),
-            capacity: $('input[name=capacity]').val(), 
-            price: $('input[name=price').val(),
+            title: $('#event-title-input').val(),
+            date: $('#date-input').val(),
+            time: $('#start-time-input').val(),
+            country: $('#country-input').val(),
+            city: $('#city-input').val(),
+            placeName: $('#place-name-input').val(),
+            address: $('#address-input').val(),
+            description: $('#event-desc-input').val(),
+            category: $('#category-input').val(),
+            subcategory: $('#subcategory-input').val(),
+            capacity: $('#category-input').val(),
+            price: $('#capacity-input').val(),
 
         }
-
+        debugger;
         console.log(eventInfo);
 
         $.ajax({
@@ -32,19 +92,18 @@ $(document).ready(function(e) {
             dataType: 'json',
             data: eventInfo,
             error: function (error) {
+                debugger;
                 $('#alertdiv')
-                .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] +'</span></div>')
+                    .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] + '</span></div>')
             },
             success: function (data) {
+                debugger;
                 var messageAlert = 'Good job! You successfully updated your profile!';
                 $('#alertdiv')
-                .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+                    .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
             }
         });
 
         return false;
-
     });
 });
-
-/* eslint-enable */

@@ -8,7 +8,7 @@ const {
 
 const passport = require('passport');
 const UserController = require('../register/register.controller');
-const multer = require('multer');
+// const multer = require('multer');
 
 const init = (app, data) => {
     const router = new Router();

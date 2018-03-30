@@ -3,11 +3,10 @@ const {
 } = require('express');
 
 const EventController = require('./event.controller');
-const passport = require('passport');
 
 const init = (app, data) => {
     const router = new Router();
-    const eventController = new EventController(data);
+    const controller = new EventController(data);
 
     router
         .get('/:ID/:TITLE', async (req, res) => {
@@ -16,23 +15,27 @@ const init = (app, data) => {
         })
         .get('/create', async (req, res, next) => {
             const context = {};
-            context.countries =['Bulgaria'];
-            //  await eventController.getCountries();
-    
-            // console.log(context);
-            // res.status(200).json(context);
+            
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+
+            context.countries = await controller.getCountries();
+            context.categories = await controller.getCategories();
+
             res.render('./event/create', context);
         })
         .post('/create', async (req, res, next) => {
-            let eventInfo = await req.body;
-            console.log(eventInfo)
-            // if (!req.user) {
-            //     return res.redirect('/login');
-            // }
-            let userID = await req.user.id;
+            const eventInfo = req.body;
             
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+ 
+            let userID = req.user.id;
+
             try {
-                 await eventController.createEvent(userID, eventInfo);
+                 await controller.createEvent(userID, eventInfo);
              } catch (err) {
                  const someError = err;
                  res.status(400).json({ 'err': err.message });
