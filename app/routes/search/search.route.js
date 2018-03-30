@@ -15,38 +15,47 @@ const init = (app, data) => {
 
     router
     .get('/', async (req, res) => {
+        await console.log(await data.events.getAllEventsInfo());
+        let allEvents  = await data.events.getAllEventsInfo();
         const categories = ['Music', 'Art', 'Sport', 'Dances', 'Technology'];
         const cities = ['London', 'Paris', 'Sofia', 'Varna'];
-        const events = {
-            eventCard1: {
-                title: 'Grande Amore',
-                coverPhoto: '/static/images/p3.jpg',
-                eventInfo: '/views/evnt-23',
-                authorProfile: '/public/users',
-                authorImg: '/static/images/p3.jpg',
-                authorName: 'Big Bill',
-                categories: [{ name: 'Music' }, { name: 'Rap' }],
-                description: 'New album release and dinner + afterparty!',
-                ticketPrice: '$15.00',
-                followers: 90,
-                capacity: 200,
-                date: '11.11.21',
-            },
-            eventCard2: {
-                title: 'Viva las Vegas',
-                coverPhoto: '/static/images/p3.jpg',
-                eventInfo: '/views/evnt-23',
-                authorProfile: '/public/users',
-                authorImg: '/static/images/p3.jpg',
-                authorName: 'Don Roberto',
-                categories: [{ name: 'Art' }, { name: 'grafity' }],
-                description: 'Gallery with all my stuff as well as friends articles',
-                ticketPrice: '$50.99',
-                followers: '48',
-                capacity: 90,
-                date: '23.01.19',
-            },
-        };
+        allEvents = allEvents.map(event => Object.assign(event, {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
+        let events = {
+            ...allEvents
+            
+        }
+        console.log(events)
+        // const events = {
+            // data.events.getAllEventsInfo(),
+        //     eventCard1: {
+        //         title: 'Grande e',
+        //         coverPhoto: '/static/images/p3.jpg',
+        //         eventInfo: '/views/evnt-23',
+        //         authorProfile: '/public/users',
+        //         authorImg: '/static/images/p3.jpg',
+        //         authorName: 'Big Bill',
+        //         categories: [{ name: 'Music' }, { name: 'Rap' }],
+        //         description: 'New album release and dinner + afterparty!',
+        //         ticketPrice: '$15.00',
+        //         followers: 90,
+        //         capacity: 200,
+        //         date: '11.11.21',
+        //     },
+        //     eventCard2: {
+        //         title: 'Viva las Vegas',
+        //         coverPhoto: '/static/images/p3.jpg',
+        //         eventInfo: '/views/evnt-23',
+        //         authorProfile: '/public/users',
+        //         authorImg: '/static/images/p3.jpg',
+        //         authorName: 'Don Roberto',
+        //         categories: [{ name: 'Art' }, { name: 'grafity' }],
+        //         description: 'Gallery with all my stuff as well as friends articles',
+        //         ticketPrice: '$50.99',
+        //         followers: '48',
+        //         capacity: 90,
+        //         date: '23.01.19',
+        //     },
+        // };
 
         const context = {
             categories,

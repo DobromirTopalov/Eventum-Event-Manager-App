@@ -28,7 +28,13 @@ class EventData extends Data {
         })
         .then((item) => item.dataValues)
     }
-   
+    getAllEventsInfo(id) {
+        return  this.Model.findAll({
+        })
+        .then((items) =>  {
+            return items.map((item) => item.dataValues)
+        })
+    }
     
     async addNewEvent(userId, eventObject) {
         try {

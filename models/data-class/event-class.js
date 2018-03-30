@@ -166,7 +166,7 @@ class Event{
     console.log(dateFormatted)
     let finalDate = new Date();
     finalDate.setMonth(dateFormatted[0]-1);
-    finalDate.setDay(dateFormatted[1]);
+    finalDate.setDate(dateFormatted[1]);
     finalDate.setFullYear(dateFormatted[2]);
     return finalDate;
   }
