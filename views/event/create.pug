@@ -13,7 +13,8 @@ block content
               h3 Create an Event
         // end /.col-md-12
       // end /.row
-      form.setting_form(action='#')
+      div#alertdiv
+      div#createEventForm.setting_form(action='#')
         .row
           .col-md-6
             .information_module
@@ -24,16 +25,16 @@ block content
               #collapse2.information__set.toggle_module.collapse.in
                 .information_wrapper.form--fields
                   .form-group
-                    label(for='acname')
+                    label(for='event-title-input')
                       | Title
                       sup *
-                    input#acname.text_field(type='text', placeholder='First Name', value='Aazz Tech')
+                    input#event-title-input.text_field(type='text', placeholder='First Name', value='Aazz Tech')
                   .form-group
-                    label(for='usrname')
+                    label(for='date-input')
                       | Date of Event 
                       sup *
                     .input_with_icon
-                      input.text_field.dattaPikkara.hasDatepicker(type='text', placeholder='Date', id='dp1522324281206')
+                      input.text_field.dattaPikkara.hasDatepicker(type='text', placeholder='Date', id='date-input')
                       span.lnr.lnr-calendar-full
                   .form-group
                     label(for='start-time-input')
@@ -74,29 +75,29 @@ block content
                       sup *
                     input#address-input.text_field(type="text", placeholder='Place\'s address')
                   .form-group
-                    label(for='authbio')
+                    label(for='event-desc-input')
                       | Event Description
                       sup *
-                    textarea#authbio.text_field(name='author_bio', placeholder='Description about the event')
+                    textarea#event-desc-input.text_field(name='event-desc', placeholder='Description about the event')
                   .row
                     .col-md-6
                       .form-group
-                        label(for='categorie-input')
-                          | Categorie 
+                        label(for='category-input')
+                          | Category 
                           sup *
                         .select-wrap.select-wrap2
-                          select#categorie-input.text_field(name='categorie')
+                          select#category-input.text_field(name='category')
                             option(value='') Select one
                             each categorie in categories
                               option(value='' + categorie.name) #{categorie.name}
                           span.lnr.lnr-chevron-down
                     .col-md-6
                       .form-group
-                        label(for='subcategorie-input')
-                          | SubCategorie
+                        label(for='subcategory-input')
+                          | Subcategory
                           sup *
                         .select-wrap.select-wrap2
-                          select#subcategorie-input.text_field(name='subcategorie')
+                          select#subcategory-input.text_field(name='subcategory')
                             option(value='') Select one
                             option(value='bangladesh') Bangladesh
                             option(value='india') India
@@ -141,8 +142,7 @@ block content
                     input#price-input.text_field(type='text', placeholder='Price', value='')
           .col-md-12
             .dashboard_setting_btn
-              button#create-event-button.btn.btn--round.btn--md(type='submit') Create
+              button#create-event-button.btn.btn--round.btn--md(type='button') Create
 
 block extrastuff
   script(src='/static/js/vendor/datepicker.js')
-  script(src='/static/js/create.event.js')

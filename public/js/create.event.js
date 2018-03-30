@@ -7,7 +7,7 @@ $(function () {
     /* Country - City */
     var changeOptionCitues = function (cities) {
         var $cityInput = $('#city-input');
-        
+
         // Clear old data
         $cityInput.empty();
 
@@ -36,7 +36,7 @@ $(function () {
 
     /* Categories - SubCategories */
     var changeOptionSubCategories = function (categories) {
-        var $subCategorieInput = $('#subcategorie-input');
+        var $subCategorieInput = $('#subcategory-input');
 
         // Clear old data
         $subCategorieInput.empty();
@@ -48,7 +48,7 @@ $(function () {
         });
     }
 
-    $('#categorie-input').change(function () {
+    $('#category-input').change(function () {
         var categorie = $(this).val();
 
         $.ajax({
@@ -59,7 +59,51 @@ $(function () {
             },
             success: function (data) {
                 changeOptionSubCategories(data);
-            } 
+            }
         });
+
+    });
+
+    /* Get data from inputs and send it */
+    $('#createEventForm').find('#create-event-button').click(function (e) {
+        console.log('dib')
+        var eventInfo = {
+            title: $('#event-title-input').val(),
+            date: $('#date-input').val(),
+            time: $('#start-time-input').val(),
+            country: $('#country-input').val(),
+            city: $('#city-input').val(),
+            placeName: $('#place-name-input').val(),
+            address: $('#address-input').val(),
+            description: $('#event-desc-input').val(),
+            category: $('#category-input').val(),
+            subcategory: $('#subcategory-input').val(),
+            capacity: $('#category-input').val(),
+            price: $('#capacity-input').val(),
+
+        }
+        debugger;
+        console.log(eventInfo);
+
+        $.ajax({
+            method: 'POST',
+            async: true,
+            url: '/event/create',
+            dataType: 'json',
+            data: eventInfo,
+            error: function (error) {
+                debugger;
+                $('#alertdiv')
+                    .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] + '</span></div>')
+            },
+            success: function (data) {
+                debugger;
+                var messageAlert = 'Good job! You successfully updated your profile!';
+                $('#alertdiv')
+                    .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+            }
+        });
+
+        return false;
     });
 });

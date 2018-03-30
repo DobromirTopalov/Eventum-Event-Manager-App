@@ -18,6 +18,9 @@ const init = (app, data) => {
     //   });
     router
     .get('/settings', async (req, res, next) => {
+        if (!req.user) {
+            return res.redirect('/login');
+          }
         let userID = await req.user.id;
 
         req.userInfo = await data.users.getUserInfoById(userID)
