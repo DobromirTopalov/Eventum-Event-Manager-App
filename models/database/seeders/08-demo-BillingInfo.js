@@ -10,6 +10,7 @@ module.exports = {
       postCode: '1242',
       CityId: 1,
       CountryId: 1,
+      UserId: 1,
     }, {
       firstName: 'Mira',
       lastName: 'Vasileva',
@@ -18,6 +19,7 @@ module.exports = {
       postCode: '3542',
       CityId: 2,
       CountryId: 3,
+      UserId: 1,
     }, {
       firstName: 'Nasko',
       lastName: 'Mitev',
@@ -26,6 +28,7 @@ module.exports = {
       postCode: '8741',
       CityId: 2,
       CountryId: 3,
+      UserId: 1,
     }, {
       firstName: 'Mirela',
       lastName: 'Gogova',
@@ -34,6 +37,7 @@ module.exports = {
       postCode: '7841',
       CityId: 3,
       CountryId: 5,
+      UserId: 2,
     }, {
       firstName: 'Mila',
       lastName: 'Zdravkova',
@@ -42,6 +46,7 @@ module.exports = {
       postCode: '3775',
       CityId: 1,
       CountryId: 1,
+      UserId: 2,
     }, {
       firstName: 'Dimitry',
       lastName: 'Vlad',
@@ -50,6 +55,7 @@ module.exports = {
       postCode: '3570',
       CityId: 2,
       CountryId: 3,
+      UserId: 2,
     }].map((el) => {
       el.updatedAt = new Date;
       el.createdAt = new Date;

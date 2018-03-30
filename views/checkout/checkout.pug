@@ -4,7 +4,7 @@ block content
     section.dashboard-area
         .dashboard_contents
             .container
-                form.setting_form(action='#')
+                form.setting_form(action='/checkout' method="POST")
                     .row
                         .col-md-6
                             .information_module
@@ -251,4 +251,4 @@ block content
                                                 |                                                 
                                                 input#cv_code.text_field(placeholder='Enter code here...', name='cvcode' type='text')
                                             |                                             
-                                            button.btn.btn--round.btn--default(type='submit') Confirm Order
+                                            button.btn.btn--round.btn--default#confirmOrder(type='button') Confirm Order

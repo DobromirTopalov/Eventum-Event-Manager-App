@@ -27,10 +27,12 @@ module.exports = (sequelize, DataTypes) => {
         const {
             Country,
             City,
+            User,
         } = models;
 
         BillingInfo.belongsTo(Country);
         BillingInfo.belongsTo(City);
+        BillingInfo.belongsTo(User);
     };
 
     return BillingInfo;
