@@ -18,13 +18,29 @@ class EventController {
     }
 
     async createEvent(userId, eventData) {
-        let thisEvent = null;
         try {
-            //    console.log(eventData);
-            // console.log('2313')
-            // await console.log(eventData.date)
-            thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
+            const thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
                 eventData.address, eventData.title, eventData.description, eventData.price, eventData.category);
+
+            const country = await this.data.country.getByName(eventData.country);
+            if (!country) {
+                throw new Error('The country is not correct');
+            }
+
+            const city = await this.data.city.getByName(eventData.city);
+            if (!city) {
+                throw new Error('The city is not correct');
+            }
+
+            const category = await this.data.categories.getByName(eventData.category);
+            if (!category) {
+                throw new Error('The category is not correct');
+            }
+
+            const subcategory = await this.data.subcategory.getByName(eventData.subcategory);
+            if (!subcategory) {
+                throw new Error('The subcategory is not correct');
+            }
 
             await this.data.events.addNewEvent(userId, thisEvent);
         }

@@ -30,6 +30,16 @@ class Category {
 
         return result;
     }
+
+    getByName(category) {
+        const result = this.Model.findOne({
+            where: {
+                name: category
+            }
+        });
+
+        return result;
+    }
 }
 
 module.exports = Category;
