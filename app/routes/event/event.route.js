@@ -38,13 +38,13 @@ const init = (app, data) => {
                  await controller.createEvent(userID, eventInfo);
              } catch (err) {
                  const someError = err;
-                 res.status(400).json({ 'err': err.message });
+                 return res.status(400).json({ 'err': err.message });
              }
              res.status(200).json({ 'success': true });
          })
          .get('/overview', async (req, res, next) => {
             let eventId = 34;
-            let event = await Object.assign(await data.events.getEventInfoById(eventId), {category: 'Music',
+            let event = Object.assign(await data.events.getEventInfoById(eventId), {category: 'Music',
             subcategories: ['Modern', 'Techno', 'Trap']} );
             // let userExtraInfo = await data.users.getUserExtraInfoById(userID)
             // eventInfo = Object.assign(userInfo, userExtraInfo );

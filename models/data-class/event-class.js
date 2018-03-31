@@ -1,33 +1,54 @@
 class Event {
-    constructor(date = '', coverPhoto = '', location_country = '', location_city = '', location_address = '',
-        title = '', description = '', category = '', prices = '', capacity = '') {
+    constructor(date = '', coverPhoto = '',location_name, location_country = '', location_city = '', location_address = '',
+        title = '', description = '', category = '', subcateogry ='', prices = '', capacity = '') {
 
         this.setDate(date);
+        
+        if (location_name.length > 0) {
+            this.location_name = location_name;
+        }
 
-        // if(location_country.length>0) {
-        // this.setLocationParams(location_country, 'country');
-        // }
+        if (location_country.length > 0) {
+            this.setLocationParams(location_country, 'country');
+        }
+
         if (location_city.length > 0) {
             this.setLocationParams(location_city, 'city');
         }
+
         if (location_address.length > 0) {
             this.setLocationParams(location_address, 'address');
         }
+
         if (title.length > 0) {
             this.setTitle(title);
         }
 
         this.setDescription(description);
+
         if (capacity.length > 0) {
             this.setCapacity(capacity);
         }
 
-        //   this.setCategory(category);
+        if (category.length > 0) {
+            this.setCategory(category);
+        }
+
+        if (category.length > 0) {
+            this.setCategory(category);
+        }
+
+        if (subcateogry.length > 0) {
+            this.subcateogry = category;
+        }
+
         if (prices.length > 0) {
             this.setPrices(prices);
         }
+
         //   this.setCoverPhoto(coverPhoto);
     }
+
     setDate(date) {
         date = date.trim();
         const dateReg = /^\d{2}([./-])\d{2}\1\d{4}$/;
@@ -45,6 +66,7 @@ class Event {
             throw new Error('Date is not in the required format');
         }
     }
+
     setLocationParams(input, attr) {
         input = input.trim();
         const alphaRegex = /^[a-zA-Z]+$/;
@@ -66,6 +88,7 @@ class Event {
             throw new Error(`${attr} name has invalid symbols`);
         }
     }
+
     setCoverPhoto(coverPhoto) {
         coverPhoto = coverPhoto.trim();
         const urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -93,11 +116,7 @@ class Event {
             throw new Error('Title is of invalid length');
         }
 
-        if (title.match(titleRegex)) {
-            this.title = title;
-        } else {
-            throw new Error('Title should include only letters');
-        }
+        this.title = title;
     }
 
     setDescription(description) {
@@ -112,6 +131,7 @@ class Event {
 
         this.description = description;
     }
+
     setCategory(category) {
         category = category.trim();
         const nameRegex = /^[a-zA-Z ]{1,30}$/;
@@ -127,6 +147,7 @@ class Event {
             this.category = category;
         }
     }
+
     setPrices(prices) {
         const priceRegex = /^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
 
@@ -143,8 +164,9 @@ class Event {
             throw new Error('Price is not of valid format');
         }
     }
+
     setCapacity(capacity) {
-        const capacityRegex = /^[a-zA-Z ]{1,30}$/;
+        const capacityRegex = /^[0-9]{1,30}$/;
 
         if (!capacity.length
             || !capacity
@@ -160,7 +182,6 @@ class Event {
         }
     }
 
-
     getDate() {
         let dateFormatted = this.date.split('/')
         console.log(dateFormatted)
@@ -170,33 +191,47 @@ class Event {
         finalDate.setFullYear(dateFormatted[2]);
         return finalDate;
     }
+
     getCoverPhoto() {
         return this.coverPhoto || null;
     }
+
     getCountry() {
         return this.location_country;
     }
+
     getCity() {
         return this.location_city;
     }
+
     getAddress() {
         return this.location_address;
     }
+
+    getLocationName() {
+        return this.location_name;
+    }
+
     getTitle() {
         return this.title;
     }
+
     getDescription() {
         return this.description || null;
     }
+
     getCategory() {
         return this.category || null;
     }
+
     getPrices() {
         return this.prices || null;
     }
+
     getCapacity() {
         return this.capacity || null;
     }
+
     getAllInfo() {
         return {
             'date': this.getDate(),

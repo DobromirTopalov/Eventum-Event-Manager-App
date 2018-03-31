@@ -19,8 +19,17 @@ class EventController {
 
     async createEvent(userId, eventData) {
         try {
-            const thisEvent = await new eventObject(eventData.date, '', eventData.country, eventData.city,
-                eventData.address, eventData.title, eventData.description, eventData.price, eventData.category);
+            const thisEvent = new eventObject(eventData.date, '', eventData.placeName, eventData.country, eventData.city,
+                eventData.address, eventData.title, eventData.description, eventData.category, eventData.subcategory, eventData.price, eventData.capacity);
+
+            const eventSeqObject = {
+                title: thisEvent.getTitle(),
+                describe: thisEvent.getDescription(),
+                capacity: thisEvent.getCapacity(),
+                coverPhoto: '',
+                date: thisEvent.getDate(),
+                UserId: userId,
+            }
 
             const country = await this.data.country.getByName(eventData.country);
             if (!country) {
@@ -37,12 +46,22 @@ class EventController {
                 throw new Error('The category is not correct');
             }
 
-            const subcategory = await this.data.subcategory.getByName(eventData.subcategory);
+            const subcategory = await this.data.subcategories.getByName(eventData.subcategory);
             if (!subcategory) {
                 throw new Error('The subcategory is not correct');
             }
 
-            await this.data.events.addNewEvent(userId, thisEvent);
+            const location = await this.data.location.createLocation({
+                name: thisEvent.getLocationName(),
+                address: thisEvent.getAddress(),
+                cityId: city,
+            });
+
+            eventSeqObject.categoryId = category;         
+            eventSeqObject.subcategoryId = subcategory;
+            eventSeqObject.locationId = location;
+
+            await this.data.events.addNewEvent(eventSeqObject);
         }
         catch (err) {
             throw err;
