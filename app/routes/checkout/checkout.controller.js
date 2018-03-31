@@ -11,9 +11,13 @@ class BillingController {
             thisBilling = await new billingObject(billingData.firstname, billingData.lastname, billingData.email, billingData.address,
               billingData.postalCode, billingData.city, billingData.country);
             
-            const city = await this.data.cities.findByName(thisBilling.getCity());
-            const country = await this.data.countries.findByName(thisBilling.getCountry());
-            await this.data.billings.addNewBilling(thisBilling, country.id, city.id, usernameId);
+            const cityName = thisBilling.getCity();
+            const countryName = thisBilling.getCountry();
+
+            const city = await this.data.city.getByName(cityName);
+            const country = await this.data.country.getByName(countryName);
+            
+            await this.data.billings.addNewBilling(thisBilling, country.dataValues.id, city.dataValues.id, usernameId);
 
             // const allBillingsOfUserId = await this.data.billings.getAllBillingsOfUser(someID);
             // const result = allBillingsOfUserId.map((element) => element.dataValues);

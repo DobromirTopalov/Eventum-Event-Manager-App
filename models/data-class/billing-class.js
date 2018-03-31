@@ -62,7 +62,7 @@ class Billing {
       const alphaRegex = /^[a-zA-Z]+$/;
 
       if (!country.length || !country || (country.length > 100)) {
-          return null;
+        throw new Error('Country name is not valid')
       }
 
       if (country.match(alphaRegex)) {
@@ -83,7 +83,7 @@ class Billing {
     if (code.match(postRegex)) {
         this.postCode = code;
     } else {
-        throw new Error('Please include only valid symbols in the country name');
+        throw new Error('Please include only valid symbols in the postcode');
     }
   }
 
@@ -92,13 +92,13 @@ class Billing {
       const alphaRegex = /^[a-zA-Z]+$/;
 
       if (!city.length || !city || (city.length > 100)) {
-          return null;
+        throw new Error('City name is not valid')
       }
 
       if (city.match(alphaRegex)) {
           this.city = city;
       } else {
-          throw new Error('Please include only valid symbols in the country name')
+          throw new Error('Please include only valid symbols in the city name')
       }
   }
   
@@ -107,7 +107,7 @@ class Billing {
     const alphaRegex = /^[a-zA-Z0-9 ]+([-_\.][a-zA-Z0-9 ]+)*[a-zA-Z0-9 ]$/;
 
     if (!address.length || !address || (address.length > 100)) {
-      throw new Error('Incorrect length in address field!')
+        throw new Error('Address is too long ')
     }
 
     if (address.match(alphaRegex)) {

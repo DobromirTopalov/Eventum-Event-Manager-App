@@ -13,7 +13,6 @@ class CountryData {
 
     getByName(country) {
         const result = this.Model.findOne({
-            attributes: ['name'],
             where: {
                 name: country
             }

@@ -25,7 +25,6 @@ class CityData {
 
     getByName(city) {
         const result = this.Model.findOne({
-            attributes: ['name'],
             where: {
                 name: city,
             },
