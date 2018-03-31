@@ -15,7 +15,7 @@ const init = (app, data) => {
         })
         .get('/create', async (req, res, next) => {
             const context = {};
-            
+
             if (!req.user) {
                 return res.redirect('/login');
             }
@@ -27,12 +27,12 @@ const init = (app, data) => {
         })
         .post('/create', async (req, res, next) => {
             const eventInfo = req.body;
-            
+
             if (!req.user) {
                 return res.redirect('/login');
             }
- 
-            let userID = req.user.id;
+
+            const userID = req.user.id;
 
             try {
                  await controller.createEvent(userID, eventInfo);
