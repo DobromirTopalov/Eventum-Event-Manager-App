@@ -36,24 +36,26 @@ class BillingsData extends Data {
     addNewBilling(billingObject, CountryId, CityId, UserId) {
         try {
             let seqError;
-            this.Model.build({
-                firstName: billingObject.getFirstName(),
-                lastName: billingObject.getLastName(),
-                email: billingObject.getEmail(),
-                address: billingObject.getAddress(),
-                postCode: billingObject.getPostCode(),
-                CountryId: CountryId,
-                CityId: CityId,
-                UserId: UserId,
-            })
-            .save()
-            .catch((err) => {
-                seqError = err;
-            });
-
+            const result = this.Model
+                .build({
+                    firstName: billingObject.getFirstName(),
+                    lastName: billingObject.getLastName(),
+                    email: billingObject.getEmail(),
+                    address: billingObject.getAddress(),
+                    postCode: billingObject.getPostCode(),
+                    CountryId: CountryId,
+                    CityId: CityId,
+                    UserId: UserId,
+                })
+                .save()
+                .catch((err) => {
+                    seqError = err;
+                });
             if (seqError && seqError.name === 'SequelizeValidationError') {
                 throw new Error('Unexpected error!');
             }
+
+            return result;
         } catch (err) {
             throw err;
         }

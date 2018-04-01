@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
             User,
             Ticket,
             BillingInfo,
+            Event,
         } = models;
 
         UserPurches.belongsTo(User);
+        UserPurches.belongsTo(Event);
         UserPurches.belongsTo(Ticket);
         UserPurches.belongsTo(BillingInfo);
     };

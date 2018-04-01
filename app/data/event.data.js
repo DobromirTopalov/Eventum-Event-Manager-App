@@ -13,6 +13,15 @@ class EventData {
         this.Model = Model;
     }
 
+    findById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+        });
+        return result;
+    }
+
     getEventInfoById(id) {
         const result = this.Model.findOne({
             where: {

@@ -2,30 +2,85 @@ extends ../_layout
 
 block content
     section.job_hero_area.event_detail_breadcrumb.bgimage
-        .bg_image_holder(style='background-image: url("images/ev_bg.jpg"); opacity: 1;')
-            img(src='images/ev_bg.jpg', alt='images/ev_bg.jpg')
-        .container.content_above
-            .row
-                .col-md-8.col-md-offset-2
-                    .job_hero_content
-                        h1 MartPlace Upcoming Event in Bangladesh
-                        .job_date
+            .bg_image_holder(style='background-image: url("/static/images/ev_bg.jpg"); opacity: 1;')
+                img(src='/static/images/ev_bg.jpg')
+                |         
+            .container.content_above
+                .row
+                    .col-md-9
+                        .job_hero_content
+                            h1 #{event.title}
+                            |                         
+                            .job_date
+                                p
+                                    span.lnr.lnr-map-marker
+                                    |  #{event.date}
+                                |                             
+                                p
+                                    span.lnr.lnr-calendar-full
+                                    |  #{event.location} #{event.city}
+                        a.btn.btn--round.btn--lg(href='#') Signup Now
+                    .col-md-3
+                        .single_speaker
+                            .speaker__thumbnail
+                                img(src='/static/images/' + event.authorPhoto, width='225px')
+                                |                                 
+                            .speaker_social
+                                ul
+                                if event.socialFb
+                                    li
+                                        a(href='' + event.socialFb)
+                                        span.fa.fa-facebook
+                                    |                                             
+                                if event.socialTwt
+                                    li
+                                        a(href='' + event.socialTwt)
+                                            span.fa.fa-twitter
+                                    |              
+                                    if event.socialGgl                               
+                                        li
+                                            a(href='' + event.socialGgl)
+                                                span.fa.fa-google-plus
+                                        |                                     
+    section.event_details.section--padding
+            .container
+                .row
+                    .col-md-8
+                        .event_module
+                            h4.event_module__title Event Overview
+                            |                         
                             p
-                                span.lnr.lnr-map-marker
-                                    |  November 27, 2017
-                            p
-                                span.lnr.lnr-calendar-full
-                                    |  Dhaka, Bangladesh
-                    a.btn.btn--round.btn--lg(href='#') Signup Now
-        .social.social--color--filled.content_above
-            p Share on:
-            ul
-                li
-                    a(href='#')
-                        span.fa.fa-facebook
-                li
-                    a(href='#')
-                        span.fa.fa-twitter
-                li
-                    a(href='#')
-                        span.fa.fa-google-plus
+                                | #{event.description}  
+                            |                         
+                            ul.list_item
+                                li #{event.country}
+                                |                             
+                                li #{event.city}
+                                |                             
+                                li #{event.location}
+                                |
+                                li #{event.hours}
+                            |                         
+                            ul.list_item
+                                li #{event.placename}
+                                |                             
+                                li #{event.category}:
+                                each subcategory in event.subcategories
+                                    | #{subcategory} 
+                    .col-md-4
+                        aside.sidebar.sidebar--single-product
+                            .sidebar-card.card-pricing
+                                .price
+                                    | Price:
+                                    h1
+                                        sup $
+                                        | #{event.price} 
+                                    | Tickets left:
+                                    h1  
+                                        | #{event.capacity}
+                                    |                             
+                                
+                                .purchase-button
+                                    a.btn.btn--round.btn--lg(type='button')#buy Purchase Now
+                                    |                                 
+            #messagediv
