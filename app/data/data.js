@@ -3,7 +3,10 @@ const {
     Category,
     Subcategory,
     Country,
+    Ticket,
+    UserPurches,
     City,
+    Event,
 } = require('../../models/database/models');
 
 const UsersData = require('./users.data');
@@ -13,6 +16,9 @@ const CountryData = require('./country.data');
 const CityData = require('./city.data');
 const EventData = require('./event.data');
 const BillingsData = require('./billing.data');
+const TicketData = require('./apis/tickets.data');
+const PurchesData = require('./apis/purches.data');
+
 
 module.exports = {
     users: new UsersData(),
@@ -20,6 +26,8 @@ module.exports = {
     subcategories: new SubcategoryDate(Subcategory),
     country: new CountryData(Country),
     city: new CityData(City),
-    events: new EventData(),
+    events: new EventData(Event),
     billings: new BillingsData(),
+    tickets: new TicketData(Ticket),
+    purches: new PurchesData(UserPurches),
 };

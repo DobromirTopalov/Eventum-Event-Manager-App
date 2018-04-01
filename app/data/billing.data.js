@@ -35,7 +35,7 @@ class BillingsData extends Data {
     async addNewBilling(billingObject, CountryId, CityId, UserId) {
         try {
             let seqError;
-            await this.Model
+            const result = await this.Model
                 .build({
                     firstName: billingObject.getFirstName(),
                     lastName: billingObject.getLastName(),
@@ -50,6 +50,7 @@ class BillingsData extends Data {
                 .catch(err => {
                     seqError = err; //sequelize error handling issue with save
                 });
+            return result;
             if (seqError && seqError.name === 'SequelizeValidationError') {
                 throw new Error('Unexpected error!')
             }

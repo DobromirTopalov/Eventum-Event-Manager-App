@@ -17,12 +17,12 @@ class BillingController {
             const city = await this.data.city.getByName(cityName);
             const country = await this.data.country.getByName(countryName);
             
-            await this.data.billings.addNewBilling(thisBilling, country.dataValues.id, city.dataValues.id, usernameId);
+            const result = await this.data.billings.addNewBilling(thisBilling, country.dataValues.id, city.dataValues.id, usernameId);
 
             // const allBillingsOfUserId = await this.data.billings.getAllBillingsOfUser(someID);
             // const result = allBillingsOfUserId.map((element) => element.dataValues);
             // console.log(result);
-
+            return result;
         }
         catch (err) {
             throw err;

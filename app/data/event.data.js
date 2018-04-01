@@ -1,71 +1,83 @@
-const Data = require('./main.data');
-
 const {
-    Event,
     UserInfo,
+    User,
+    Location,
+    City,
+    Country,
+    Subcategory,
+    Category,
 } = require('../../models/database/models');
 
-class EventData extends Data {
-    constructor() {
-        super(Event);
+class EventData {
+    constructor(Model) {
+        this.Model = Model;
     }
+
     findById(id) {
-        return this.Model.findOne({
+        const result = this.Model.findOne({
             where: {
                 id: id,
             },
-        })
-        .then((item) =>  {
-            return item.dataValues;
-        })
-    }
-   
-    getEventInfoById(id) {
-        return  this.Model.findOne({
-            where: {
-                id: id,
-            },
-        })
-        .then((item) => item.dataValues)
-    }
-    getAllEventsInfo(id) {
-        return  this.Model.findAll({
-        })
-        .then((items) =>  {
-            return items.map((item) => item.dataValues)
-        })
-    }    getAllEventsInfo(id) {
-        return  this.Model.findAll({
-        })
-        .then((items) =>  {
-            return items.map((item) => item.dataValues)
-        })
+        });
+        return result;
     }
     
-    async addNewEvent(userId, eventObject) {
-        try {
-            console.log( eventObject)
-            let seqError;
-            await this.Model
-            .build({ title: eventObject.getTitle(), 
-                 describe: eventObject.getDescription(),
-                 capacity: eventObject.getCapacity(),
-                 date: eventObject.getDate(),
-                 UserId: userId
-                })
-            .save()
-            .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                  });
-            
-            if(seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing creating this event. Try again later or contact our teams!')
-            }
-        } catch (err) {
-            throw err;
-        }
+    getEventInfoById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+            include: [
+                {
+                    model: Location,
+                    include: [
+                        {
+                            model: City,
+                            include: {
+                                model: Country,
+                            },
+                        },
+                    ],
+                },
+                {
+                    model: User,
+                    include: {
+                        model: UserInfo,
+                    },
+                },
+                {
+                    model: Category,
+                },
+                {
+                    model: Subcategory,
+                },
+            ],
+        });
+
+        return result;
     }
-   
+
+    getAllEventsInfo(id) {
+        const result = this.Model.findAll();
+
+        return result;
+    }
+
+    async addNewEvent(eventObject) {
+        const result = this.Model.create({
+            title: eventObject.title,
+            describe: eventObject.describe,
+            capacity: eventObject.capacity,
+            // coverPhoto: '',
+            date: eventObject.date,
+            LocationId: eventObject.locationId.id,
+            UserId: eventObject.UserId,
+            CategoryId: eventObject.categoryId.id,
+            SubcategoryId: eventObject.subcategoryId.id,
+        });
+
+        return result;
+    }
 }
 
 module.exports = EventData;
