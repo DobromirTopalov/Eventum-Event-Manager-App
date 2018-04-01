@@ -1,18 +1,23 @@
 mixin user-bio()
-    .author_module.about_author
-        .row.text-center
-            .col-md-4
-                h2
-                    strong #{followers}
-                p
-                    small Followers
-            .col-md-4
-                h2
-                    strong #{events}
-                p
-                    small Events
-            .col-md-4
-                h2
+    .row
+        .col-md-4.col-sm-4
+            .author-info.mcolorbg4
+                if account.role == 'User'
+                    p Visited Events
+                else
+                    p Events 
+                h3 4,369
+        .col-md-4.col-sm-4
+            .author-info.pcolorbg
+                if account.role == 'User'
+                    p Comments
+                else
+                    p Role
+                h3 36,957
+        if account.role == 'Artist'
+            .col-md-4.col-sm-4
+                .author-info.scolorbg
+                    p Total Items
                     .rating.product--rating
                         - var starIndex = 0;
                         ul
@@ -20,7 +25,7 @@ mixin user-bio()
                                 li 
                                     span.fa.fa-star
                                     - starIndex+=2
-                                
+                            
                             if starRating%2 === 1
                                 li
                                     span.fa.fa-star-half-o 
@@ -29,8 +34,8 @@ mixin user-bio()
                                 li 
                                     span.fa.fa-star-o
                                     - starIndex+=2
-                p
-                    small Average Rating
+
+    .author_module.about_author
         .row
             .col-md-12
                 h2

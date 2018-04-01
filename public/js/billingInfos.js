@@ -1,4 +1,5 @@
-$(function () {
+/* eslint-disable */
+$(function() {
     function checkEmail(email) {
         const emailRegex = (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
 
@@ -221,7 +222,7 @@ $(function () {
         // $('#messagediv').attr('display','none');
 
         var eventInfo = {
-            EventId: 1,
+            EventId: 4,
             amount: 3,
         };
 

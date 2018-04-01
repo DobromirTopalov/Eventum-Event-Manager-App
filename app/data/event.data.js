@@ -21,7 +21,7 @@ class EventData {
         });
         return result;
     }
-    
+
     getEventInfoById(id) {
         const result = this.Model.findOne({
             where: {
@@ -57,13 +57,13 @@ class EventData {
         return result;
     }
 
-    getAllEventsInfo(id) {
+    getAllEventsInfo() {
         const result = this.Model.findAll();
 
         return result;
     }
 
-    async addNewEvent(eventObject) {
+    addNewEvent(eventObject) {
         const result = this.Model.create({
             title: eventObject.title,
             describe: eventObject.describe,

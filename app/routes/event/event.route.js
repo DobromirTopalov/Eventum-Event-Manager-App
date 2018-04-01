@@ -50,7 +50,7 @@ const init = (app, data) => {
         })
         .get('/create', async (req, res, next) => {
             const context = {};
-            
+
             if (!req.user) {
                 return res.redirect('/login');
             }
@@ -58,22 +58,22 @@ const init = (app, data) => {
             context.countries = await controller.getCountries();
             context.categories = await controller.getCategories();
 
-            res.render('./event/create', context);
+            return res.render('./event/create', context);
         })
         .post('/create', async (req, res, next) => {
             const eventInfo = req.body;
-            
+
             if (!req.user) {
                 return res.redirect('/login');
             }
- 
-            let userID = req.user.id;
+
+            const userID = req.user.id;
 
             try {
                  await controller.createEvent(userID, eventInfo);
              } catch (err) {
                  const someError = err;
-                 res.status(400).json({ 'err': err.message });
+                 return res.status(400).json({ 'err': err.message });
              }
              res.status(200).json({ 'success': true });
          })

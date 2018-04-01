@@ -1,5 +1,5 @@
 class CountryData {
-    constructor (Model) {
+    constructor(Model) {
         this.Model = Model;
     }
 
@@ -14,8 +14,8 @@ class CountryData {
     getByName(country) {
         const result = this.Model.findOne({
             where: {
-                name: country
-            }
+                name: country,
+            },
         });
 
         return result;

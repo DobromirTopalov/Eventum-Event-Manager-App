@@ -1,3 +1,4 @@
+/* eslint-disable */
 $(document).ready(function(e) {
     function checkUsername(username) {
         const usernameRegex = /^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$/;
@@ -173,7 +174,52 @@ $(document).ready(function(e) {
             throw error;
         }
         return true;
-    }
+    };
+
+
+    $( '#profileForm' )
+    .submit( function( e ) {
+        $.ajax( {
+        url: '/settings',
+        type: 'POST',
+        data: new FormData( this ),
+        processData: false,
+        contentType: false,
+        error: function (error) {
+            var errorAlert = 'There is a problem adding your photos to your profile. Try again later!'
+            $('#alertdiv')
+            .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + errorAlert +'</span></div>')
+        },
+        success: function (data) {
+            var messageAlert = 'Your profile picture was updated successfully!';
+            $('#alertdiv')
+            .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+        }
+        } );
+        e.preventDefault();
+    } );
+
+    $( '#coverForm' )
+    .submit( function( e ) {
+        $.ajax( {
+        url: '/settings',
+        type: 'POST',
+        data: new FormData( this ),
+        processData: false,
+        contentType: false,
+        error: function (error) {
+            var errorAlert = 'There is a problem adding your photos to your profile. Try again later!'
+            $('#alertdiv')
+            .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + errorAlert +'</span></div>')
+        },
+        success: function (data) {
+            var messageAlert = 'Your cover photo was updated successfully!';
+            $('#alertdiv')
+            .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+        }
+        } );
+        e.preventDefault();
+    } );
 
     $('#settingsForm').find('button').click( function (event) {
 
@@ -191,18 +237,8 @@ $(document).ready(function(e) {
             socialProf1: $("input[socialWebFb]").val() || '',
             socialProf2: $("input[socialWebTwt]").val() || '',
             socialProf3: $("input[socialWebGgl]").val() || '',
-            // city:
         };
 
-        // try {
-        //     validateAllInfo(invalidObj)
-        // } catch(err) {
-        //     $('#alertdiv')
-        //     .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + err.message +'</span></div>')
-        //     return false;
-        // }
-         
-        console.log(validObj);
 
         $.ajax({
             method: 'POST',
@@ -222,3 +258,4 @@ $(document).ready(function(e) {
         });
     });
 });
+/* eslint-enable */

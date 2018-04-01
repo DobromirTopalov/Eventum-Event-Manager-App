@@ -14,7 +14,7 @@ class Subcategory {
     getByName(subcategory) {
         const result = this.Model.findOne({
             where: {
-                name: subcategory
+                title: subcategory
             }
         });
 

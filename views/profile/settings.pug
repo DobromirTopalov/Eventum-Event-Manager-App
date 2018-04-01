@@ -3,37 +3,8 @@ include ./_mixins/_userSettings
 include ./_mixins/_artistSettings
 
 block content
-    
-    //- - var acc = account.acc;
-
-    - var webpage = account.website;
+    - var webpage = account.website || '';
     - var authorBio = account.biography;
-    //- - var mailOnComment;
-    //- - var mailOnExpire;
-    //- - var mailOnReview;
-    
-    //- if (acc === 'artist')
-    //-     - webpage = account.webpage;
-    //-     - authorBio = account.authorBio;
-    //-     - mailOnComment;
-    //-     - mailOnExpire;
-    //-     - mailOnReview;
-    
-    //- - var coverPhoto = account.coverPhoto;
-    //- - var coverImg = account.coverImg;
-    //- - var cat1 = account.cat1 || false;
-    //- - var sub1cat1 = account.sub1cat1 || false;
-    //- - var sub2cat1 = account.sub2cat1 || false;
-    //- - var sub3cat1 =  account.sub3cat1 || false;
-    //- - var cat2 = account.cat2 || false;
-    //- - var sub1cat2 = account.sub1cat2 || false;
-    //- - var cat3 = account.cat3 || false;
-    //- - var cat4 = account.cat4 || false;
-    //- - var cat5 = account.cat5 || false;
-    //- - var sub1cat5 = account.sub1cat5 || false;
-    //- - var fb = account.socialWebFb;
-    //- - var twt = account.socialWebTwt;
-    //- - var ggl = account.socialWebGgl;
 
     - var fullname = account.name
     - var username = account.username || undefined;
@@ -42,9 +13,8 @@ block content
     - var passwordSecondary = account.password;
     - var country = account.country;
     - var address = account.address;
-    
-    //- - var mailOnApproval = account.mailOnApproval || false;
-    //- - var mailOnUpdates = account.mailOnUpdates || false;
+    - var coverPicName = account.coverPhoto;
+    - var profilePicName = account.avatar;
     
     .dashboard-area
         .dashboard_contents
@@ -54,8 +24,9 @@ block content
                         .dashboard_title_area
                             .dashboard__title
                                 h3 Account Settings
+
                 #alertdiv
-                form.setting_form(action='/settings/:id' method='POST')
+                .setting_form(action='/settings/:id' method='POST')
                     #settingsForm
                         .row
                             .col-md-6
@@ -71,8 +42,7 @@ block content
                                                 +user-settings-personalInfo()
                                             else
                                                 +artist-settings-personalInfo()
-                                            
-                                            //- +artist-settings-personalInfo()
+
                             .col-md-6
                                 .information_module
                                     a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
@@ -83,7 +53,7 @@ block content
                                     #collapse3.information__set.profile_images.toggle_module.collapse
                                         .information_wrapper
                                             .profile_image_area
-                                                img(src='/static/images/authplc.png', alt='Author profile area')
+                                                img#profileImg(src='/static/uploads/'+ profilePicName, height="100", width="100", alt='Author profile area')
                                                 |                                             
                                                 .img_info
                                                     p.bold Profile Image
@@ -91,178 +61,32 @@ block content
                                                     p.subtitle JPG, GIF or PNG 100x100 px
                                                 |                                             
                                                 label.upload_btn(for='cover_photo')
-                                                    input#cover_photo(type='file', name='coverPhoto', value='' + coverPhoto)
-                                                    |                                                 
-                                                    span.btn.btn--sm.btn--round(aria-hidden='true', type='submit') Upload Image
+                                                    form#profileForm( method='POST', enctype='multipart/form-data')
+                                                        input#cover_photo(type='file', name='profilePhoto', value='' + coverPhoto, onchange="document.getElementById('profileImg').src = window.URL.createObjectURL(this.files[0])")
+                                                        |                                                 
+                                                        span.btn.btn--sm.btn--round(aria-hidden='true', type='submit', id ='uploadProfile') Upload Image
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='file', name='image')
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='submit', value='Save')
                                             |                                         
                                             .prof_img_upload
                                                 p.bold Cover Image
                                                 |                                             
-                                                img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
+                                                img#coverImg(src='/static/uploads/' + coverPicName, height="370", width="750", alt='The great warrior of China')
                                                 |                                             
                                                 .upload_title
                                                     p JPG, GIF or PNG 750x370 px
                                                     |                                                 
                                                     label.upload_btn(for='dp')
-                                                        input#dp(type='file', name='coverImg', value='' + coverImg)
-                                                        |                                                     
-                                                        span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
-                            .col-md-6
-                                .information_module
-                                    a.toggle_title(href='#collapse5', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                                        h4
-                                            | Social Profiles 
-                                            span.lnr.lnr-chevron-down
-                                    |                                 
-                                    #collapse5.information__set.social_profile.toggle_module.collapse
-                                        .information_wrapper
-                                            .social__single
-                                                .social_icon
-                                                    span.fa.fa-facebook
-                                                |                                             
-                                                .link_field
-                                                    input.text_field(placeholder='ex: www.facebook.com/aazztech', name='socialWebFb', value='' + fb, type='text')
-                                            .social__single
-                                                .social_icon
-                                                    span.fa.fa-twitter
-                                                |                                             
-                                                .link_field
-                                                    input.text_field(placeholder='ex: www.twitter.com/aazztech', name='socialWebTwt', value='' + twt, type='text')
-                                            .social__single
-                                                .social_icon
-                                                    span.fa.fa-google-plus
-                                                |                                             
-                                                .link_field
-                                                    input.text_field(placeholder='ex: www.google.com/aazztech', name='socialWebGgl', value='' + ggl, type='text')
-                            .col-md-6
-                                .information_module
-                                    a.toggle_title(href='#collapse22', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                                        h4
-                                            | Event Preferences 
-                                            span.lnr.lnr-chevron-down
-                                    |                                 
-                                    #collapse22.information__set.toggle_module.collapse
-                                        .information_wrapper.dashboard_title_area
-                                            .custom_checkbox
-                                                input#opt1(name='cat1', type='checkbox' checked=cat1)
-                                                |                                             
-                                                label(for='opt1')
-                                                    span.shadow_checkbox
-                                                    |                                                    
-                                                    span.radio_title
-                                                    | Music                 
-                                                    span.desc 
-                                                        | 
-                                            .information_wrapper.dashboard_title_area
-                                                .custom_checkbox
-                                                    input#opt11(name='sub1cat1', type='checkbox' checked=sub1cat1)
-                                                    |                                             
-                                                    label(for='opt11')
-                                                        span.shadow_checkbox
-                                                        |                                                    
-                                                        span.radio_title
-                                                        |                  
-                                                        span.desc 
-                                                            | RnB 
-                                                .custom_checkbox
-                                                    input#opt12(name='sub2cat1', type='checkbox' checked=sub2cat1)
-                                                    |                                             
-                                                    label(for='opt12')
-                                                        span.shadow_checkbox
-                                                        |                                                    
-                                                        span.radio_title
-                                                        |                  
-                                                        span.desc 
-                                                            | Trap
-                                                .custom_checkbox
-                                                    input#opt13(name='sub3cat1', type='checkbox' checked=sub3cat1)
-                                                    |                                             
-                                                    label(for='opt13')
-                                                        span.shadow_checkbox
-                                                        |                                                    
-                                                        span.radio_title
-                                                        |                  
-                                                        span.desc 
-                                                            | House & Techno
-                                            // end music
-                                            .custom_checkbox
-                                                input#opt2(name='cat2', type='checkbox' checked=cat2)
-                                                |                                             
-                                                label(for='opt2')
-                                                    span.shadow_checkbox
-                                                    |                                                    
-                                                    span.radio_title
-                                                    | Art                 
-                                                    span.desc 
-                                                        | 
-                                            .information_wrapper.dashboard_title_area
-                                                .custom_checkbox
-                                                    input#opt21(name='sub1cat2', type='checkbox' checked=sub1cat2)
-                                                    |                                             
-                                                    label(for='opt21')
-                                                        span.shadow_checkbox
-                                                        |                                                    
-                                                        span.radio_title
-                                                        |                  
-                                                        span.desc 
-                                                            | Modern art 
-                                            // end others
-                                            .custom_checkbox
-                                                input#opt3(name='cat3', type='checkbox' checked=cat3)
-                                                |                                             
-                                                label(for='opt3')
-                                                    span.shadow_checkbox
-                                                    |                                                    
-                                                    span.radio_title
-                                                    | Dance                 
-                                                    span.desc 
-                                                        |
-                                            .custom_checkbox
-                                                input#opt4(name='cat4', type='checkbox' checked=cat4)
-                                                |                                             
-                                                label(for='opt4')
-                                                    span.shadow_checkbox
-                                                    |                                                    
-                                                    span.radio_title
-                                                    | Fest                 
-                                                    span.desc 
-                                                        |
-                                            .custom_checkbox
-                                                input#opt5(name='cat5', type='checkbox' checked=cat5)
-                                                |                                             
-                                                label(for='opt5')
-                                                    span.shadow_checkbox
-                                                    |                                                    
-                                                    span.radio_title
-                                                    | Sport                 
-                                                    span.desc 
-                                                        |    
-                                            .information_wrapper.dashboard_title_area
-                                                .custom_checkbox
-                                                    input#opt51(name='sub1cat5', type='checkbox' checked=sub1cat5)
-                                                    |                                             
-                                                    label(for='opt51')
-                                                        span.shadow_checkbox
-                                                        |                                                    
-                                                        span.radio_title
-                                                        |                  
-                                                        span.desc 
-                                                            | Hiking         
-                            .col-md-6
-                                .information_module
-                                    a.toggle_title(href='#collapse4', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
-                                        h4
-                                            | Email Settings 
-                                            span.lnr.lnr-chevron-down
-                                    |                                 
-                                    #collapse4.information__set.mail_setting.toggle_module.collapse
-                                        .information_wrapper
-                                            if (acc === 'user')
-                                                +user-settings-emailSettings()
-                                            else
-                                                +artist-settings-emailSettings()
-                                        
-
+                                                        form#coverForm( method='POST', enctype='multipart/form-data')
+                                                            input#dp(type='file', name='coverPhoto', value='' + coverImg, onchange="document.getElementById('coverImg').src = window.URL.createObjectURL(this.files[0])")
+                                                            |                                                     
+                                                            span.btn.btn--sm.btn--round(aria-hidden='true', id ='uploadCover') Upload Image
+                                                            |
+                                                            input.btn.btn--sm.btn--round(type='file', name='image')
+                                                            |
+                                                            input.btn.btn--sm.btn--round(type='submit', value='Save')
                             .col-md-12
                                 .dashboard_setting_btn
                                     button.btn.btn--round.btn--md(type = 'button') Save Change
