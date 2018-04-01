@@ -19,7 +19,7 @@ class UserController {
             const usernamesArray = await this.data
                 .users.findByUsername(userData.username);
             if (usernamesArray) {
-                throw new Error('Existing username');
+                throw new Error('This username is already taken');
             }
 
             const emailsArray = await this.data
@@ -28,7 +28,12 @@ class UserController {
                 throw new Error('This email is already taken');
             }
 
-            await this.data.users.addNewUser(thisUser);
+            const theNewUser = await this.data.users.addNewUser(thisUser);
+            const theNewUsersInfo = await this.data
+                .users.addUserInfo(theNewUser.id);
+
+            await this.data
+                .users.updateUserDataToInfo(theNewUser.id, theNewUsersInfo.id);
         } catch (err) {
             throw err;
         }
@@ -47,17 +52,19 @@ class UserController {
                 'userDatacity', 'userDatacountry', userData.profilePic,
                 userData.coverPhoto, '', '', '', '',
                 userData.webpage, userData.autoBio);
-            const usernamesArray = await this.data.users.getAllUsernames();
 
-            // if(usernamesArray.includes(thisUser.getUsername())) {
-            //     throw new Error('Existing username');
-            // }
-            // let emailsArray = await this.data.users.getAllEmails();
-            // if(emailsArray.includes(thisUser.getEmail())) {
-            //     throw new Error('This email is already registered');
-            // }
-            // await this.data.users.updateUserData(userID, thisUser);
-            // createCity( thisCity, id = findCountryID(thisCity.getCountry()))
+            const usernamesArray = await this.data
+                .users.findByUsername(userData.username);
+            if (usernamesArray) {
+                throw new Error('This username is already taken');
+            }
+
+            const emailsArray = await this.data
+                .users.findByEmail(userData.email);
+            if (emailsArray) {
+                throw new Error('This email is already taken');
+            }
+
             await this.data.users.updateUserData(userID, thisUser);
             await this.data.users.updateUserInfo(userID, thisUser);
         } catch (err) {
