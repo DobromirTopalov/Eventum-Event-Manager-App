@@ -15,7 +15,8 @@ const EncryptController = require('../../../controllers/EncryptingController');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, path.join(path.resolve(), '..', '..', '..', 'public', 'uploads'));
+      cb(null,
+        path.join(__dirname, '..', '..', '..', 'public', 'uploads'));
     },
     filename: async function(req, file, cb) {
         cb(null,
@@ -31,29 +32,28 @@ const init = (app, data) => {
     const userController = new UserController(data);
     router
     .get('/settings', async (req, res, next) => {
-        // if (!req.user) {
-        //     return res.redirect('/login');
-        //   }
-        // let userID = await req.user.id;
-        const userID = 3;
+        if (!req.user) {
+            return res.redirect('/login');
+          }
 
-        req.userInfo = await data.users.getUserInfoById(userID);
-        req.userExtraInfo = await data.users.getUserExtraInfoById(userID);
-        const account = Object.assign(req.userInfo, req.userExtraInfo );
+        const userID = await req.user.id;
+        const userInfo = await data.users.getUserInfoById(userID);
+        const userExtraInfo = await data.users.getUserExtraInfoById(userID);
+        const account = Object.assign(
+            userInfo.dataValues, userExtraInfo.dataValues
+        );
+        console.log(account);
 
         res.render('./profile/settings', { account });
     })
 
     .post('/settings', [upload.any(), async function(req, res, next) {
         const userData = await req.body;
-        console.log(userData);
-        //  if (!req.user) {
-        //     return res.redirect('/login');
-        //   }
-        // let userID = await req.user.id;
-
+         if (!req.user) {
+            return res.redirect('/login');
+          }
+        const userID = await req.user.id;
         if (Object.keys(userData).length!==0) {
-            const userID = 2;
             //     let userID = await req.user.id;
                 try {
                     await userController.updateUser(userID, userData);
@@ -63,11 +63,21 @@ const init = (app, data) => {
                 }
                 res.status(200).json({ 'success': true });
         } else {
-            const file = await req.files.file;
-            await console.log(await file);
-            res.end();
+            const hashedFileName = await req.files[0].filename;
+
+            if (req.files[0].fieldname === 'profilePhoto') {
+                await userController
+                .updateUserProfilePic(userID, hashedFileName);
+                res.end();
+            }
+            if (req.files[0].fieldname === 'coverPhoto') {
+                await userController
+                .updateUserCoverPic(userID, hashedFileName);
+                res.end();
+            }
         }
       }]);
+
     app.use('/', router);
 };
 

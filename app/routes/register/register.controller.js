@@ -71,6 +71,20 @@ class UserController {
             throw err;
         }
     }
+    async updateUserProfilePic(userID, imageName) {
+        try {
+            await this.data.users.updateUserProfilePic(userID, imageName);
+        } catch (err) {
+            throw err;
+        }
+    }
+    async updateUserCoverPic(userID, imageName) {
+        try {
+            await this.data.users.updateUserCoverPic(userID, imageName);
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = UserController;

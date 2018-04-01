@@ -176,7 +176,8 @@ $(document).ready(function(e) {
         return true;
     };
 
-    $( '#myForm' )
+
+    $( '#profileForm' )
     .submit( function( e ) {
         $.ajax( {
         url: '/settings',
@@ -190,7 +191,29 @@ $(document).ready(function(e) {
             .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + errorAlert +'</span></div>')
         },
         success: function (data) {
-            var messageAlert = 'Your photos are now updated!';
+            var messageAlert = 'Your profile picture was updated successfully!';
+            $('#alertdiv')
+            .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+        }
+        } );
+        e.preventDefault();
+    } );
+
+    $( '#coverForm' )
+    .submit( function( e ) {
+        $.ajax( {
+        url: '/settings',
+        type: 'POST',
+        data: new FormData( this ),
+        processData: false,
+        contentType: false,
+        error: function (error) {
+            var errorAlert = 'There is a problem adding your photos to your profile. Try again later!'
+            $('#alertdiv')
+            .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + errorAlert +'</span></div>')
+        },
+        success: function (data) {
+            var messageAlert = 'Your cover photo was updated successfully!';
             $('#alertdiv')
             .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
         }

@@ -3,7 +3,7 @@ mixin user-info()
         .author-card.sidebar-card
             .author-infos
                 .author_avatar
-                    img(src= account.UserInfo.avatar, alt='Presenting the broken author avatar ')
+                    img(src= '/static/uploads/' + account.UserInfo.avatar, alt='Presenting the broken author avatar ')
                 .author
                     h4 #{username}
                     p #{createdAt}

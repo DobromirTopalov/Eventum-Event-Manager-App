@@ -78,8 +78,8 @@ class UsersData extends Data {
     addUserInfo(userId) {
         const result = UserInfo.create({
             address: '',
-            avatar: '/static/images/usr_avatar.png',
-            coverPhoto: 'http://colorfully.eu/wp-content/uploads/2012/09/i-need-a-cover-facebook-cover.jpg',
+            avatar: 'usr_avatar.png',
+            coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
             website: '',
             biography: '',
         });
@@ -127,8 +127,6 @@ class UsersData extends Data {
             UserInfo.update(
                 {
                     address: userObject.getAddress(),
-                    avatar: userObject.getProfilePicture(),
-                    coverPhoto: userObject.getCoverPicture(),
                     website: userObject.getWebpage(),
                     biography: userObject.getBio(),
                 },
@@ -140,6 +138,51 @@ class UsersData extends Data {
                 throw new Error(`We are experiencing a problem
                     with your registration.
                     Try again later or contact our teams!`);
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+
+    updateUserProfilePic(id, userProfilePic) {
+        console.log(id, userProfilePic);
+        try {
+            let seqError;
+            UserInfo.update(
+                {
+                    avatar: userProfilePic,
+                },
+                { where: { id: id } }
+            ).catch((err) => {
+                    seqError = err;
+            });
+            if (seqError && seqError.name === 'SequelizeValidationError') {
+                throw new Error(
+                    `There is a problem updating your profile picture. 
+                    Please try again later`
+                );
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+    updateUserCoverPic(id, userCoverPic) {
+        try {
+            let seqError;
+            UserInfo.update(
+                {
+                    coverPhoto: userCoverPic,
+                },
+                { where: { id: id } }
+            ).catch((err) => {
+                    seqError = err;
+            });
+            if (seqError && seqError.name === 'SequelizeValidationError') {
+                throw new Error(
+                    `There is a problem updating your cover photo. 
+                    Please try again later.`
+                );
             }
         } catch (err) {
             throw err;
