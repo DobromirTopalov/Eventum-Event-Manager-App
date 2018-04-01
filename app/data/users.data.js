@@ -78,8 +78,8 @@ class UsersData extends Data {
     addUserInfo(userId) {
         const result = UserInfo.create({
             address: '',
-            avatar: '',
-            coverPhoto: '',
+            avatar: '/static/images/usr_avatar.png',
+            coverPhoto: 'http://colorfully.eu/wp-content/uploads/2012/09/i-need-a-cover-facebook-cover.jpg',
             website: '',
             biography: '',
         });

@@ -13,8 +13,7 @@ const init = (app, data) => {
 
         const userID = req.user.id;
         const userInfo = await data.users.getUserInfoById(userID);
-        const userExtraInfo = await data.users.getUserExtraInfoById(userID);
-        const account = Object.assign(userInfo, userExtraInfo );
+        const account = userInfo;
         // console.log(account);
         // const context = {
         //     username: 'cgfd',
@@ -26,7 +25,7 @@ const init = (app, data) => {
         //     starRating: 8,
         // };
         // console.log(account.createdAt)
-        return res.render('./profile/user-page', account);
+        return res.render('./profile/user-page', { account });
     });
 
     app.use('/', router);
