@@ -1,5 +1,11 @@
 const {
     UserInfo,
+    User,
+    Location,
+    City,
+    Country,
+    Subcategory,
+    Category,
 } = require('../../models/database/models');
 
 class EventData {
@@ -12,18 +18,43 @@ class EventData {
             where: {
                 id: id,
             },
+            include: [
+                {
+                    model: Location,
+                    include: [
+                        {
+                            model: City,
+                            include: {
+                                model: Country,
+                            },
+                        },
+                    ],
+                },
+                {
+                    model: User,
+                    include: {
+                        model: UserInfo,
+                    },
+                },
+                {
+                    model: Category,
+                },
+                {
+                    model: Subcategory,
+                },
+            ],
         });
 
         return result;
     }
 
-    getAllEventsInfo(id) {
+    getAllEventsInfo() {
         const result = this.Model.findAll();
 
         return result;
     }
 
-    async addNewEvent(eventObject) {
+    addNewEvent(eventObject) {
         const result = this.Model.create({
             title: eventObject.title,
             describe: eventObject.describe,

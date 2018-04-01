@@ -5,8 +5,8 @@ mixin user-info()
                 .author_avatar
                     img(src= account.UserInfo.avatar, alt='Presenting the broken author avatar ')
                 .author
-                    h4 #{username}
-                    p #{createdAt}
+                    h4 #{account.name}
+                    p #{account.createdAt}
                 // end /.author
                 .social.social--color--filled
                     ul
@@ -16,12 +16,9 @@ mixin user-info()
                         li
                             a(href='#')
                                 span.fa.fa-twitter
-                        li
-                            a(href='#')
-                                span.fa.fa-dribbble
                 // end /.social
-                .author-btn
-                    a.btn.btn--md.btn--round(href='#') Follow
+                //- .author-btn
+                //-     a.btn.btn--md.btn--round(href='#') Follow
                 // end /.author-btn
             // end /.author-infos
         // end /.author-card

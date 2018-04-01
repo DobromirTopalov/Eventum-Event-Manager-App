@@ -9,8 +9,11 @@ const init = (app, data) => {
     const controller = new EventController(data);
 
     router
-        .get('/:ID/:TITLE', async (req, res) => {
+        .get('/:id', async (req, res) => {
             const context = {};
+            const eventId = req.params.id;
+            const eventData = await data.events.getEventInfoById(eventId);
+
             res.render('./event/eventPage', context);
         })
         .get('/create', async (req, res, next) => {
@@ -23,7 +26,7 @@ const init = (app, data) => {
             context.countries = await controller.getCountries();
             context.categories = await controller.getCategories();
 
-            res.render('./event/create', context);
+            return res.render('./event/create', context);
         })
         .post('/create', async (req, res, next) => {
             const eventInfo = req.body;

@@ -25,6 +25,9 @@ class UsersData extends Data {
             where: {
                 username: username,
             },
+            include: {
+                model: UserInfo,
+            },
         });
 
         return result;
