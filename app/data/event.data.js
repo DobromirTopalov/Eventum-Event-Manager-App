@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const {
     UserInfo,
     User,
@@ -8,11 +7,6 @@ const {
     Subcategory,
     Category,
 } = require('../../models/database/models');
-=======
-// const {
-//     UserInfo,
-// } = require('../../models/database/models');
->>>>>>> b0ec09d6e4d689ea76989ca68adf12a64c9941ae
 
 class EventData {
     constructor(Model) {
