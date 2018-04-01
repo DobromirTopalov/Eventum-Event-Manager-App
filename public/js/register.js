@@ -29,6 +29,5 @@ $(document).ready(function(e) {
         return false;
     });
 });
-
 /* eslint-enable */
 

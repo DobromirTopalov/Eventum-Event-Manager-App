@@ -1,3 +1,4 @@
+
 const {
     Router,
   } = require('express');
@@ -12,10 +13,9 @@ const multer = require('multer');
 const UserController = require('../register/register.controller');
 const EncryptController = require('../../../controllers/EncryptingController');
 
-const __dirname = path.resolve();
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, path.join(__dirname, '..', '..', '..', 'public', 'uploads'));
+      cb(null, path.join(path.resolve(), '..', '..', '..', 'public', 'uploads'));
     },
     filename: async function(req, file, cb) {
         cb(null,
@@ -37,8 +37,8 @@ const init = (app, data) => {
         // let userID = await req.user.id;
         const userID = 3;
 
-        req.userInfo = await data.users.getUserInfoById(userID)
-        req.userExtraInfo = await data.users.getUserExtraInfoById(userID)
+        req.userInfo = await data.users.getUserInfoById(userID);
+        req.userExtraInfo = await data.users.getUserExtraInfoById(userID);
         const account = Object.assign(req.userInfo, req.userExtraInfo );
 
         res.render('./profile/settings', { account });
@@ -46,6 +46,7 @@ const init = (app, data) => {
 
     .post('/settings', [upload.any(), async function(req, res, next) {
         const userData = await req.body;
+        console.log(userData);
         //  if (!req.user) {
         //     return res.redirect('/login');
         //   }

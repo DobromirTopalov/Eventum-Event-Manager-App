@@ -1,6 +1,6 @@
-const {
-    UserInfo,
-} = require('../../models/database/models');
+// const {
+//     UserInfo,
+// } = require('../../models/database/models');
 
 class EventData {
     constructor(Model) {
