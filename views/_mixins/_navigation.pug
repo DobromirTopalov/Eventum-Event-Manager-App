@@ -57,7 +57,10 @@ mixin site-navigation(guest)
                                 if user
                                     .author-author__info.inline.has_dropdown
                                         .author__avatar
-                                            img(src='/static/images/usr_avatar.png', alt='user avatar')
+                                            if(account)
+                                                img.img-circle(src='/static/uploads/' + account.UserInfo.avatar, height = '50', width = '50', alt='user avatar')
+                                            else
+                                                img(src='/static/uploads/' + 'usr_avatar.png', height = '50', width = '50', alt='user avatar')
                                         .autor__info
                                             p.name
                                             | #{user.name}

@@ -2,10 +2,10 @@ const {
   Router,
 } = require('express');
 
-const {
-    User,
-    Artist,
-} = require('../../../models/data-class');
+// const {
+//     User,
+//     Artist,
+// } = require('../../../models/data-class');
 
 // const UserController = require('./search.controller');
 
@@ -15,14 +15,19 @@ const init = (app, data) => {
 
     router
     .get('/', async (req, res) => {
-        let allEvents = await data.events.getAllEventsInfo();
+        // await console.log(await data.events.getAllEventsInfo());
+        const allEvents = await data.events.getAllEventsInfo();
         const categories = ['Music', 'Art', 'Sport', 'Dances', 'Technology'];
         const cities = ['London', 'Paris', 'Sofia', 'Varna'];
-        allEvents = allEvents.map(event => Object.assign(event, {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
-        let events = {
-            ...allEvents
-        }
-        console.log(events)
+        await console.log(allEvents[0].dataValues);
+        await console.log(allEvents[0].dataValues.User);
+        // allEvents = allEvents.map(event =>
+        // Object.assign(event, event.dataValues.User.User,
+        // {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
+        const events = {
+            ...allEvents,
+        };
+        // console.log(events)
         // const events = {
             // data.events.getAllEventsInfo(),
         //     eventCard1: {
@@ -47,7 +52,7 @@ const init = (app, data) => {
         //         authorImg: '/static/images/p3.jpg',
         //         authorName: 'Don Roberto',
         //         categories: [{ name: 'Art' }, { name: 'grafity' }],
-        //         description: 'Gallery with all my stuff as well as friends articles',
+        //         description: 'Gallery',
         //         ticketPrice: '$50.99',
         //         followers: '48',
         //         capacity: 90,
@@ -65,14 +70,16 @@ const init = (app, data) => {
             context.category = req.body.category;
             context.city = req.body.city;
             context.keywords = req.body.keywords;
-
-            res.redirect(`./search/?keywords=${context.keywords}&${context.category}&${context.city}`);
+            res.redirect(
+                `./search/?keywords=
+                ${context.keywords}&${context.category}&${context.city}`
+            );
         }
 
         res.render('./search/search', context);
     })
     .post('/', async (req, res, next) => {
-        const searchWordsAndCriteries = req.body;
+        // const searchWordsAndCriteries = req.body;
         try {
             // search in DB regex that matches the word via event title
             // using some logic or regex to compare

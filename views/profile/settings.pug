@@ -11,8 +11,10 @@ block content
     - var email = account.email || undefined;
     - var passwordMain = account.password;
     - var passwordSecondary = account.password;
-    - var country = account.UserInfo.country;
-    - var address = account.UserInfo.address;
+    - var country = account.country;
+    - var address = account.address;
+    - var coverPicName = account.coverPhoto;
+    - var profilePicName = account.avatar;
     
     .dashboard-area
         .dashboard_contents
@@ -22,8 +24,9 @@ block content
                         .dashboard_title_area
                             .dashboard__title
                                 h3 Account Settings
+
                 #alertdiv
-                form.setting_form(action='/settings/:id' method='POST')
+                .setting_form(action='/settings/:id' method='POST')
                     #settingsForm
                         .row
                             .col-md-6
@@ -39,8 +42,7 @@ block content
                                                 +user-settings-personalInfo()
                                             else
                                                 +artist-settings-personalInfo()
-                                            
-                                            //- +artist-settings-personalInfo()
+
                             .col-md-6
                                 .information_module
                                     a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
@@ -51,7 +53,7 @@ block content
                                     #collapse3.information__set.profile_images.toggle_module.collapse
                                         .information_wrapper
                                             .profile_image_area
-                                                img(src='/static/images/authplc.png', alt='Author profile area')
+                                                img#profileImg(src='/static/uploads/'+ profilePicName, height="100", width="100", alt='Author profile area')
                                                 |                                             
                                                 .img_info
                                                     p.bold Profile Image
@@ -59,22 +61,32 @@ block content
                                                     p.subtitle JPG, GIF or PNG 100x100 px
                                                 |                                             
                                                 label.upload_btn(for='cover_photo')
-                                                    input#cover_photo(type='file', name='coverPhoto', value='' + coverPhoto)
-                                                    |                                                 
-                                                    span.btn.btn--sm.btn--round(aria-hidden='true', type='submit') Upload Image
+                                                    form#profileForm( method='POST', enctype='multipart/form-data')
+                                                        input#cover_photo(type='file', name='profilePhoto', value='' + coverPhoto, onchange="document.getElementById('profileImg').src = window.URL.createObjectURL(this.files[0])")
+                                                        |                                                 
+                                                        span.btn.btn--sm.btn--round(aria-hidden='true', type='submit', id ='uploadProfile') Upload Image
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='file', name='image')
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='submit', value='Save')
                                             |                                         
                                             .prof_img_upload
                                                 p.bold Cover Image
                                                 |                                             
-                                                img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
+                                                img#coverImg(src='/static/uploads/' + coverPicName, height="370", width="750", alt='The great warrior of China')
                                                 |                                             
                                                 .upload_title
                                                     p JPG, GIF or PNG 750x370 px
                                                     |                                                 
                                                     label.upload_btn(for='dp')
-                                                        input#dp(type='file', name='coverImg', value='' + coverImg)
-                                                        |                                                     
-                                                        span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
+                                                        form#coverForm( method='POST', enctype='multipart/form-data')
+                                                            input#dp(type='file', name='coverPhoto', value='' + coverImg, onchange="document.getElementById('coverImg').src = window.URL.createObjectURL(this.files[0])")
+                                                            |                                                     
+                                                            span.btn.btn--sm.btn--round(aria-hidden='true', id ='uploadCover') Upload Image
+                                                            |
+                                                            input.btn.btn--sm.btn--round(type='file', name='image')
+                                                            |
+                                                            input.btn.btn--sm.btn--round(type='submit', value='Save')
                             .col-md-12
                                 .dashboard_setting_btn
                                     button.btn.btn--round.btn--md(type = 'button') Save Change
