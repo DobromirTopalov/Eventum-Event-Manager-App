@@ -1,3 +1,4 @@
+/* eslint-disable */
 $(document).ready(function(e) {
     function checkUsername(username) {
         const usernameRegex = /^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$/;
@@ -213,18 +214,8 @@ $(document).ready(function(e) {
             socialProf1: $("input[socialWebFb]").val() || '',
             socialProf2: $("input[socialWebTwt]").val() || '',
             socialProf3: $("input[socialWebGgl]").val() || '',
-            // city:
         };
 
-        // try {
-        //     validateAllInfo(invalidObj)
-        // } catch(err) {
-        //     $('#alertdiv')
-        //     .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + err.message +'</span></div>')
-        //     return false;
-        // }
-         
-        console.log(validObj);
 
         $.ajax({
             method: 'POST',
@@ -244,3 +235,4 @@ $(document).ready(function(e) {
         });
     });
 });
+/* eslint-enable */

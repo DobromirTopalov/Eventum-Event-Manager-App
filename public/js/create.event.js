@@ -1,3 +1,4 @@
+/* eslint-disable */
 $(function () {
     /* date picker js */
     $('.dattaPikkara').datepicker({
@@ -105,3 +106,4 @@ $(function () {
         return false;
     });
 });
+/* eslint-enable */
