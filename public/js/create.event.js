@@ -66,7 +66,7 @@ $(function () {
 
     /* Get data from inputs and send it */
     $('#createEventForm').find('#create-event-button').click(function (e) {
-        console.log('dib')
+
         var eventInfo = {
             title: $('#event-title-input').val(),
             date: $('#date-input').val(),
@@ -82,8 +82,6 @@ $(function () {
             price: $('#price-input').val(),
 
         }
-        debugger;
-        console.log(eventInfo);
 
         $.ajax({
             method: 'POST',
@@ -92,12 +90,12 @@ $(function () {
             dataType: 'json',
             data: eventInfo,
             error: function (error) {
-                debugger;
+                $("html, body").animate({ scrollTop: 0 }, "slow");
                 $('#alertdiv')
                     .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] + '</span></div>')
             },
             success: function (data) {
-                debugger;
+                $("html, body").animate({ scrollTop: 0 }, "slow");
                 var messageAlert = 'Good job! You successfully updated your profile!';
                 $('#alertdiv')
                     .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')

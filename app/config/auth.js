@@ -24,12 +24,12 @@ const init = (app, data) => {
 
     // User to string
     passport.serializeUser((user, done) => {
-        done(null, user.username);
+        done(null, user.id);
     });
 
     // string to User
-    passport.deserializeUser(async (username, done) => {
-        const user = await data.users.findByUsername(username);
+    passport.deserializeUser(async (id, done) => {
+        const user = await data.users.findById(id);
 
         if (!user) {
             return done(new Error('Invalid user'));

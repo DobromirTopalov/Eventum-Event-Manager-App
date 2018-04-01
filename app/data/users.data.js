@@ -9,155 +9,137 @@ class UsersData extends Data {
     constructor() {
         super(User);
     }
+
     findById(id) {
-        return this.Model.findOne({
+        const result = this.Model.findOne({
             where: {
                 id: id,
             },
-        })
-        .then((item) =>  {
-            return item.dataValues;
-        })
-    }
-    findByUsername(username) {
-        return this.Model.findOne({
-            where: {
-                username,
-            },
-        }).then((item) => item.dataValues);
-    }
-    getUserInfoById(id) {
-        return  this.Model.findOne({
-            where: {
-                id: id,
-            },
-        })
-        .then((item) => item.dataValues)
-    }
-    getUserExtraInfoById(id) {
-        return  UserInfo.findOne({
-            where: {
-                id: id,
-            },
-        })
-        .then((item) => item.dataValues)
-        
+        });
+
+        return result;
     }
 
-    getAllUsernames() {
-        return  this.Model.findAll({
-            attributes: ['username'],
-        })
-        .then((items) =>  {
-            return items.map((item) => item.dataValues['username'])
-        })
-    }
-    getAllEmails() {
-        return this.Model.findAll({
-            attributes: ['email'],
-        })
-        .then((items) =>  {
-            return items.map((item) => item.dataValues['email'])
-        })
-    }
-    
-    async addNewUser(userObject) {
-        try {
-            let seqError;
-            await this.Model
-            .build({ username: userObject.getUsername(),
-                 email: userObject.getEmail(),
-                 password: userObject.getPassword(),
-                 name: userObject.getName(),
-                 role: 'User' })
-            .save()
-            .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                  });
-            let userId = await this.findByUsername(userObject.getUsername()).then(async (item) => await item.id);
-            console.log(userId)
-            await this.addUserInfo(userId, userObject);
-            await this.Model
-            .update(
-                { UserInfoId: userId },
-                { where: { id: userId} }
-                    )
-                .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                });
-            
-            if(seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
-            }
-        } catch (err) {
-            throw err;
-        }
-    }
-    async updateUserData(id, userObject) {
-        try {
-            let seqError;
-            await this.Model
-            .update(
-                {
-                username: userObject.getUsername(),
-                email: userObject.getEmail(),
-                password: userObject.getPassword(),
-                name: userObject.getName(),
-                role: 'User', 
-                UserInfoId: id },
-                    { where: { id: id} }
-                )
-            .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                    });
-            if(seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
-            }
-        } catch (err) {
-            throw err;
-        }
-    }
-    async addUserInfo(id, userInfo) {
-        try {
-            let seqError;
-            await UserInfo
-            .build({ id: id,
-                address: '',
-                avatar: '',
-                coverPhoto: '',
-                website: '',
-                biography: '',
-             })
-            .save()
-            .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                  });
-            if(seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
-            }
-        } catch (err) {
-            throw err;
-        }
-    }
-    async updateUserInfo(id, userObject) {
-        try {
-            let seqError;
-            await UserInfo
-            .update(
-            {
-                address: userObject.getAddress(),
-                avatar: userObject.getProfilePicture(),
-                coverPhoto: userObject.getCoverPicture(),
-                website: userObject.getWebpage(),
-                biography: userObject.getBio(),
+    findByUsername(username) {
+        const result = this.Model.findOne({
+            where: {
+                username: username,
             },
-                    { where: { id: id} }
-                )
-            .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                    });
-            if(seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
+        });
+
+        return result;
+    }
+
+    findByEmail(email) {
+        const result = this.Model.findOne({
+            where: {
+                email: email,
+            },
+        });
+
+        return result;
+    }
+
+    getUserInfoById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+            include: {
+                model: UserInfo,
+            },
+        });
+
+        return result;
+    }
+
+    getUserExtraInfoById(id) {
+        const result = UserInfo.findOne({
+            where: {
+                id: id,
+            },
+        });
+
+        return result;
+    }
+
+    addNewUser(userObject) {
+        const result = this.Model.create({
+            username: userObject.username,
+            email: userObject.email,
+            password: userObject.password,
+            name: userObject.name,
+            role: 'User',
+        });
+
+        return result;
+    }
+
+    addUserInfo(userId) {
+        const result = UserInfo.create({
+            address: '',
+            avatar: '/static/images/usr_avatar.png',
+            coverPhoto: 'http://colorfully.eu/wp-content/uploads/2012/09/i-need-a-cover-facebook-cover.jpg',
+            website: '',
+            biography: '',
+        });
+
+        return result;
+    }
+
+    updateUserDataToInfo(userId, Infoid) {
+        const result = this.Model.update(
+            { UserInfoId: Infoid },
+            { where: { id: userId } }
+        );
+
+        return result;
+    }
+
+    updateUserData(id, userObject) {
+        try {
+            let seqError;
+            this.Model.update(
+                {
+                    username: userObject.getUsername(),
+                    email: userObject.getEmail(),
+                    password: userObject.getPassword(),
+                    name: userObject.getName(),
+                    role: 'User',
+                    UserInfoId: id,
+                },
+                { where: { id: id } }
+            ).catch((err) => {
+                seqError = err;
+            });
+            if (seqError && seqError.name === 'SequelizeValidationError') {
+                throw new Error(`We are experiencing a problem with
+                    your registration. Try again later or contact our teams!`);
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    updateUserInfo(id, userObject) {
+        try {
+            let seqError;
+            UserInfo.update(
+                {
+                    address: userObject.getAddress(),
+                    avatar: userObject.getProfilePicture(),
+                    coverPhoto: userObject.getCoverPicture(),
+                    website: userObject.getWebpage(),
+                    biography: userObject.getBio(),
+                },
+                { where: { id: id } }
+            ).catch((err) => {
+                    seqError = err;
+            });
+            if (seqError && seqError.name === 'SequelizeValidationError') {
+                throw new Error(`We are experiencing a problem
+                    with your registration.
+                    Try again later or contact our teams!`);
             }
         } catch (err) {
             throw err;

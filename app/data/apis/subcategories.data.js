@@ -1,25 +1,25 @@
-class CountryData {
+class Subcategory {
     constructor(Model) {
         this.Model = Model;
     }
 
     getAll() {
         const result = this.Model.findAll({
-            attributes: ['name'],
+            attributes: ['title'],
         });
 
         return result;
     }
 
-    getByName(country) {
+    getByName(subcategory) {
         const result = this.Model.findOne({
             where: {
-                name: country,
-            },
+                title: subcategory
+            }
         });
 
         return result;
     }
 }
 
-module.exports = CountryData;
+module.exports = Subcategory;

@@ -1,4 +1,4 @@
-const userObject = require('../../../models/data-class/user-class');
+const UserObject = require('../../../models/data-class/user-class');
 
 class UserController {
     constructor(data) {
@@ -8,25 +8,33 @@ class UserController {
     async createUser(userData) {
         let thisUser = null;
         try {
-            if(userData.password !== userData.passwordRepeat) {
+            if (userData.password !== userData.passwordRepeat) {
                 throw new Error('The two passwords do not match');
             }
 
-            thisUser = await new userObject(userData.username, userData.email, userData.password, userData.name, 
+            thisUser = await new UserObject(userData.username,
+                userData.email, userData.password, userData.name,
                 '', '', '', '', '', '', '', '');
-            let usernamesArray = await this.data.users.getAllUsernames();
-            if(usernamesArray.includes(thisUser.getUsername())) {
-                throw new Error('Existing username');
+
+            const usernamesArray = await this.data
+                .users.findByUsername(userData.username);
+            if (usernamesArray) {
+                throw new Error('This username is already taken');
             }
 
-            let emailsArray = await this.data.users.getAllEmails();
-            if(emailsArray.includes(thisUser.getEmail())) {
+            const emailsArray = await this.data
+                .users.findByEmail(userData.email);
+            if (emailsArray) {
                 throw new Error('This email is already taken');
             }
 
-            await this.data.users.addNewUser(thisUser);
-        }
-        catch (err) {
+            const theNewUser = await this.data.users.addNewUser(thisUser);
+            const theNewUsersInfo = await this.data
+                .users.addUserInfo(theNewUser.id);
+
+            await this.data
+                .users.updateUserDataToInfo(theNewUser.id, theNewUsersInfo.id);
+        } catch (err) {
             throw err;
         }
     }
@@ -35,27 +43,31 @@ class UserController {
         let thisUser = null;
 
         try {
-            if(userData.password !== userData.passwordRepeat) {
+            if (userData.password !== userData.passwordRepeat) {
                 throw new Error('The two passwords do not match');
             }
-            await console.log(userData)
-            thisUser = await new userObject(userData.username, userData.email, userData.password, userData.name, 
-                'userDatacity', 'userDatacountry', userData.profilePic, userData.coverPhoto, '', '' , '', '', userData.webpage, userData.autoBio)
-            let usernamesArray = await this.data.users.getAllUsernames();
-            
-            // if(usernamesArray.includes(thisUser.getUsername())) {
-            //     throw new Error('Existing username');
-            // }
-            // let emailsArray = await this.data.users.getAllEmails();
-            // if(emailsArray.includes(thisUser.getEmail())) {
-            //     throw new Error('This email is already registered');
-            // }
-            // await this.data.users.updateUserData(userID, thisUser);
-            // createCity( thisCity, id = findCountryID(thisCity.getCountry()))
+
+            thisUser = await new UserObject(userData.username, userData.email,
+                userData.password, userData.name,
+                'userDatacity', 'userDatacountry', userData.profilePic,
+                userData.coverPhoto, '', '', '', '',
+                userData.webpage, userData.autoBio);
+
+            const usernamesArray = await this.data
+                .users.findByUsername(userData.username);
+            if (usernamesArray) {
+                throw new Error('This username is already taken');
+            }
+
+            const emailsArray = await this.data
+                .users.findByEmail(userData.email);
+            if (emailsArray) {
+                throw new Error('This email is already taken');
+            }
+
             await this.data.users.updateUserData(userID, thisUser);
             await this.data.users.updateUserInfo(userID, thisUser);
-        }
-        catch (err) {
+        } catch (err) {
             throw err;
         }
     }

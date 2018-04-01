@@ -15,8 +15,12 @@ const init = (app, data) => {
 
     router
     .get('/', async (req, res) => {
+<<<<<<< HEAD
         // await console.log(await data.events.getAllEventsInfo());
         let allEvents  = await data.events.getAllEventsInfo();
+=======
+        let allEvents = await data.events.getAllEventsInfo();
+>>>>>>> ad680902b2d4fbe11806fb6ab942b2e1b7780bc6
         const categories = ['Music', 'Art', 'Sport', 'Dances', 'Technology'];
         const cities = ['London', 'Paris', 'Sofia', 'Varna'];
         await console.log(allEvents[0].dataValues);
@@ -24,7 +28,6 @@ const init = (app, data) => {
         // allEvents = allEvents.map(event => Object.assign(event, event.dataValues.User.User, {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
         let events = {
             ...allEvents
-            
         }
         // console.log(events)
         // const events = {
