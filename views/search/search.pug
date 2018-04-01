@@ -42,7 +42,7 @@ block content
                                 li
                                     img.auth-img#event-author(src='' + eventCard.authorImg, alt='author image', width='30px')
                                     p
-                                        a(href='' + eventCard.authorProfile) #{eventCard.authorName}
+                                        a(href='' + eventCard.authorProfile) #{eventCard.name}
                                 li.product_cat
                                     span.lnr.lnr-book
                                     each category in eventCard.categories

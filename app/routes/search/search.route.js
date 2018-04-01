@@ -15,16 +15,18 @@ const init = (app, data) => {
 
     router
     .get('/', async (req, res) => {
-        await console.log(await data.events.getAllEventsInfo());
+        // await console.log(await data.events.getAllEventsInfo());
         let allEvents  = await data.events.getAllEventsInfo();
         const categories = ['Music', 'Art', 'Sport', 'Dances', 'Technology'];
         const cities = ['London', 'Paris', 'Sofia', 'Varna'];
-        allEvents = allEvents.map(event => Object.assign(event, {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
+        await console.log(allEvents[0].dataValues);
+        await console.log(allEvents[0].dataValues.User)
+        // allEvents = allEvents.map(event => Object.assign(event, event.dataValues.User.User, {categories: [{ name: 'Music' }, { name: 'Rap' }]}  ));
         let events = {
             ...allEvents
             
         }
-        console.log(events)
+        // console.log(events)
         // const events = {
             // data.events.getAllEventsInfo(),
         //     eventCard1: {

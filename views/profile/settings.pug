@@ -42,7 +42,8 @@ block content
     - var passwordSecondary = account.password;
     - var country = account.country;
     - var address = account.address;
-    
+    - var coverPicName = account.coverPhoto;
+    - var profilePicName = account.avatar;
     //- - var mailOnApproval = account.mailOnApproval || false;
     //- - var mailOnUpdates = account.mailOnUpdates || false;
     
@@ -54,8 +55,13 @@ block content
                         .dashboard_title_area
                             .dashboard__title
                                 h3 Account Settings
+                //- form#myForm( method='POST', enctype='multipart/form-data')
+                //-     | Select an image to upload:
+                //-     input(type='file', name='image')
+                //-     input(type='submit', value='Upload Image')
+
                 #alertdiv
-                form.setting_form(action='/settings/:id' method='POST')
+                .setting_form(action='/settings/:id' method='POST')
                     #settingsForm
                         .row
                             .col-md-6
@@ -83,7 +89,7 @@ block content
                                     #collapse3.information__set.profile_images.toggle_module.collapse
                                         .information_wrapper
                                             .profile_image_area
-                                                img(src='/static/images/authplc.png', alt='Author profile area')
+                                                img(src='/static/uploads/'+ profilePicName, height="100", width="100", alt='Author profile area')
                                                 |                                             
                                                 .img_info
                                                     p.bold Profile Image
@@ -91,14 +97,19 @@ block content
                                                     p.subtitle JPG, GIF or PNG 100x100 px
                                                 |                                             
                                                 label.upload_btn(for='cover_photo')
-                                                    input#cover_photo(type='file', name='coverPhoto', value='' + coverPhoto)
-                                                    |                                                 
-                                                    span.btn.btn--sm.btn--round(aria-hidden='true', type='submit') Upload Image
+                                                    form#myForm( method='POST', enctype='multipart/form-data')
+                                                        input#cover_photo(type='file', name='coverPhoto', value='' + coverPhoto)
+                                                        |                                                 
+                                                        span.btn.btn--sm.btn--round(aria-hidden='true', type='submit') Upload Image
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='file', name='image')
+                                                        |
+                                                        input.btn.btn--sm.btn--round(type='submit', value='Save')
                                             |                                         
                                             .prof_img_upload
                                                 p.bold Cover Image
                                                 |                                             
-                                                img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
+                                                img(src='/static/uploads' + coverPicName, height="370", width="750", alt='The great warrior of China')
                                                 |                                             
                                                 .upload_title
                                                     p JPG, GIF or PNG 750x370 px
