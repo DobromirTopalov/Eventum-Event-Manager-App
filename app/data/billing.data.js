@@ -16,6 +16,8 @@ class BillingsData extends Data {
                 id: id,
             },
         });
+
+        return result;
     }
 
     getAllBillingsOfUser(userId) {
@@ -24,40 +26,38 @@ class BillingsData extends Data {
                 model: User,
                 where: {
                     id: userId,
-                }
-            }, ],
+                },
+            }],
         });
 
         return result;
     }
 
-
-    async addNewBilling(billingObject, CountryId, CityId, UserId) {
+    addNewBilling(billingObject, CountryId, CityId, UserId) {
         try {
             let seqError;
-            await this.Model
-                .build({
-                    firstName: billingObject.getFirstName(),
-                    lastName: billingObject.getLastName(),
-                    email: billingObject.getEmail(),
-                    address: billingObject.getAddress(),
-                    postCode: billingObject.getPostCode(),
-                    CountryId: CountryId,
-                    CityId: CityId,
-                    UserId: UserId,
-                })
-                .save()
-                .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
-                });
+            this.Model.build({
+                firstName: billingObject.getFirstName(),
+                lastName: billingObject.getLastName(),
+                email: billingObject.getEmail(),
+                address: billingObject.getAddress(),
+                postCode: billingObject.getPostCode(),
+                CountryId: CountryId,
+                CityId: CityId,
+                UserId: UserId,
+            })
+            .save()
+            .catch((err) => {
+                seqError = err;
+            });
+
             if (seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('Unexpected error!')
+                throw new Error('Unexpected error!');
             }
         } catch (err) {
             throw err;
         }
     }
-
 }
 
 module.exports = BillingsData;
