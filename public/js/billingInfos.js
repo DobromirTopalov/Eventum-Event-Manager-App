@@ -1,5 +1,44 @@
 /* eslint-disable */
 $(function() {
+    var cart = (function () {
+        var cartInfo = {
+            products: [],
+        };
+
+        var updateLocalStorage = function () {
+            localStorage.setItem('cart', JSON.stringify(cartInfo));
+        }
+
+        if (localStorage.getItem('cart')) {
+            cartInfo = JSON.parse(localStorage.getItem('cart'));
+        } else {
+            updateLocalStorage();
+        }
+
+        var addProduct = function (obj) {
+            cartInfo.products.push(obj);
+            updateLocalStorage();
+        }
+
+        var getProducts = function () {
+            return cartInfo.products;
+        }
+
+        var clear = function () {
+            cartInfo = {
+                products: [],
+            };
+
+            updateLocalStorage();
+        }
+
+        return {
+            addProduct: addProduct,
+            getProducts: getProducts,
+            clear: clear
+        }
+    })();
+
     function checkEmail(email) {
         const emailRegex = (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
 
@@ -127,45 +166,6 @@ $(function() {
         return true;
     }
 
-    var cart = (function () {
-        var cartInfo = {
-            products: [],
-        };
-
-        var updateLocalStorage = function () {
-            localStorage.setItem('cart', JSON.stringify(cartInfo));
-        }
-
-        if (localStorage.getItem('cart')) {
-            cartInfo = JSON.parse(localStorage.getItem('cart'));
-        } else {
-            updateLocalStorage();
-        }
-
-        var addProduct = function (obj) {
-            cartInfo.products.push(obj);
-            updateLocalStorage();
-        }
-
-        var getProducts = function () {
-            return cartInfo.products;
-        }
-
-        var clear = function () {
-            cartInfo = {
-                products: [],
-            };
-
-            updateLocalStorage();
-        }
-
-        return {
-            addProduct: addProduct,
-            getProducts: getProducts,
-            clear: clear
-        }
-    })();
-
     const allPurchasedItems = cart.getProducts();
     var totalprice = 0;
 
@@ -222,8 +222,6 @@ $(function() {
     // end of cart
 
     $('#buy').on("click", function () {
-        debugger;
-
         var eventInfo = {
             EventId: 1,
             amount: 2,
@@ -236,16 +234,14 @@ $(function() {
             dataType: 'json',
             data: eventInfo,
             error: function (error) {
-                debugger;
                 $('#messagediv')
                     .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">X</a><span>' + error.responseJSON["err"] + '</span></div>')
             },
             success: function (data) {
-                debugger;
                 var message = 'You\'ve successfully ordered your tickets!';
                 $('#messagediv')
                     .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">X</a><span>' + message + '</span></div>')
-                    
+
                     //update localstorage
                     var infoForTicketProduct = {
                         eventTitle: data.infoEvent.title,
@@ -256,19 +252,17 @@ $(function() {
                         eventUrl: '/event/' + data.infoTicket.EventId + '/' + data.infoEvent.title,
                     };
                     cart.addProduct(infoForTicketProduct);
-                    
+
                     window.location.href = '/checkout';
             }
         });
         return false;
-    })
+    });
 
     $('#confirmOrder').on("click", function () {
-        debugger;
         for (var i = 0; i < allPurchasedItems.length; i += 1) {
             var item = allPurchasedItems[i];
 
-            debugger;
             $('#messagediv').attr('display', 'none');
             var userInfo = {
                 firstname: $('#first_name').val(),

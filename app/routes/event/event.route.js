@@ -21,6 +21,21 @@ const init = (app, data) => {
 
             return res.render('./event/create', context);
         })
+        .post('/create', async (req, res, next) => {
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+
+            const eventInfo = req.body;
+
+            try {
+                await controller.createEvent(req.user.id, eventInfo);
+            } catch (err) {
+                return res.status(400).json({ 'err': err.message });
+            }
+
+            return res.status(200).json({ 'success': true });
+        })
         .get('/:id', async (req, res) => {
             const eventID = req.params.id;
 
@@ -61,30 +76,6 @@ const init = (app, data) => {
             };
 
             return res.render('./event/eventPage', context);
-        })
-        .get('/:id', async (req, res) => {
-            const context = {};
-            const eventId = req.params.id;
-            const eventData = await data.events.getEventInfoById(eventId);
-
-            res.render('./event/eventPage', context);
-        })
-        .post('/create', async (req, res, next) => {
-            const eventInfo = req.body;
-
-            if (!req.user) {
-                return res.redirect('/login');
-            }
-
-            const userID = req.user.id;
-
-            try {
-                await controller.createEvent(userID, eventInfo);
-            } catch (err) {
-                const someError = err;
-                return res.status(400).json({ 'err': err.message });
-            }
-            return res.status(200).json({ 'success': true });
         });
 
     app.use('/event', router);

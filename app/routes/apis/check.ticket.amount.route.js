@@ -10,14 +10,14 @@ const init = (app, data) => {
 
   router
     .get('/checkTicketsAmount', async (req, res, next) => {
+      if (!req.user) {
+        return res.redirect('/login');
+      }
+
       const eventId = req.query.EventId;
       const amount = req.query.amount;
 
       let product;
-
-      if (!req.user) {
-        return res.redirect('/login');
-      }
 
       try {
         const eventInfo = await controller.getEventInfo(eventId);

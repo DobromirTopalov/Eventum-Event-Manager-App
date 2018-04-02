@@ -20,6 +20,19 @@ class UsersData extends Data {
         return result;
     }
 
+    findAllById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+            include: {
+                model: UserInfo,
+            },
+        });
+
+        return result;
+    }
+
     findByUsername(username) {
         const result = this.Model.findOne({
             where: {

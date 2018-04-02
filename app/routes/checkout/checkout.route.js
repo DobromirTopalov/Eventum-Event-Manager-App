@@ -11,7 +11,7 @@ const init = (app, data) => {
   const ticketController = new TicketController(data);
 
   router
-    .get('/checkout', async (req, res) => {
+    .get('/', async (req, res) => {
       if (!req.user) {
         return res.redirect('/login');
       }
@@ -26,9 +26,12 @@ const init = (app, data) => {
 
       return res.render('./checkout/checkout', context);
     })
-    .post('/checkout', async (req, res, next) => {
-      const usernameId = req.user.id;
+    .post('/', async (req, res, next) => {
+      if (!req.user) {
+        res.status(400).json({ 'err': 'You need to be authenticated!' });
+      }
 
+      const usernameId = req.user.id;
       const billingData = req.body;
       const eventId = billingData.order.eventId;
       const amount = billingData.order.amount;
@@ -42,7 +45,7 @@ const init = (app, data) => {
 
         const ticketInfo = await ticketController.getTicketInfo(eventId);
         if (ticketInfo === null) {
-          throw new Error('This is no such a ticket!');
+          throw new Error('There is no such a ticket!');
         }
 
         const ticketCapacity = ticketInfo.capacity;
@@ -72,7 +75,7 @@ const init = (app, data) => {
       res.status(200).json(product);
     });
 
-  app.use('/', router);
+  app.use('/checkout', router);
 };
 
 module.exports = {

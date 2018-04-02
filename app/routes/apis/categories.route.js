@@ -19,10 +19,10 @@ const init = (app, data) => {
       const result = await controller.getAllSub(reqCategorie);
 
       if (result.length === 0) {
-        return res.status(200).json({info: false});
+        return res.status(200).json({ info: false });
       }
 
-      res.status(200).json(result[0].Subcategories);
+      return res.status(200).json(result[0].Subcategories);
     });
 
   app.use('/', router);
