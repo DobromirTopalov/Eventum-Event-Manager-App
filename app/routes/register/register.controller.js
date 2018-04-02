@@ -53,18 +53,15 @@ class UserController {
                 userData.coverPhoto, '', '', '', '',
                 userData.webpage, userData.autoBio);
 
-            const usernamesArray = await this.data
-                .users.findByUsername(userData.username);
-            if (usernamesArray) {
+            const checkUsername = await this.data.users.findByUsername(thisUser.getUsername());
+            if (checkUsername && checkUsername.dataValues.id!== userID) {
                 throw new Error('This username is already taken');
             }
 
-            const emailsArray = await this.data
-                .users.findByEmail(userData.email);
-            if (emailsArray) {
+            const checkEmail = await this.data.users.findByEmail(thisUser.getEmail())
+            if ( checkEmail && checkEmail.dataValues.id!== userID) {
                 throw new Error('This email is already taken');
             }
-
             await this.data.users.updateUserData(userID, thisUser);
             await this.data.users.updateUserInfo(userID, thisUser);
         } catch (err) {

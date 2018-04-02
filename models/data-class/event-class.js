@@ -2,9 +2,10 @@ class Event {
     constructor(date = '', coverPhoto = '', locationName = '',
         location_country = '', location_city = '',
         location_address = '', title = '', description = '', category = '',
-        subcateogry = '', prices = '', capacity = '') {
+        subcateogry = '', prices = '', capacity = '', time = '') {
 
         this.setDate(date);
+        this.setTime(time);
 
         if (locationName.length > 0) {
             this.location_name = locationName;
@@ -63,7 +64,19 @@ class Event {
             throw new Error('Date is not in the required format');
         }
     }
+    setTime(time) {
+        time = time.trim();
+        const timeReg = /^(?:\d|[01]\d|2[0-3]):[0-5]\d$/;
+        if (!time.length || !time || (time.length > 6) || time.length < 4) {
+            throw new Error('Please add time in the required format');
+        }
 
+        if (time.match(timeReg)) {
+            this.time = time;
+        } else {
+            throw new Error('Time is not in the required format');
+        }
+    }
     setLocationParams(input, attr) {
         input = input.trim();
 
@@ -176,7 +189,9 @@ class Event {
         finalDate.setMonth(dateFormatted[0] - 1);
         finalDate.setDate(dateFormatted[1]);
         finalDate.setFullYear(dateFormatted[2]);
-
+        finalDate.setHours(Number(this.time.substring(0, 2))-3);
+        finalDate.setMinutes(Number(this.time.substring(3, 5)));
+        // console.log(finalDate)
         return finalDate;
     }
 

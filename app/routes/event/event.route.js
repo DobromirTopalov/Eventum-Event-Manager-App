@@ -2,12 +2,30 @@ const {
     Router,
 } = require('express');
 
+const path = require('path');
+const multer = require('multer');
+
+const EncryptController = require('../../../controllers/EncryptingController');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null,
+        path.join(__dirname, '..', '..', '..', 'public', 'uploads'));
+    },
+    filename: async function(req, file, cb) {
+        cb(null,
+            await EncryptController.imageName(file.originalname + Date.now())
+            + path.extname(file.originalname));
+    },
+  });
+
+const upload = multer({ storage: storage });
+
 const EventController = require('./event.controller');
 
 const init = (app, data) => {
     const router = new Router();
     const controller = new EventController(data);
-
     router
         .get('/:ID/:TITLE', async (req, res) => {
             const context = {};
@@ -16,39 +34,41 @@ const init = (app, data) => {
         .get('/create', async (req, res, next) => {
             const context = {};
 
-            if (!req.user) {
-                return res.redirect('/login');
-            }
+            // if (!req.user) {
+            //     return res.redirect('/login');
+            // }
 
             context.countries = await controller.getCountries();
             context.categories = await controller.getCategories();
 
             res.render('./event/create', context);
         })
-        .post('/create', async (req, res, next) => {
-            const eventInfo = req.body;
-
-            if (!req.user) {
-                return res.redirect('/login');
-            }
-
-            const userID = req.user.id;
-
+        .post('/create', [upload.any(), async function(req, res, next) {
+            let eventData = await req.body;
+            // console.log(req);
+             if (!req.user) {
+                 res.redirect('/login');
+              }
+            const userID = await req.user.id;
             try {
-                 await controller.createEvent(userID, eventInfo);
-             } catch (err) {
-                 const someError = err;
-                 return res.status(400).json({ 'err': err.message });
-             }
-             res.status(200).json({ 'success': true });
-         })
+                if (req.files.length === 1) {
+                    const hashedFileName = await req.files[0].filename;
+                    eventData = await Object.assign(eventData, { 'coverPhoto': hashedFileName } );
+                    await controller.createEvent(userID, eventData);
+                } else {
+                    throw new Error('Please upload a cover photo');
+                }
+            } catch (err) {
+                res.status(400).json({ 'err': err.message });
+            }
+            res.status(200).json({ 'success': true });
+          }])
          .get('/overview', async (req, res, next) => {
             let eventId = 34;
             let event = Object.assign(await data.events.getEventInfoById(eventId), {category: 'Music',
             subcategories: ['Modern', 'Techno', 'Trap']} );
             // let userExtraInfo = await data.users.getUserExtraInfoById(userID)
             // eventInfo = Object.assign(userInfo, userExtraInfo );
-            console.log(event)
             // const context = {};
             // context.countries =['Bulgaria'];
             // const event = {

@@ -14,11 +14,11 @@ block content
         // end /.col-md-12
       // end /.row
       div#alertdiv
-      div#createEventForm.setting_form(action='#')
+      #createEventForm.setting_form
         .row
           .col-md-6
             .information_module
-              a.toggle_title(href='#collapse2', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+              a.toggle_title(id = 'eventInfo', href='#collapse2', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
                 h4
                   | Event info 
                   span.lnr.lnr-chevron-down
@@ -68,7 +68,7 @@ block content
                     label(for='place-name-input') 
                       | Place's name
                       sup *
-                    input#place-name-input.text_field(type='password', placeholder='Place\'s name')
+                    input#place-name-input.text_field(type='text', placeholder='Place\'s name')
                   .form-group
                     label(for="address-input")
                       | Address
@@ -99,17 +99,11 @@ block content
                         .select-wrap.select-wrap2
                           select#subcategory-input.text_field(name='subcategory')
                             option(value='') Select one
-                            option(value='bangladesh') Bangladesh
-                            option(value='india') India
-                            option(value='uruguye') Uruguye
-                            option(value='australia') Australia
-                            option(value='neverland') Neverland
-                            option(value='atlantis') Atlantis
                           span.lnr.lnr-chevron-down
                   
           .col-md-6
             .information_module
-              a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
+              a.toggle_title(href='#collapse3', id = 'imageInfo', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
                 h4
                   | Cover Photo 
                   span.lnr.lnr-chevron-down
@@ -117,12 +111,16 @@ block content
                 .information_wrapper
                   .prof_img_upload
                     p.bold Cover Image
-                    img(src='/static/images/cvrplc.jpg', alt='The great warrior of China')
+                    img#eventCoverImg(src='/static/images/cvrplc.jpg', alt='The great warrior of China', width = '800', height ='400')
                     .upload_title
                       p JPG, GIF or PNG 1600x400px
                       label.upload_btn(for='dp')
-                        input#dp(type='file')
-                        span.btn.btn--sm.btn--round(aria-hidden='true') Upload Image
+                        form#eventCoverForm( method='POST', enctype='multipart/form-data')
+                            input#dp(type='file', name='eventCoverPhoto', value='' + coverImg, onchange="document.getElementById('eventCoverImg').src = window.URL.createObjectURL(this.files[0])")
+                            |                                                     
+                            span.btn.btn--sm.btn--round(aria-hidden='true', id ='uploadEventCover') Upload Image
+                            |
+                            input.btn.btn--sm.btn--round(type='file', name='image')
             .information_module
               a.toggle_title(href='#collapse5', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
                 h4

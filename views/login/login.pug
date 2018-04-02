@@ -1,10 +1,17 @@
 extends ../_layout
 
 block content
+    - var err = error
     section.login_area.section--padding2
         .container
             .row
                 .col-md-6.col-md-offset-3
+                    #alertdiv
+                        if err
+                            .alert.alert-danger
+                                a.close(data-dismiss='alert') ×
+                                span #{error}
+                                |
                     form(action="/login", method="post")
                         .cardify.login
                             .login--header
