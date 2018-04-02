@@ -14,18 +14,18 @@ class Subcategory {
     getByName(subcategory) {
         const result = this.Model.findOne({
             where: {
-                title: subcategory
-            }
+                title: subcategory,
+            },
         });
 
         return result;
     }
-    
+
     getByCategoryId(catId) {
         const result = this.Model.findAll({
             where: {
                 CategoryId: catId,
-            }
+            },
         });
 
         return result;

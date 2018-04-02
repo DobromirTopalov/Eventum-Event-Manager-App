@@ -66,12 +66,13 @@ const init = (app, data) => {
                 return res.redirect('/login');
             }
 
-            const eventInfo = await data.events.getEventInfoById(eventID);
-            const subCategoriesInfo = await data.subcategories.getByCategoryId(eventInfo.Category.id);
-            const subCatFineInfo = subCategoriesInfo.map((item) => item.title);
-            const ticketsOnMarket = await data.tickets.getByEventId(eventInfo.id);
+            const eventInfo = await data
+                .events.getEventInfoById(eventID);
+            const ticketsOnMarket = await data
+                .tickets.getByEventId(eventInfo.id);
 
             const event = {
+                id: eventInfo.id,
                 title: eventInfo.title,
                 date: eventInfo.date,
                 location: eventInfo.Location.address,
@@ -83,15 +84,16 @@ const init = (app, data) => {
                 socialFb: 'asd.bg',
                 socialTwt: 'asd.com',
                 socialGgl: 'asd.net',
-                price: ticketsOnMarket.price,
-                capacity: ticketsOnMarket.capacity,
+                capacity: eventInfo.capacity,
+                ticket: {
+                    price: ticketsOnMarket.price,
+                    capacity: ticketsOnMarket.capacity,
+                },
                 placename: eventInfo.Location.name,
                 category: eventInfo.Category.name,
-                subcategories: subCatFineInfo,
+                subcategories: eventInfo.Subcategory.title,
                 hours: '21:30',
-
             };
-            // console.log(event);
 
             const context = {
                 event,
