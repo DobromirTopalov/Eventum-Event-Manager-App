@@ -23,7 +23,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-04-01T18:07:23.962Z",
+    "created": "2018-04-02T17:49:14.253Z",
     "comment": ""
 };
 
@@ -404,7 +404,7 @@ var migrationCommands = [{
                     "allowNull": false
                 },
                 "describe": {
-                    "type": Sequelize.STRING,
+                    "type": Sequelize.TEXT,
                     "allowNull": false
                 },
                 "capacity": {

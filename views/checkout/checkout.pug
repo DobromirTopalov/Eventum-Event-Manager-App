@@ -1,8 +1,6 @@
 extends ../_layout
 
 block content
-    button#buy
-        | Test
     section.dashboard-area
         .dashboard_contents
             .container
@@ -49,33 +47,28 @@ block content
                                                     option(value='') Select one
                                                     |                                                             
                                                     each country in countries
-                                                        option(value='' + country) #{country}
+                                                        option(value='' + country.name) #{country.name}
                                                 |                                              
                                                 span.lnr.lnr-chevron-down                                     
-                                            .form-group
-                                                label(for='address1') Address
-                                                |                                             
-                                                input#address1.text_field(placeholder='Address line one', name='addressLineOne', type='text')
-                                            |                                                                                  
+                                        .form-group
+                                            label(for='address1')
+                                                | Address
+                                                sup *
+                                            input#address1.text_field(placeholder='Address line one', name='addressLineOne', type='text')
+                                        .form-group
                                             .row
                                                 .col-md-6
-                                                    .form-group
-                                                        label(for='city')
-                                                            | City / State 
-                                                            sup *                                                     
+                                                    label(for='city')
+                                                        | City / State 
+                                                        sup *
                                                     .select-wrap.select-wrap2
                                                         select#city.text_field(name='city')
-                                                            option(value='') Select one
-                                                            |                                                             
-                                                            each city in cities
-                                                                option(value='' + city) #{city}
-                                                        |                                                         
+                                                            option(value='') Select one                                                       
                                                         span.lnr.lnr-chevron-down
                                                 .col-md-6
-                                                    .form-group
-                                                        label(for='zipcode')
-                                                            | Zip / Postal Code 
-                                                            sup *                                                                      
+                                                    label(for='zipcode')
+                                                        | Zip / Postal Code 
+                                                        sup *                                                                      
                                                     .select-wrap.select-wrap2
                                                         input#zipcode.text_field(placeholder='zip/postal code', name='zipcode', type='text')
                                     // end /.information__set

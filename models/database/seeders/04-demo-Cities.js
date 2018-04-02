@@ -114,7 +114,11 @@ module.exports = {
             name: 'Luxembourg',
             CountryId: 16,
         }, {
+<<<<<<< HEAD
+            name: 'Zabbar',
+=======
             name: 'Żabbar',
+>>>>>>> 8180189e7b58674bdc51f8f8262a320a2a63bc09
             CountryId: 17,
         }, {
             name: 'Groningen',

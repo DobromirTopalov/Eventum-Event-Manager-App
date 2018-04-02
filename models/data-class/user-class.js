@@ -72,7 +72,7 @@ class User {
         if (email.match(emailRegex)) {
             this.email = email;
         } else {
-            throw new Error('Email includes symbols that are not allowed');
+            throw new Error('Email is not of valid format');
         }
     }
 
@@ -209,18 +209,18 @@ class User {
     setWebpage(webpage) {
         webpage = webpage.trim();
 
-        const urlRegex = `/(ftp|http|https):\/\/(\w+:{0,1}
-            \w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/`;
+        // const urlRegex = `/(ftp|http|https):\/\/(\w+:{0,1}
+        //     \w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/`;
 
         if (!webpage.length || !webpage) {
-            throw new Error('Website is a valid URL');
+            throw new Error('Website is a not a valid URL');
         }
 
-        if (webpage.match(urlRegex)) {
+        // if (webpage.match(urlRegex)) {
             this.webpage = webpage;
-        } else {
-            throw new Error('Website is a not valid URL');
-        }
+        // } else {
+            // throw new Error('Website is a not valid URL');
+        // }
     }
 
     setBio(bio) {

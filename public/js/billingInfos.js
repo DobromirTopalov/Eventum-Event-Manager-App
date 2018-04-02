@@ -1,5 +1,5 @@
 /* eslint-disable */
-$(function() {
+$(function () {
     var cart = (function () {
         var cartInfo = {
             products: [],
@@ -16,12 +16,29 @@ $(function() {
         }
 
         var addProduct = function (obj) {
-            cartInfo.products.push(obj);
+            var checkExist = cartInfo.products
+                .find(function (item, index) {
+                    if (item.eventId === obj.eventId) {
+                        cartInfo.products[index].amount += obj.amount;
+
+                        return true;
+                    }
+                });
+
+            if (!checkExist) {
+                cartInfo.products.push(obj);
+            }
+
             updateLocalStorage();
         }
 
         var getProducts = function () {
             return cartInfo.products;
+        }
+
+        var removeItem = function(id){
+            cartInfo.products.splice(id, 1);
+            updateLocalStorage();
         }
 
         var clear = function () {
@@ -35,6 +52,7 @@ $(function() {
         return {
             addProduct: addProduct,
             getProducts: getProducts,
+            removeItem: removeItem,
             clear: clear
         }
     })();
@@ -169,21 +187,22 @@ $(function() {
     const allPurchasedItems = cart.getProducts();
     var totalprice = 0;
 
-    var emptycart = $("<Li>").addClass("total_ammount").attr("id","empty-cart").append($("<p>").html("Your cart is empty!"));
+    var emptycart = $("<Li>").addClass("total_ammount").attr("id", "empty-cart").append($("<p>").html("Your cart is empty!"));
     $("#list-tickets").append(emptycart);
 
     // start of summary
-    for (var i=0; i < allPurchasedItems.length; i+=1) {
+    for (var i = 0; i < allPurchasedItems.length; i += 1) {
         $("#empty-cart-one").remove();
         $("#empty-cart").remove();
         var item = allPurchasedItems[i];
 
-        var a = $("<a>").attr("href", "" + item.eventUrl).html("" + item.eventTitle);
+        var a = $("<a>").attr("href", "/event/" + item.eventId)
+            .html("" + item.eventTitle + '<br>x' + item.amount);
         var span = $("<span>").html("$" + item.price);
         var li = $("<li>").addClass("item").append(a).append(span);
         $("#list-tickets").append(li);
 
-        totalprice += item.price;
+        totalprice += item.price * item.amount;
     }
 
     var p = $("<p>").html("Total");
@@ -193,7 +212,7 @@ $(function() {
 
     // end of summary
     // start of cart
-    
+
     var p_total = $("<p>");
     var span_total = $("<span>").html("Total:    $" + totalprice);
     p_total.append(span_total);
@@ -203,28 +222,56 @@ $(function() {
     /* => HEADER */
     for (var i = 0; i < allPurchasedItems.length; i += 1) {
         var item = allPurchasedItems[i];
-        
-        var a_info = $("<a>").addClass("title").attr("href", "" + item.eventUrl).html("" + item.eventTitle);
+
+        var a_info = $("<a>").addClass("title")
+            .attr("href", "/event/" + item.eventId)
+            .html("" + item.eventTitle + '<br>x' + item.amount);
         var div_info = $("<div>").addClass("info").append(a_info);
-        var img_info = $("<img>").attr("src", "static/images/capro1.jpg").attr("width","100px").attr("height","70px");
+        var img_info = $("<img>").attr("src", "/static/images/capro1.jpg").attr("width", "100px").attr("height", "70px");
         var div_info2 = $("<div>").addClass("thumbn").append(img_info);
         var div_productInfo = $("<div>").addClass("product__info").append(div_info2).append(div_info);
 
-        var span_cart = $("<span>").addClass("lnr lnr-trash");
-        var p_cart = $("<p>").html("$"+ item.price);
+        var span_cart = $("<span>").addClass("lnr lnr-trash cart-delete-item").attr('data-item', i);
+        var p_cart = $("<p>").html("$" + item.price);
         var a_cart = $("<a>").attr("href", "").append(span_cart);
         var div_cart = $("<div>").addClass("product__action").append(a_cart).append(p_cart);
-    
+
         var productFinal = $("<div>").addClass("cart_product").append(div_productInfo).append(div_cart);
-        
+
         $("#cart-space").prepend(productFinal);
     }
     // end of cart
 
     $('#buy').on("click", function () {
+        var $theEvent = $(this).data('event');
+        var $ticketsAmount = +($('#amount-ticket-input').val());
+        var $ticketAmountDb = +($('#tickets-amount').text());
+
+        // Check weather you want buy more then we have
+        if ($ticketsAmount > $ticketAmountDb) {
+            $('.purchase-button p.text-error').text('Currently, we don\'t have that many tickets available!');
+
+            return false;
+        }
+
+        // Check wather the amount is <= 0
+        if ($ticketsAmount <= 0) {
+            $('.purchase-button p.text-error').text('You need to get minimum one ticket!');
+
+            return false;
+        }
+
+        // Check weather the amount is number
+        if (isNaN($ticketsAmount))  {
+            $('.purchase-button p.text-error').text('You do not use correct characters');
+
+            return false;
+        }
+
+        // Data for Ajax
         var eventInfo = {
-            EventId: 1,
-            amount: 2,
+            EventId: $theEvent,
+            amount: $ticketsAmount,
         };
 
         $.ajax({
@@ -242,20 +289,21 @@ $(function() {
                 $('#messagediv')
                     .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">X</a><span>' + message + '</span></div>')
 
-                    //update localstorage
-                    var infoForTicketProduct = {
-                        eventTitle: data.infoEvent.title,
-                        description: data.infoEvent.describe,
-                        price: data.infoTicket.price,
-                        amount: +(data.amount),
-                        eventId: data.infoTicket.EventId,
-                        eventUrl: '/event/' + data.infoTicket.EventId + '/' + data.infoEvent.title,
-                    };
-                    cart.addProduct(infoForTicketProduct);
+                //update localstorage
+                var infoForTicketProduct = {
+                    eventTitle: data.infoEvent.title,
+                    description: data.infoEvent.describe,
+                    price: data.infoTicket.price,
+                    amount: +(data.amount),
+                    eventId: data.infoTicket.EventId,
+                    eventUrl: '/event/' + data.infoTicket.EventId + '/' + data.infoEvent.title,
+                };
+                cart.addProduct(infoForTicketProduct);
 
-                    window.location.href = '/checkout';
+                window.location.href = '/checkout';
             }
         });
+
         return false;
     });
 
@@ -278,7 +326,7 @@ $(function() {
             try {
                 validateAllInfo(userInfo);
                 if (!allPurchasedItems.length) {
-                    throw new Error('Cart is empty!');    
+                    throw new Error('Cart is empty!');
                 }
             } catch (err) {
                 $('#messagediv')
@@ -306,4 +354,10 @@ $(function() {
             });
         }
     })
+
+    $('.cart-delete-item').on('click', function() {
+        debugger;
+        var theItem = $(this).data('item');
+        cart.removeItem(theItem);
+    });
 })

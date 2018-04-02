@@ -19,43 +19,43 @@ class EventController {
 
     async createEvent(userId, eventData) {
         try {
+            console.log(userId);
             const thisEvent = new EventObject(eventData.date, '',
                 eventData.placeName, eventData.country, eventData.city,
                 eventData.address, eventData.title, eventData.description,
                 eventData.category, eventData.subcategory, eventData.price,
-                eventData.capacity);
+                eventData.capacity, eventData.time);
 
             const eventSeqObject = {
                 title: thisEvent.getTitle(),
                 describe: thisEvent.getDescription(),
                 capacity: thisEvent.getCapacity(),
-                coverPhoto: '',
                 date: thisEvent.getDate(),
-                UserId: userId,
+                userId: userId,
             };
 
             const country = await this.data
                 .country.getByName(eventData.country);
             if (!country) {
-                throw new Error('The country is not correct');
+                throw new Error('Please choose a country');
             }
 
             const city = await this.data
                 .city.getByName(eventData.city);
             if (!city) {
-                throw new Error('The city is not correct');
+                throw new Error('Please choose a city');
             }
 
             const category = await this.data
                 .categories.getByName(eventData.category);
             if (!category) {
-                throw new Error('The category is not correct');
+                throw new Error('Please select a category');
             }
 
             const subcategory = await this.data
                 .subcategories.getByName(eventData.subcategory);
             if (!subcategory) {
-                throw new Error('The subcategory is not correct');
+                throw new Error('Please select a subcategory');
             }
 
             const location = await this.data.location.createLocation({
@@ -67,8 +67,24 @@ class EventController {
             eventSeqObject.categoryId = category;
             eventSeqObject.subcategoryId = subcategory;
             eventSeqObject.locationId = location;
+            eventSeqObject.coverPhoto = eventData.coverPhoto;
 
-            await this.data.events.addNewEvent(eventSeqObject);
+            return await this.data.events.addNewEvent(eventSeqObject);
+        } catch (err) {
+            throw err;
+        }
+    }
+    async addEventCoverPic(id, coverPhoto) {
+        try {
+            await this.data.events.addEventCoverPic(id, coverPhoto);
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async deleteEvent(id) {
+        try {
+            await this.data.events.deleteEventById(id);
         } catch (err) {
             throw err;
         }

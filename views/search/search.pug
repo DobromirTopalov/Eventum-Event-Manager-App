@@ -14,54 +14,59 @@ block content
                             input.text_field#keywords(type='text', name='keywords', placeholder='Search for events...')
                             .search__select.select-wrap
                                 select#categories.select--field(name='category')
-                                    option(value='allCategories') All Categories
+                                    option(value='') All Categories
                                     each category in categories
                                         option(value='' + category) #{category}
                                 span.lnr.lnr-chevron-down#category
                             .search__select.select-wrap
                                 select#cities.select--field(name='city')
-                                    option(value='allCities') City
+                                    option(value='') City
                                     each city in cities
                                             option(value='' + city) #{city}
                                 span.lnr.lnr-chevron-down#city 
                             button.search-btn.btn--lg#search Search Now
-    
-        .row#event-list
-            each eventCard in events
-                .col-md-4.col-sm-6
-                    .product.product--card
-                        .product__thumbnail
-                            img#event-coverPhoto(src='' + eventCard.coverPhoto, alt='Product Image')
-                            .prod_btn
-                                a.transparent.btn--sm.btn--round(href='' + eventCard.eventInfo) Event Info
-                                a.transparent.btn--sm.btn--round(href='' + eventCard.authorProfile) Author Profile
-                        .product-desc
-                            a.product_title(href='' + eventCard.eventInfo)
-                                h4#event-title #{eventCard.title}
-                            ul.titlebtm
-                                li
-                                    img.auth-img#event-author(src='' + eventCard.authorImg, alt='author image', width='30px')
+            p
+            .row#event-list
+                each eventCard in events
+                    .col-md-4.col-sm-6
+                        .product.product--card
+                            .product__thumbnail
+                                img#event-coverPhoto(src='' + eventCard.coverPhoto, alt='Product Image')
+                                .prod_btn
+                                    a.transparent.btn--sm.btn--round(href='' + eventCard.eventInfo) Event Info
+                                    a.transparent.btn--sm.btn--round(href='' + eventCard.authorProfile) Author Profile
+                            .product-desc
+                                a.product_title(href='' + eventCard.eventInfo)
+                                    h4#event-title #{eventCard.title}
+                                .row
+                                    .col-md-8
+                                        ul.titlebtm
+                                            li
+                                                img.auth-img#event-author(src='' + eventCard.authorImg, alt='author image', width='30px')
+                                                p
+                                                    a(href='' + eventCard.authorProfile) #{eventCard.name}
+                                            li.product_cat
+                                                span.lnr.lnr-book
+                                                each category in eventCard.categories
+                                                    a(href='#')
+                                                        | #{category.name}
+                                    .col-md-4
+                                        |#{eventCard.city}
+
+                                p#event-date
+                                    | Date of event: #{eventCard.date} 
+                                p#event-description
+                                    | #{eventCard.description}
+                            .product-purchase
+                                .price_love
+                                    span#event-ticketPrice #{eventCard.ticketPrice}
                                     p
-                                        a(href='' + eventCard.authorProfile) #{eventCard.name}
-                                li.product_cat
-                                    span.lnr.lnr-book
-                                    each category in eventCard.categories
-                                        a(href='#')
-                                            | #{category.name} 
-                            p#event-date
-                                | Date of event: #{eventCard.date} 
-                            p#event-description
-                                | #{eventCard.description}
-                        .product-purchase
-                            .price_love
-                                span#event-ticketPrice #{eventCard.ticketPrice}
-                                p
-                                    span#event-followers.lnr.lnr-heart
-                                    | #{eventCard.followers}
-                            .sell
-                                p
-                                    span.lnr.lnr-cart
-                                    span#event-capacity #{eventCard.capacity}
+                                        span#event-followers.lnr.lnr-heart
+                                        | #{eventCard.followers}
+                                .sell
+                                    p
+                                        span.lnr.lnr-cart
+                                        span#event-capacity #{eventCard.capacity}
         .row
             .col-md-12
                 .pagination-area

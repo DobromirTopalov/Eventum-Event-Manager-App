@@ -1,5 +1,5 @@
 /* eslint-disable */
-$(function () {
+$(document).ready(function(e) {
     /* date picker js */
     $('.dattaPikkara').datepicker({
         autoclose: true
@@ -64,10 +64,11 @@ $(function () {
         });
 
     });
+  
 
     /* Get data from inputs and send it */
     $('#createEventForm').find('#create-event-button').click(function (e) {
-
+        console.log(this);
         var eventInfo = {
             title: $('#event-title-input').val(),
             date: $('#date-input').val(),
@@ -81,27 +82,35 @@ $(function () {
             subcategory: $('#subcategory-input').val(),
             capacity: $('#capacity-input').val(),
             price: $('#price-input').val(),
-
         }
+        var myform = new FormData( $('#eventCoverForm')[0]);
+        console.log(myform);
+        Object.keys(eventInfo).forEach(function(key,index) {
+            myform.append(key, eventInfo[key])
+        });
 
-        $.ajax({
-            method: 'POST',
-            async: true,
+
+        console.log(myform);
+        $.ajax( {
             url: '/event/create',
-            dataType: 'json',
-            data: eventInfo,
+            type: 'POST',
+            data: myform,
+            processData: false,
+            contentType: false,
             error: function (error) {
-                $("html, body").animate({ scrollTop: 0 }, "slow");
                 $('#alertdiv')
-                    .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' + error.responseJSON["err"] + '</span></div>')
+                    .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><span>' 
+                    + error.responseJSON["err"] + '</span></div>')
             },
             success: function (data) {
                 $("html, body").animate({ scrollTop: 0 }, "slow");
-                var messageAlert = 'Good job! You successfully updated your profile!';
+                var messageAlert = 'The event was successfully created!';
                 $('#alertdiv')
-                    .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' + messageAlert + '</span></div>')
+                .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>' 
+                + messageAlert + '</span></div>')
             }
         });
+      
 
         return false;
     });
