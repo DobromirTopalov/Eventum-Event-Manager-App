@@ -18,6 +18,14 @@ module.exports = {
       price: 15.00,
       capacity: 40,
       EventId: 4,
+    }, {
+      price: 15.00,
+      capacity: 180,
+      EventId: 5,
+    }, {
+      price: 25.00,
+      capacity: 100,
+      EventId: 6,
     }].map((el) => {
       el.updatedAt = new Date;
       el.createdAt = new Date;

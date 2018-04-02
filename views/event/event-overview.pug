@@ -4,9 +4,10 @@ extends ../_layout
 
 
 block content
+    -var covephoto = 'url("/static/images/uploads/' + event.coverPhoto + '");';
     section.job_hero_area.event_detail_breadcrumb.bgimage
-        .bg_image_holder(style='background-image: url("/static/images/ev_bg.jpg"); opacity: 1;')
-            img(src='/static/images/ev_bg.jpg')
+        .bg_image_holder(style='background-image: '+ covephoto + ' opacity: 1;')
+            img(src='/static/images/uploads/' + event.coverPhoto)
             |         
         .container.content_above
             .row
