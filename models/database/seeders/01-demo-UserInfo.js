@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('UserInfos', [{
         address: 'Sofia Oborishte 18',
-        avatar: 'usr_avatar.png',
+        avatar: 'speaker1.jpg',
         coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
         website: 'https://ivan.com/',
         biography: 'I\'m an artist, Ivan!',
@@ -28,7 +28,7 @@ module.exports = {
         biography: 'I\'m an user, Maia!',
       }, {
         address: 'Varna Lulin 46',
-        avatar: 'usr_avatar.png',
+        avatar: 'speaker3.jpg',
         coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
         website: 'https://hristo.com/',
         biography: 'I\'m an artist, Hristo!',
@@ -46,7 +46,7 @@ module.exports = {
         biography: 'I\'m an user, Stilian!',
       }, {
         address: 'Nantes 96 rue La Boétie',
-        avatar: 'usr_avatar.png',
+        avatar: 'nia.png',
         coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
         website: 'https://nia.com/',
         biography: 'I\'m an artist, Nia!',
@@ -70,16 +70,16 @@ module.exports = {
         biography: 'I\'m an user, Claudia!',
       }, {
         address: 'London Down Town street 023',
-        avatar: 'usr_avatar.png',
+        avatar: 'speaker4.jpg',
         coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
         website: 'https://lucho.com/',
         biography: 'I\'m an artist, Lucho!',
       }, {
-        address: 'London Down Town street 023',
-        avatar: 'usr_avatar.png',
+        address: 'Bayern strasse 69',
+        avatar: 'test1.png',
         coverPhoto: 'i-need-a-cover-facebook-cover.jpg',
-        website: 'https://lucho.com/',
-        biography: 'I\'m an artist, Lucho!',
+        website: 'https://yavor.com/',
+        biography: 'I\'m an artist, Yavor!',
       }].map( (el) => {
         el.updatedAt = new Date;
         el.createdAt = new Date;

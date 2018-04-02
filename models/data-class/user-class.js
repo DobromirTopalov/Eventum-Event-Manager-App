@@ -72,7 +72,7 @@ class User {
         if (email.match(emailRegex)) {
             this.email = email;
         } else {
-            throw new Error('Email includes symbols that are not allowed');
+            throw new Error('Email is not of valid format');
         }
     }
 

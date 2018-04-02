@@ -219,7 +219,7 @@
                 },
                 "describe": {
                     "allowNull": false,
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "capacity": {
                     "seqType": "Sequelize.INTEGER"
@@ -583,5 +583,5 @@
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 2
 }

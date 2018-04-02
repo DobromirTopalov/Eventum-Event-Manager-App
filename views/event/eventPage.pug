@@ -1,9 +1,10 @@
 extends ../_layout
 
 block content
+    -var covephoto = 'url("/static/uploads/' + event.coverPhoto + '");';
     section.job_hero_area.event_detail_breadcrumb.bgimage
-            .bg_image_holder(style='background-image: url("/static/images/ev_bg.jpg"); opacity: 1;')
-                img(src='/static/images/' + event.coverPhoto)
+            .bg_image_holder(style='background-image: '+ covephoto + ' opacity: 1;')
+                img(src='/static/uploads/' + event.coverPhoto)
                 |         
             .container.content_above
                 .row
@@ -23,7 +24,7 @@ block content
                     .col-md-3
                         .single_speaker
                             .speaker__thumbnail
-                                img(src='/static/images/' + event.authorPhoto, width='225px')
+                                img(src='/static/uploads/' + event.authorPhoto, width='225px')
                                 |                                 
                             .speaker_social
                                 ul

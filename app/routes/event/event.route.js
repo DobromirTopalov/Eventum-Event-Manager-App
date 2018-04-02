@@ -2,40 +2,63 @@ const {
     Router,
 } = require('express');
 
+const path = require('path');
+const multer = require('multer');
+
+const EncryptController = require('../../../controllers/EncryptingController');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null,
+            path.join(__dirname, '..', '..', '..', 'public', 'uploads'));
+    },
+    filename: async (req, file, cb) => {
+        cb(null,
+            await EncryptController.imageName(file.originalname + Date.now())
+            + path.extname(file.originalname));
+    },
+});
+
+const upload = multer({ storage: storage });
+
 const EventController = require('./event.controller');
 
 const init = (app, data) => {
     const router = new Router();
     const controller = new EventController(data);
-
     router
         .get('/create', async (req, res, next) => {
             const context = {};
 
-            if (!req.user) {
-                return res.redirect('/login');
-            }
+            // if (!req.user) {
+            //     return res.redirect('/login');
+            // }
 
             context.countries = await controller.getCountries();
             context.categories = await controller.getCategories();
 
             return res.render('./event/create', context);
         })
-        .post('/create', async (req, res, next) => {
+        .post('/create', [upload.any(), async (req, res, next) => {
+            let eventData = await req.body;
+            // console.log(req);
             if (!req.user) {
-                return res.redirect('/login');
+                res.redirect('/login');
             }
-
-            const eventInfo = req.body;
-
+            const userID = await req.user.id;
             try {
-                await controller.createEvent(req.user.id, eventInfo);
+                if (req.files.length === 1) {
+                    const hashedFileName = await req.files[0].filename;
+                    eventData = await Object.assign(eventData, { 'coverPhoto': hashedFileName });
+                    await controller.createEvent(userID, eventData);
+                } else {
+                    throw new Error('Please upload a cover photo');
+                }
             } catch (err) {
-                return res.status(400).json({ 'err': err.message });
+                res.status(400).json({ 'err': err.message });
             }
-
-            return res.status(200).json({ 'success': true });
-        })
+            res.status(200).json({ 'success': true });
+        }])
         .get('/:id', async (req, res) => {
             const eventID = req.params.id;
 
