@@ -74,16 +74,16 @@ block content
                                     | Price:
                                     h1
                                         sup $
-                                        | #{event.price} 
+                                        | #{event.ticket.price} 
                                     | Tickets left:
-                                    h1  
-                                        | #{event.capacity}
+                                    p  
+                                        b#tickets-amount
+                                            | #{event.ticket.capacity}
+                                        | from #{event.capacity}
                                     |                             
                                 
                                 .purchase-button
-                                    input#amount.text_field(placeholder='Enter amount', name='amount', type='text')
-                                    p            
-                                    a.btn.btn--round.btn--lg(type='button')#add Add to cart
-                                    a.btn.btn--round.btn--lg(type='button')#buy Purchase Now
-                                    |                
+                                    input#amount-ticket-input.text_field(placeholder='Enter amount', name='amount', type='text')
+                                    p.text-error
+                                    a.btn.btn--round.btn--lg(type='button' data-event='' + event.id)#buy Purchase Now
             #messagediv
