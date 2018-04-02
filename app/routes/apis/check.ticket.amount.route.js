@@ -12,7 +12,7 @@ const init = (app, data) => {
     .get('/checkTicketsAmount', async (req, res, next) => {
       const eventId = req.query.EventId;
       const amount = req.query.amount;
-      
+
       let product;
 
       if (!req.user) {
@@ -22,8 +22,9 @@ const init = (app, data) => {
       try {
         const eventInfo = await controller.getEventInfo(eventId);
         const ticketInfo = await controller.getTicketInfo(eventId);
+
         const ticketCapacity = ticketInfo.dataValues.capacity;
-        
+
         if ( !((ticketCapacity - amount) > -1) ) {
           throw new Error('All tickets were sold out!');
         } else {
@@ -39,7 +40,7 @@ const init = (app, data) => {
       }
       res.status(200).json(product);
     });
-      
+
   app.use('/event', router);
 };
 

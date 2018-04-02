@@ -3,7 +3,7 @@ extends ../_layout
 block content
     section.job_hero_area.event_detail_breadcrumb.bgimage
             .bg_image_holder(style='background-image: url("/static/images/ev_bg.jpg"); opacity: 1;')
-                img(src='/static/images/ev_bg.jpg')
+                img(src='/static/images/' + event.coverPhoto)
                 |         
             .container.content_above
                 .row
@@ -13,11 +13,11 @@ block content
                             |                         
                             .job_date
                                 p
-                                    span.lnr.lnr-map-marker
+                                    span.lnr.lnr-calendar-full
                                     |  #{event.date}
                                 |                             
                                 p
-                                    span.lnr.lnr-calendar-full
+                                    span.lnr.lnr-map-marker
                                     |  #{event.location} #{event.city}
                         a.btn.btn--round.btn--lg(href='#') Signup Now
                     .col-md-3
@@ -81,6 +81,9 @@ block content
                                     |                             
                                 
                                 .purchase-button
+                                    input#amount.text_field(placeholder='Enter amount', name='amount', type='text')
+                                    p            
+                                    a.btn.btn--round.btn--lg(type='button')#add Add to cart
                                     a.btn.btn--round.btn--lg(type='button')#buy Purchase Now
-                                    |                                 
+                                    |                
             #messagediv

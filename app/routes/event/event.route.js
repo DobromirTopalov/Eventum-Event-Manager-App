@@ -15,11 +15,12 @@ const init = (app, data) => {
             if (!req.user) {
                 return res.redirect('/login');
             }
-            
+
             const eventInfo = await data.events.getEventInfoById(eventID);
             const subCategoriesInfo = await data.subcategories.getByCategoryId(eventInfo.Category.id);
             const subCatFineInfo = subCategoriesInfo.map((item)=>item.title);
-            
+            const ticketsOnMarket = await data.tickets.getByEventId(eventInfo.id);
+
             const event = {
                 title: eventInfo.title,
                 date: eventInfo.date,
@@ -32,17 +33,16 @@ const init = (app, data) => {
                 socialFb: 'asd.bg',
                 socialTwt: 'asd.com',
                 socialGgl: 'asd.net',
-                price: '15.99',
-                capacity: eventInfo.capacity,
+                price: ticketsOnMarket.price,
+                capacity: ticketsOnMarket.capacity,
                 placename: eventInfo.Location.name,
                 category: eventInfo.Category.name,
                 subcategories: subCatFineInfo,
                 hours: '21:30',
-                
+
             };
-            console.log(event);
-            
-            
+            // console.log(event);
+
             const context = {
                 event,
             };
@@ -76,49 +76,7 @@ const init = (app, data) => {
                  return res.status(400).json({ 'err': err.message });
              }
              res.status(200).json({ 'success': true });
-         })
-         
-        // // .get('/overview', async (req, res) => {
-        // //     const event = {
-        // //         title: 'Soundwave - experience the best audio!',
-        //         date: 'November, 27 2018',
-        //         location: 'NDK',
-        //         city: 'Sofia',
-        //         country: 'Bulgaria',
-        //         authorPhoto: 'photo.com',
-        //         description: 'Ultra new, bleeding edge sound equipment and a lot of music, drink and fun!',
-        //         socialFb: 'asd.bg',
-        //         socialTwt: 'asd.com',
-        //         socialGgl: 'asd.net',
-        //         price: '15.99',
-        //         capacity: '120',
-        //         placename: 'Sofia Live Club',
-        //         category: 'Music',
-        //         subcategories: ['Modern', 'Techno', 'Trap'],
-        //         hours: '21:30',
-
-        //     };
-
-        //     const comments = [{
-        //             img: 'photo.com',
-        //             owner: 'Ivan Ivanov',
-        //             date: '23.12.16 23:45',
-        //             content: 'Fantastic show!',
-        //         },
-        //         {
-        //             img: 'photos.com',
-        //             owner: 'Mitko Mitev',
-        //             date: '02.08.16 02:45',
-        //             content: 'Awesome!',
-        //         },
-        //     ];
-
-        //     const context = {
-        //         event,
-        //         comments,
-        //     };
-        //     res.render('./event/event-overview', context);
-        // });
+         });
 
     app.use('/event', router);
 };

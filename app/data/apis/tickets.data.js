@@ -15,7 +15,7 @@ class Tickets {
         const result = this.Model.findOne({
             where: {
                 EventId: eventId,
-            }
+            },
         });
 
         return result;
