@@ -56,6 +56,16 @@
                     "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "UserId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -209,7 +219,7 @@
                 },
                 "describe": {
                     "allowNull": false,
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.TEXT"
                 },
                 "capacity": {
                     "seqType": "Sequelize.INTEGER"
@@ -533,6 +543,16 @@
                     "allowNull": true,
                     "references": {
                         "model": "Users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "EventId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Events",
                         "key": "id"
                     },
                     "onDelete": "SET NULL",

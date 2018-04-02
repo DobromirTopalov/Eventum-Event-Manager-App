@@ -29,7 +29,7 @@ const init = (app, data) => {
 
     // string to User
     passport.deserializeUser(async (id, done) => {
-        const user = await data.users.findById(id);
+        const user = await data.users.findAllById(id);
 
         if (!user) {
             return done(new Error('Invalid user'));

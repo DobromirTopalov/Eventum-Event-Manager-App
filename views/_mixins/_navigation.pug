@@ -16,51 +16,20 @@ mixin site-navigation(guest)
                                         li.has_dropdown
                                             .icon_wrap
                                                 span.lnr.lnr-cart
-                                                span.notification_count.purch 2
+                                                span
                                             .dropdown.dropdown--cart
-                                                .cart_area
-                                                    .cart_product
-                                                        .product__info
-                                                            .thumbn
-                                                                img(src='static/images/capro1.jpg', alt='cart product thumbnail' )
-                                                            .info
-                                                                a.title(href='single-product.html') Finance and Consulting Business Theme
-                                                                .cat
-                                                                    a(href='#')
-                                                                        img(src='static/images/catword.png', alt='')
-                                                                        | Wordpress
-                                                        .product__action
-                                                            a(href='#')
-                                                                span.lnr.lnr-trash
-                                                            p $60
-                                                    .cart_product
-                                                        .product__info
-                                                            .thumbn
-                                                                img(src='static/images/capro2.jpg', alt='cart product thumbnail')
-                                                            .info
-                                                                a.title(href='single-product.html') Flounce - Multipurpose OpenCart Theme
-                                                                .cat
-                                                                    a(href='#')
-                                                                        img(src='static/images/catword.png', alt='')
-                                                                        | Wordpress
-                                                        .product__action
-                                                            a(href='#')
-                                                                span.lnr.lnr-trash
-                                                            p $60
-                                                    .total
-                                                        p
-                                                            span Total :
-                                                            | $80
+                                                .cart_area#cart-space
+                                                    .total#empty-cart-one
+                                                        h5
+                                                            | Your cart is empty!
+                                                    //- inject content here
                                                     .cart_action
-                                                        a.go_cart(href='cart.html') View Cart
+                                                        a.go_cart(href='/checkout') View Cart
                                                         a.go_checkout(href='/checkout') Checkout
                                 if user
                                     .author-author__info.inline.has_dropdown
                                         .author__avatar
-                                            if(account)
-                                                img.img-circle(src='/static/uploads/' + account.UserInfo.avatar, height = '50', width = '50', alt='user avatar')
-                                            else
-                                                img(src='/static/uploads/' + 'usr_avatar.png', height = '50', width = '50', alt='user avatar')
+                                            img.img-circle(src='/static/uploads/' + user.UserInfo.avatar, height = '50', width = '50', alt='user avatar')
                                         .autor__info
                                             p.name
                                             | #{user.name}
@@ -72,10 +41,15 @@ mixin site-navigation(guest)
                                                     a(href='/profile')
                                                         span.lnr.lnr-user
                                                         | Profile
+                                                if user.role == 'Artist'
+                                                    li
+                                                        a(href='/event/create')
+                                                            span.lnr.lnr-calendar-full
+                                                            | Create Event
                                                 li
                                                     a(href='/settings')
                                                         span.lnr.lnr-cog
-                                                        |  Setting
+                                                        |  Settings
                                                 li
                                                     a(href='/logout')
                                                         span.lnr.lnr-exit

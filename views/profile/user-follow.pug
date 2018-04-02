@@ -1,0 +1,14 @@
+extends ../_layout
+include ./_mixins/_user-info
+include ./_mixins/_user-menu
+include ./_mixins/_user-follow
+include ./_mixins/_cover
+block content
+    section.author-profile-area
+        .container
+            +user-cover()
+            .col-md-4
+                +user-info()
+                +user-menu()
+            .col-md-8
+                +user-follow()

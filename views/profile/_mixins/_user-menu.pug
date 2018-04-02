@@ -3,13 +3,14 @@ mixin user-menu()
         .sidebar-card.author-menu
             ul
                 li
-                    a.active(href='#') Profile
-                li
-                    a(href='author-items.html') Author Items
-                li
-                    a(href='author-reviews.html') Customer Reviews
-                li
-                    a(href='author-followers.html') Followers (67)
-                li
-                    a(href='author-following.html') Following (39)
-        // end /.author-menu
+                    a(href='/profile/'+ account.username) Profile
+                if account.role == 'User'
+                    li
+                        a(href='/profile/'+ account.username +'/event') Visited Events
+                    //- li
+                    //-     a(href='/profile/'+ account.username +'/following') Following
+                else
+                    li
+                        a(href='/profile/'+ account.username +'/event') Events
+                    //- li
+                    //-     a(href='/profile/'+ account.username +'/followers') Followers

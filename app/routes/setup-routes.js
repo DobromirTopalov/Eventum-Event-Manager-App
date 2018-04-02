@@ -4,7 +4,8 @@ const path = require('path');
 const init = (app, data) => {
     app.get('/', async (req, res) => {
         const context = {};
-        res.render('./home/home', context);
+
+        res.render('./home/home', { context });
     });
 
     /* dynamically load all routes */

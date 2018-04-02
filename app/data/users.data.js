@@ -20,10 +20,26 @@ class UsersData extends Data {
         return result;
     }
 
+    findAllById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+            include: {
+                model: UserInfo,
+            },
+        });
+
+        return result;
+    }
+
     findByUsername(username) {
         const result = this.Model.findOne({
             where: {
                 username: username,
+            },
+            include: {
+                model: UserInfo,
             },
         });
 
@@ -144,7 +160,6 @@ class UsersData extends Data {
         }
     }
 
-
     updateUserProfilePic(id, userProfilePic) {
         console.log(id, userProfilePic);
         try {
@@ -167,6 +182,7 @@ class UsersData extends Data {
             throw err;
         }
     }
+
     updateUserCoverPic(id, userCoverPic) {
         try {
             let seqError;

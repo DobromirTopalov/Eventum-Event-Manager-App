@@ -7,11 +7,20 @@ const {
     Subcategory,
     Category,
 } = require('../../models/database/models');
-// const Op = Sequelize.Op;
 class EventData {
     constructor(Model) {
         this.Model = Model;
     }
+
+    findById(id) {
+        const result = this.Model.findOne({
+            where: {
+                id: id,
+            },
+        });
+        return result;
+    }
+
     getEventInfoById(id) {
         const result = this.Model.findOne({
             where: {
@@ -47,42 +56,25 @@ class EventData {
         return result;
     }
 
-    // getEventInfoByQuery(id, cityName) {
-    //     return this.Model.findAll({
-    //     include: [{
-    //       model: Location,
-    //     //   as: 'Loc',
-    //       include: [{
-    //         model: City,
-    //         where: {
-    //           name: "Woodstock Music School"
-    //         },
-    //         required: false,
-    //       }]
-    //     }]
-    //   }).then(users => {
-    //     console.log(users)
-    //   })
-    // }
-    getEventInfoByQuery( keywords, city, country, category) {
+    getEventInfoByQuery(keywords, city, country, category) {
         let keywordsQuery = keywords.split(' ');
-        keywordsQuery = keywordsQuery.map(function(item) {
-        return {
-            $like: '%' + item + '%',
-        };
+        keywordsQuery = keywordsQuery.map(function (item) {
+            return {
+                $like: '%' + item + '%',
+            };
         });
         // let cityQuery = city.split(' ');
-        const cityQuery = city.split(' ').map(function(item) {
-            return {
-                $like: '%' + item + '%',
-            };
-            });
-        const countryQuery = country.split(' ').map(function(item) {
+        const cityQuery = city.split(' ').map(function (item) {
             return {
                 $like: '%' + item + '%',
             };
         });
-        const categoryQuery = category.split(' ').map(function(item) {
+        const countryQuery = country.split(' ').map(function (item) {
+            return {
+                $like: '%' + item + '%',
+            };
+        });
+        const categoryQuery = category.split(' ').map( (item) => {
             return {
                 $like: '%' + item + '%',
             };
@@ -90,9 +82,9 @@ class EventData {
 
         const result = this.Model.findAll({
             where: {
-                describe:  { $or: keywordsQuery }
-             },
-             required: true,
+                describe: { $or: keywordsQuery }
+            },
+            required: true,
             include: [
                 {
                     model: Location,
@@ -100,14 +92,14 @@ class EventData {
                         {
                             model: City,
                             where: {
-                               name:  { $or: cityQuery }
+                                name: { $or: cityQuery },
                             },
                             required: true,
                             include: {
                                 model: Country,
                                 where: {
-                                    name:  { $or: countryQuery }
-                                 },
+                                    name: { $or: countryQuery },
+                                },
                                 required: true,
                             },
                         },
@@ -123,8 +115,8 @@ class EventData {
                 {
                     model: Category,
                     where: {
-                        name:  { $or: categoryQuery }
-                     },
+                        name: { $or: categoryQuery },
+                    },
                     required: true,
                 },
                 {
@@ -165,23 +157,8 @@ class EventData {
 
         return result;
     }
-    // getEventInfoById(id) {
-    //     const result = this.Model.findOne({
-    //         where: {
-    //             id: id,
-    //         },
-    //     });
 
-    //     return result;
-    // }
-
-    // getAllEventsInfo(id) {
-    //     const result = this.Model.findAll();
-
-    //     return result;
-    // }
-
-    async addNewEvent( eventObject) {
+    addNewEvent(eventObject) {
         const result = this.Model.create({
             title: eventObject.title,
             describe: eventObject.describe,
@@ -200,7 +177,7 @@ class EventData {
         const result = this.Model.update({
             coverPhoto: coverImg,
         },
-        { where: { id: id } }
+            { where: { id: id } }
         );
 
         return result;

@@ -20,6 +20,16 @@ class Subcategory {
 
         return result;
     }
+    
+    getByCategoryId(catId) {
+        const result = this.Model.findAll({
+            where: {
+                CategoryId: catId,
+            }
+        });
+
+        return result;
+    }
 }
 
 module.exports = Subcategory;

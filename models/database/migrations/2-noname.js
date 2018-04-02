@@ -5,25 +5,25 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * changeColumn "name" on table "Users"
+ * changeColumn "describe" on table "Events"
  *
  **/
 
 var info = {
     "revision": 2,
     "name": "noname",
-    "created": "2018-03-29T17:55:56.590Z",
+    "created": "2018-04-02T16:13:44.280Z",
     "comment": ""
 };
 
 var migrationCommands = [{
     fn: "changeColumn",
     params: [
-        "Users",
-        "name",
+        "Events",
+        "describe",
         {
-            "type": Sequelize.STRING,
-            "allowNull": true
+            "type": Sequelize.TEXT,
+            "allowNull": false
         }
     ]
 }];
