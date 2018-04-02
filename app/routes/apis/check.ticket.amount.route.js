@@ -10,35 +10,41 @@ const init = (app, data) => {
 
   router
     .get('/checkTicketsAmount', async (req, res, next) => {
+      if (!req.user) {
+        return res.redirect('/login');
+      }
+
       const eventId = req.query.EventId;
       const amount = req.query.amount;
 
       let product;
 
-      if (!req.user) {
-          return res.redirect('/login');
-      }
-
       try {
         const eventInfo = await controller.getEventInfo(eventId);
-        const ticketInfo = await controller.getTicketInfo(eventId);
-
-        const ticketCapacity = ticketInfo.dataValues.capacity;
-
-        if ( !((ticketCapacity - amount) > -1) ) {
-          throw new Error('All tickets were sold out!');
-        } else {
-          product = {
-            infoEvent: eventInfo,
-            infoTicket: ticketInfo.dataValues,
-            amount,
-          };
+        if (eventInfo === null) {
+          throw new Error('There is no such a Event!');
         }
+
+        const ticketInfo = await controller.getTicketInfo(eventId);
+        if (ticketInfo === null) {
+          throw new Error('There is no such a Ticket!');
+        }
+
+        const ticketCapacity = ticketInfo.capacity;
+        if (ticketCapacity - amount < 0) {
+          throw new Error('All tickets were sold out!');
+        }
+
+        product = {
+          infoEvent: eventInfo,
+          infoTicket: ticketInfo,
+          amount: amount,
+        };
       } catch (err) {
-          const someError = err;
-          res.status(400).json({ 'err': err.message });
+        res.status(400).json({ 'err': err.message });
       }
-      res.status(200).json(product);
+
+      return res.status(200).json(product);
     });
 
   app.use('/event', router);

@@ -2,10 +2,6 @@
 const {
     Router,
   } = require('express');
-// const {
-//     User,
-//     Artist,
-// } = require('../../../models/data-class');
 
 const path = require('path');
 const multer = require('multer');

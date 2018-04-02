@@ -34,17 +34,6 @@ const init = (app, data) => {
       const account = userInfo;
 
       return res.render('./profile/user-event', { account });
-    })
-    .get('/:theUser/following', async (req, res) => {
-      if (!req.user) {
-        return res.redirect('/login');
-      }
-
-      const userName = req.params.theUser;
-      const userInfo = await data.users.findByUsername(userName);
-      const account = userInfo;
-
-      return res.render('./profile/user-follow', { account });
     });
 
   app.use('/profile', router);

@@ -8,8 +8,9 @@ const app = express();
 require('./config/express').init(app);
 require('./config/auth').init(app, data);
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     res.locals.user = req.user || null;
+
     return next();
 });
 

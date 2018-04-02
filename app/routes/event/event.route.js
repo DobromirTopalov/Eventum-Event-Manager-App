@@ -9,6 +9,33 @@ const init = (app, data) => {
     const controller = new EventController(data);
 
     router
+        .get('/create', async (req, res, next) => {
+            const context = {};
+
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+
+            context.countries = await controller.getCountries();
+            context.categories = await controller.getCategories();
+
+            return res.render('./event/create', context);
+        })
+        .post('/create', async (req, res, next) => {
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+
+            const eventInfo = req.body;
+
+            try {
+                await controller.createEvent(req.user.id, eventInfo);
+            } catch (err) {
+                return res.status(400).json({ 'err': err.message });
+            }
+
+            return res.status(200).json({ 'success': true });
+        })
         .get('/:id', async (req, res) => {
             const eventID = req.params.id;
 
@@ -46,37 +73,9 @@ const init = (app, data) => {
             const context = {
                 event,
             };
-            res.render('./event/eventPage', context);
-        })
-        .get('/create', async (req, res, next) => {
-            const context = {};
 
-            if (!req.user) {
-                return res.redirect('/login');
-            }
-
-            context.countries = await controller.getCountries();
-            context.categories = await controller.getCategories();
-
-            return res.render('./event/create', context);
-        })
-        .post('/create', async (req, res, next) => {
-            const eventInfo = req.body;
-
-            if (!req.user) {
-                return res.redirect('/login');
-            }
-
-            const userID = req.user.id;
-
-            try {
-                 await controller.createEvent(userID, eventInfo);
-             } catch (err) {
-                 const someError = err;
-                 return res.status(400).json({ 'err': err.message });
-             }
-             res.status(200).json({ 'success': true });
-         });
+            return res.render('./event/eventPage', context);
+        });
 
     app.use('/event', router);
 };

@@ -1,28 +1,30 @@
 class TicketAmountController {
-  constructor (data) {
+  constructor(data) {
       this.data = data;
   }
 
   async getEventInfo(eventId) {
     const result = await this.data.events.findById(eventId);
-    
+
     return result;
   }
 
   async getTicketInfo(eventId) {
     const result = await this.data.tickets.getByEventId(eventId);
-    
+
     return result;
   }
 
-  async createPurchesInfo(quantity, UserId, TicketId, BillingInfoId) {
-    const result = await this.data.purches.addNewPurches(quantity, UserId, TicketId, BillingInfoId);
+  async createPurchesInfo(quantity, UserId, EventId, TicketId, BillingInfoId) {
+    const result = await this.data
+      .purches.addNewPurches(quantity, UserId,
+        EventId, TicketId, BillingInfoId);
+
     return result;
   }
 
-  async updateTicketCapacity(eventId, capacity) {
-    const ticket = await this.data.tickets.getByEventId(eventId);
-    const result = await this.data.tickets.updateCapacity(ticket.id, capacity);
+  async updateTicketCapacity(ticketId, capacity) {
+    const result = await this.data.tickets.updateCapacity(ticketId, capacity);
 
     return result;
   }

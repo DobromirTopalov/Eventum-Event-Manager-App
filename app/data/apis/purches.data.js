@@ -15,28 +15,29 @@ class Purches {
       const result = this.Model.findOne({
           where: {
               UserId: userId,
-          }
+          },
       });
 
       return result;
   }
 
-  async addNewPurches(quantity, UserId, TicketId ,BillingInfoId) {
+  async addNewPurches(quantity, UserId, EventId, TicketId, BillingInfoId) {
       try {
           let seqError;
           await this.Model
               .build({
                   quantity: quantity,
                   UserId: UserId,
+                  EventId: EventId,
                   TicketId: TicketId,
                   BillingInfoId: BillingInfoId,
               })
               .save()
-              .catch(err => {
-                  seqError = err; //sequelize error handling issue with save
+              .catch((err) => {
+                  seqError = err;
               });
           if (seqError && seqError.name === 'SequelizeValidationError') {
-              throw new Error('Unexpected error!')
+              throw new Error('Unexpected error!');
           }
       } catch (err) {
           throw err;

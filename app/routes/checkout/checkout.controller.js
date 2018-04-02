@@ -1,4 +1,4 @@
-const billingObject = require('../../../models/data-class/billing-class');
+const BillingObject = require('../../../models/data-class/billing-class');
 
 class BillingController {
     constructor(data) {
@@ -8,23 +8,22 @@ class BillingController {
     async createBilling(billingData, usernameId) {
         let thisBilling = null;
         try {
-            thisBilling = await new billingObject(billingData.firstname, billingData.lastname, billingData.email, billingData.address,
-              billingData.postalCode, billingData.city, billingData.country);
-            
+            thisBilling = new BillingObject(billingData.firstname,
+                billingData.lastname, billingData.email, billingData.address,
+                billingData.postalCode, billingData.city, billingData.country);
+
             const cityName = thisBilling.getCity();
             const countryName = thisBilling.getCountry();
 
             const city = await this.data.city.getByName(cityName);
             const country = await this.data.country.getByName(countryName);
-            
-            const result = await this.data.billings.addNewBilling(thisBilling, country.dataValues.id, city.dataValues.id, usernameId);
 
-            // const allBillingsOfUserId = await this.data.billings.getAllBillingsOfUser(someID);
-            // const result = allBillingsOfUserId.map((element) => element.dataValues);
-            // console.log(result);
+            const result = await this.data
+                .billings.addNewBilling(thisBilling,
+                    country.id, city.id, usernameId);
+
             return result;
-        }
-        catch (err) {
+        } catch (err) {
             throw err;
         }
     }

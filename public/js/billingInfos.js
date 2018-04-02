@@ -1,5 +1,44 @@
 /* eslint-disable */
 $(function() {
+    var cart = (function () {
+        var cartInfo = {
+            products: [],
+        };
+
+        var updateLocalStorage = function () {
+            localStorage.setItem('cart', JSON.stringify(cartInfo));
+        }
+
+        if (localStorage.getItem('cart')) {
+            cartInfo = JSON.parse(localStorage.getItem('cart'));
+        } else {
+            updateLocalStorage();
+        }
+
+        var addProduct = function (obj) {
+            cartInfo.products.push(obj);
+            updateLocalStorage();
+        }
+
+        var getProducts = function () {
+            return cartInfo.products;
+        }
+
+        var clear = function () {
+            cartInfo = {
+                products: [],
+            };
+
+            updateLocalStorage();
+        }
+
+        return {
+            addProduct: addProduct,
+            getProducts: getProducts,
+            clear: clear
+        }
+    })();
+
     function checkEmail(email) {
         const emailRegex = (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
 
@@ -127,44 +166,18 @@ $(function() {
         return true;
     }
 
-    var cart = (function () {
-        var cartInfo = {
-            products: [],
-        };
-
-        var updateLocalStorage = function () {
-            localStorage.setItem('cart', JSON.stringify(cartInfo));
-        }
-
-
-        if (localStorage.getItem('cart')) {
-            cartInfo = JSON.parse(localStorage.getItem('cart'));
-        } else {
-            updateLocalStorage();
-        }
-
-        var addProduct = function (obj) {
-            cartInfo.products.push(obj);
-            updateLocalStorage();
-        }
-
-        return {
-            addProduct: addProduct,
-        }
-    })();
-
-    var myStorage = window.localStorage;
-    const allPurchasedItems = JSON.parse(myStorage.getItem("cart"));
+    const allPurchasedItems = cart.getProducts();
     var totalprice = 0;
 
     var emptycart = $("<Li>").addClass("total_ammount").attr("id","empty-cart").append($("<p>").html("Your cart is empty!"));
     $("#list-tickets").append(emptycart);
+
     // start of summary
-    for (var i = 0; i < allPurchasedItems.products.length; i += 1) {
+    for (var i=0; i < allPurchasedItems.length; i+=1) {
         $("#empty-cart-one").remove();
         $("#empty-cart").remove();
-        var item = allPurchasedItems.products[i];
-        
+        var item = allPurchasedItems[i];
+
         var a = $("<a>").attr("href", "" + item.eventUrl).html("" + item.eventTitle);
         var span = $("<span>").html("$" + item.price);
         var li = $("<li>").addClass("item").append(a).append(span);
@@ -172,7 +185,7 @@ $(function() {
 
         totalprice += item.price;
     }
-    
+
     var p = $("<p>").html("Total");
     var span2 = $("<span>").html("$" + totalprice);
     var li2 = $("<li>").addClass("total_ammount").append(p).append(span2);
@@ -187,8 +200,9 @@ $(function() {
     var div_total = $("<div>").addClass("total").append(p_total);
     $("#cart-space").prepend(div_total);
 
-    for (var i = 0; i < allPurchasedItems.products.length; i += 1) {
-        var item = allPurchasedItems.products[i];
+    /* => HEADER */
+    for (var i = 0; i < allPurchasedItems.length; i += 1) {
+        var item = allPurchasedItems[i];
         
         var a_info = $("<a>").addClass("title").attr("href", "" + item.eventUrl).html("" + item.eventTitle);
         var div_info = $("<div>").addClass("info").append(a_info);
@@ -207,32 +221,11 @@ $(function() {
     }
     // end of cart
 
-    
-    var basket = [];
-    for (var i = 0; i < allPurchasedItems.products.length; i += 1) {
-        var item = allPurchasedItems.products[i];
-        // console.log(item);
-        basket.push({
-            EventId: item.id,
-            amount: item.amount,
-        });
-    }
-
     $('#buy').on("click", function () {
-        // $('#messagediv').attr('display','none');
-
         var eventInfo = {
-            EventId: 4,
-            amount: 3,
+            EventId: 1,
+            amount: 2,
         };
-
-        // try {
-        //     checkAmount(userInfo.amount);
-        // } catch(err) {
-        //     $('#messagediv')
-        //         .html('<div class="alert alert-danger"><a class="close" data-dismiss="alert">X</a><span>' + err.message +'</span></div>')
-        //     return false;
-        // }
 
         $.ajax({
             method: 'GET',
@@ -248,29 +241,28 @@ $(function() {
                 var message = 'You\'ve successfully ordered your tickets!';
                 $('#messagediv')
                     .html('<div class="alert alert-success"><a class="close" data-dismiss="alert">X</a><span>' + message + '</span></div>')
-                    
+
                     //update localstorage
                     var infoForTicketProduct = {
                         eventTitle: data.infoEvent.title,
                         description: data.infoEvent.describe,
                         price: data.infoTicket.price,
                         amount: +(data.amount),
-                        id: data.infoTicket.EventId,
+                        eventId: data.infoTicket.EventId,
                         eventUrl: '/event/' + data.infoTicket.EventId + '/' + data.infoEvent.title,
                     };
                     cart.addProduct(infoForTicketProduct);
-                    
+
                     window.location.href = '/checkout';
             }
         });
         return false;
-    })
+    });
 
     $('#confirmOrder').on("click", function () {
-        for (var i = 0; i < basket.length; i += 1) {
-            var item = basket[i];
-            // console.log(item);
-            debugger;
+        for (var i = 0; i < allPurchasedItems.length; i += 1) {
+            var item = allPurchasedItems[i];
+
             $('#messagediv').attr('display', 'none');
             var userInfo = {
                 firstname: $('#first_name').val(),
@@ -285,7 +277,7 @@ $(function() {
 
             try {
                 validateAllInfo(userInfo);
-                if (!basket.length) {
+                if (!allPurchasedItems.length) {
                     throw new Error('Cart is empty!');    
                 }
             } catch (err) {
@@ -309,10 +301,9 @@ $(function() {
                     $('#messagediv')
                         .append('<div class="alert alert-success"><a class="close" data-dismiss="alert">X</a><span>' + message + '</span></div>')
                     // window.location.href = '/checkout';
+                    cart.clear();
                 }
             });
         }
-
-        myStorage.setItem("cart","");
     })
 })

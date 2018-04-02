@@ -11,19 +11,19 @@ var Sequelize = require('sequelize');
  * createTable "Cities", deps: [Countries]
  * createTable "Locations", deps: [Cities]
  * createTable "Subcategories", deps: [Categories]
- * createTable "BillingInfos", deps: [Countries, Cities]
  * createTable "Users", deps: [UserInfos]
+ * createTable "BillingInfos", deps: [Countries, Cities, Users]
  * createTable "Events", deps: [Locations, Users, Categories, Subcategories]
  * createTable "Tickets", deps: [Events]
  * createTable "Comments", deps: [Users]
- * createTable "UserPurches", deps: [Users, Tickets, BillingInfos]
+ * createTable "UserPurches", deps: [Users, Events, Tickets, BillingInfos]
  *
  **/
 
 var info = {
     "revision": 1,
     "name": "noname",
-    "created": "2018-03-28T17:26:33.556Z",
+    "created": "2018-04-01T18:07:23.962Z",
     "comment": ""
 };
 
@@ -254,6 +254,70 @@ var migrationCommands = [{
     {
         fn: "createTable",
         params: [
+            "Users",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "autoIncrement": true,
+                    "primaryKey": true,
+                    "allowNull": false
+                },
+                "username": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "len": [1, 30]
+                    },
+                    "unique": true,
+                    "allowNull": false
+                },
+                "email": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "isEmail": true
+                    },
+                    "unique": true,
+                    "allowNull": false
+                },
+                "password": {
+                    "type": Sequelize.STRING,
+                    "validate": {
+                        "len": [6, 30]
+                    },
+                    "allowNull": false
+                },
+                "name": {
+                    "type": Sequelize.STRING,
+                    "allowNull": true
+                },
+                "role": {
+                    "type": Sequelize.STRING,
+                    "allowNull": false
+                },
+                "createdAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "updatedAt": {
+                    "type": Sequelize.DATE,
+                    "allowNull": false
+                },
+                "UserInfoId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "UserInfos",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                }
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
             "BillingInfos",
             {
                 "id": {
@@ -309,70 +373,13 @@ var migrationCommands = [{
                         "key": "id"
                     },
                     "allowNull": true
-                }
-            },
-            {}
-        ]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "Users",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
                 },
-                "username": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [1, 30]
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "email": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isEmail": true
-                    },
-                    "unique": true,
-                    "allowNull": false
-                },
-                "password": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "len": [6, 30]
-                    },
-                    "allowNull": false
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isAlpha": true
-                    },
-                    "allowNull": true
-                },
-                "role": {
-                    "type": Sequelize.STRING,
-                    "allowNull": false
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "UserInfoId": {
+                "UserId": {
                     "type": Sequelize.INTEGER,
                     "onUpdate": "CASCADE",
                     "onDelete": "SET NULL",
                     "references": {
-                        "model": "UserInfos",
+                        "model": "Users",
                         "key": "id"
                     },
                     "allowNull": true
@@ -582,6 +589,16 @@ var migrationCommands = [{
                     "onDelete": "SET NULL",
                     "references": {
                         "model": "Users",
+                        "key": "id"
+                    },
+                    "allowNull": true
+                },
+                "EventId": {
+                    "type": Sequelize.INTEGER,
+                    "onUpdate": "CASCADE",
+                    "onDelete": "SET NULL",
+                    "references": {
+                        "model": "Events",
                         "key": "id"
                     },
                     "allowNull": true

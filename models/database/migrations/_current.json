@@ -549,6 +549,16 @@
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
+                "EventId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Events",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
                 "TicketId": {
                     "allowNull": true,
                     "references": {
@@ -573,5 +583,5 @@
             "indexes": []
         }
     },
-    "revision": 3
+    "revision": 1
 }

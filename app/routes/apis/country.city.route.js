@@ -19,10 +19,10 @@ const init = (app, data) => {
       const result = await controller.getAllCities(country);
 
       if (result.length === 0) {
-        return res.status(200).json({info: false});
+        return res.status(200).json({ info: false });
       }
 
-      res.status(200).json(result);
+      return res.status(200).json(result);
     })
     .get('/countryByName', async (req, res) => {
       const country = req.query.country;

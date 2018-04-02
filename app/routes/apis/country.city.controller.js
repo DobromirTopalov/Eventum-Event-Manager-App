@@ -1,5 +1,5 @@
 class CountryCityController {
-    constructor (data) {
+    constructor(data) {
         this.data = data;
     }
 
@@ -11,7 +11,7 @@ class CountryCityController {
 
     getAllCountries() {
         const result = this.data.country.getAll();
-        
+
         return result;
     }
 
