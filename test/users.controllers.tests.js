@@ -50,6 +50,12 @@ const fakeUserData = {
         updateUserDataToInfo(userObject) {
             return userObject;
         },
+        updateUserProfilePic(id, pictureName) {
+            return id;
+        },
+        updateUserCoverPic(id, pictureName) {
+            return id;
+        },
     },
 };
 
@@ -58,8 +64,11 @@ describe('UserController', () => {
     .returns(null);
     const usernameSpy = sinon.stub(fakeUserData.users, 'findByUsername')
     .returns(null);
+    const profilePicSpy = sinon.stub(fakeUserData.users, 'updateUserProfilePic')
+    .returns(null);
+    const coverPicSpy = sinon.stub(fakeUserData.users, 'updateUserCoverPic')
+    .returns(null);
     const fakes = sinon.collection;
-
     let Model = null;
     beforeEach(() => {
         Model = {
@@ -74,6 +83,7 @@ describe('UserController', () => {
         fakes.restore();
         emailSpy.reset();
         usernameSpy.reset();
+        profilePicSpy.reset();
     });
     describe('createUser', () => {
         describe('when only username  is passed', () => {
@@ -551,23 +561,34 @@ describe('UserController', () => {
                 testUser.email = 'nouser@gmail.co';
                 testUser.password = '12345678';
                 testUser.passwordRepeat = '12345678';
-
-                userArray = [{
-                    username: 'userDefault',
-                    email: 'user@gmail.com',
-                    password: '12345678',
-                    name: 'noname',
-                    role: 'User',
-                    }];
+                profilePicSpy.returns();
                 const controller = new UserController(fakeUserData);
-
+                
                 const func = async () => {
-                    return await controller.updateUser(1, testUser);
+                    return await controller.updateUserProfilePic(1, 'something.jpg');
                 };
-
                 return await expect(func())
                 .to.eventually.to.be.fulfilled;
-                // .and.be.an.instanceOf(UserError.EmptyUsername);
+            });
+        });
+        describe('updateCoverPhoto', () => {
+            describe('when everything is correct', () => {
+                it('expect to pass', async () => {
+                    const testUser = {};
+                    testUser.username = 'newUsername';
+                    testUser.name = 'lolo';
+                    testUser.email = 'nouser@gmail.co';
+                    testUser.password = '12345678';
+                    testUser.passwordRepeat = '12345678';
+
+                    coverPicSpy.returns();
+                    const controller = new UserController(fakeUserData);
+                    const func = async () => {
+                        return await controller.updateUserProfilePic(1, 'something.jpg');
+                    };
+                    return await expect(func())
+                    .to.eventually.to.be.fulfilled;
+                });
             });
         });
     });

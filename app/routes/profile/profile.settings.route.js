@@ -43,8 +43,6 @@ const init = (app, data) => {
             if (!req.user) {
                 return res.redirect('/login');
             }
-   
-            
             const userData = req.body;
             const userID = req.user.id;
 

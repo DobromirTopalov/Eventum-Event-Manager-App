@@ -161,7 +161,6 @@ class UsersData extends Data {
     }
 
     updateUserProfilePic(id, userProfilePic) {
-        console.log(id, userProfilePic);
         try {
             let seqError;
             UserInfo.update(

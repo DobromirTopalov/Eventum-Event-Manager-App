@@ -7,7 +7,6 @@ class EventController {
 
     getCountries() {
         const result = this.data.country.getAll();
-
         return result;
     }
 
