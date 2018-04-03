@@ -5,6 +5,11 @@ class UserController {
         this.data = data;
     }
 
+    async getAllCountries() {
+        const result = await this.data.country.getAll();
+
+        return result;
+    }
     async createUser(userData) {
         let thisUser = null;
         try {
@@ -51,23 +56,27 @@ class UserController {
                 userData.password, userData.name,
                 'userDatacity', 'userDatacountry', userData.profilePic,
                 userData.coverPhoto, '', '', '', '',
-                userData.webpage, userData.autoBio);
+                userData.webpage, userData.autoBio, userData.role);
 
-            const checkUsername = await this.data.users.findByUsername(thisUser.getUsername());
-            if (checkUsername && checkUsername.dataValues.id!== userID) {
+            const checkUsername = await this.data
+                .users.findByUsername(thisUser.getUsername());
+            if (checkUsername && checkUsername.id!== userID) {
                 throw new Error('This username is already taken');
             }
 
-            const checkEmail = await this.data.users.findByEmail(thisUser.getEmail())
-            if ( checkEmail && checkEmail.dataValues.id!== userID) {
+            const checkEmail = await this.data
+                .users.findByEmail(thisUser.getEmail());
+            if ( checkEmail && checkEmail.id!== userID) {
                 throw new Error('This email is already taken');
             }
+
             await this.data.users.updateUserData(userID, thisUser);
-            await this.data.users.updateUserInfo(userID, thisUser);
+            // await this.data.users.createTicket(userID, thisUser);
         } catch (err) {
             throw err;
         }
     }
+
     async updateUserProfilePic(userID, imageName) {
         try {
             await this.data.users.updateUserProfilePic(userID, imageName);
@@ -75,6 +84,7 @@ class UserController {
             throw err;
         }
     }
+
     async updateUserCoverPic(userID, imageName) {
         try {
             await this.data.users.updateUserCoverPic(userID, imageName);

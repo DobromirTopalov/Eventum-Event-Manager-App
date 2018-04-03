@@ -14,7 +14,7 @@ mixin artist-settings-personalInfo()
         input#usrname.text_field(placeholder='Account name', name='username', value='' + username, type='text')
         |                                             
         p
-        | Your Eventum URL: https://eventum.com/
+        | Your Eventum URL: https://eventum.com/user/
         span #{username}
     |                                         
     .form-group
@@ -23,53 +23,26 @@ mixin artist-settings-personalInfo()
         sup *
         |                                             
         input#emailad.text_field(placeholder='contact@somemail.com', name='email', value='' + email, type='text')
-    |                                         
-    .col-md-6
-        .form-group
-            label(for='password') New Password 
-            |
-            sup *
-            |                                                     
-            input#password.text_field(placeholder='enter new password', name='passwordMain', value='' + passwordMain, type='password')
-        |                                             
-    .col-md-6
-        .form-group
-            label(for='conpassword') Confirm New Password
-            |  
-            sup *
-            |                                                     
-            input#conpassword.text_field(placeholder='re-enter new password', name='passwordSecondary', value='' + passwordSecondary ,type='password')
-    |                                         
+    |
+    .row                                        
+        .col-md-6
+            .form-group
+                label(for='password') New Password 
+                |
+                sup *
+                |                                                     
+                input#password.text_field(placeholder='enter new password', name='passwordMain', value='' + passwordMain, type='password')                                             
+        .col-md-6
+            .form-group
+                label(for='conpassword') Confirm New Password
+                |  
+                sup *
+                |                                                     
+                input#conpassword.text_field(placeholder='re-enter new password', name='passwordSecondary', value='' + passwordSecondary ,type='password')                                  
     .form-group
         label(for='website') Website
         |                                             
         input#website.text_field(placeholder='Website', name='webpage', value='' + webpage, type='text')
-        |                                         
-    .form-group
-        label(for='country')
-            | Country 
-            sup *
-        |                                             
-        .select-wrap.select-wrap2
-            select#country.text_field(name='country')
-                option(selected='selected') #{country}
-                option(value='') Select one
-                |                                                     
-                option(value='bangladesh') Bangladesh
-                |                                                     
-                option(value='india') India
-                |                                                     
-                option(value='uruguye') Uruguye
-                |                                                     
-                option(value='australia') Australia
-                |                                                     
-                option(value='neverland') Neverland
-                |                                                     
-                option(value='atlantis') Atlantis
-            |                                                 
-            span.lnr.lnr-chevron-down
-        |
-
     .form-group
         label(for='authbio') Author Bio
         |                                             

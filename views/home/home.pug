@@ -20,23 +20,25 @@ block content
         .row
           .col-sm-12
             .search_box
-              form(action='#')
-                input.text_field(type='text', name='keywords', placeholder='Search for events...')
-                .search__select.select-wrap
-                  select#blah.select--field(name='category')
-                    option(value='') All Categories
-                    option(value='') PSD
-                    option(value='') HTML
-                    option(value='') WordPress
-                    option(value='') All Categories
-                  span.lnr.lnr-chevron-down
-                .search__select.select-wrap
-                  select#blah.select--field(name='city')
-                    option(value='') City
-                    option(value='') PSD
-                    option(value='') HTML
-                    option(value='') WordPress
-                    option(value='') All Categories
-                  span.lnr.lnr-chevron-down 
-                button.search-btn.btn--lg Search Now
+              form(action='/search', method="GET")
+                  input.text_field#keywords(type='text', name='keywords', placeholder='Search for events...')
+                  .search__select.select-wrap
+                      select#categories.select--field(name='category')
+                          option(value='') All Categories
+                          each category in categories
+                              option(value='' + category.name) #{category.name}
+                      span.lnr.lnr-chevron-down#category
+                  .search__select.select-wrap
+                      select#country-input.select--field(name='country')
+                          option(value='') Country
+                          each country in countries
+                            option(value='' + country.name) #{country.name}
+                      span.lnr.lnr-chevron-down#city
+                  .search__select.select-wrap
+                    select#city-input.select--field(name='city')
+                      option(value='') City
+                    span.lnr.lnr-chevron-down#city 
+                  button.search-btn.btn--lg#search Search Now
 
+block extrastuff
+    script(src='/static/js/city.js')

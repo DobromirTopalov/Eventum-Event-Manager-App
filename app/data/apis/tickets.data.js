@@ -26,16 +26,16 @@ class Tickets {
             let seqError;
             await this.Model
                 .build({
-                    price: ticketObject.getPrice(),
-                    capacity: ticketObject.getCapacity(),
+                    price: ticketObject.price,
+                    capacity: ticketObject.capacity,
                     EventId: EventId,
                 })
                 .save()
-                .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
+                .catch((err) => {
+                    seqError = err;
                 });
             if (seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('Unexpected error!')
+                throw new Error('Unexpected error!');
             }
         } catch (err) {
             throw err;
@@ -44,24 +44,19 @@ class Tickets {
 
     updateTicketInfo(id, ticketObject, price, cap, eventId) {
         try {
-            let seqError;
             const result = this.Model.update({
-                //   price: ticketObject.getPrice(),
-                //   capacity: ticketObject.getCapacity(),
                 price: price,
                 capacity: cap,
                 EventId: eventId,
             }, {
-                where: {
-                    id: id
-                }
-            }).catch((err) => {
-                seqError = err;
-            });
+                    where: {
+                        id: id,
+                    },
+                }).catch((err) => {
+                    throw new Error('Unexpected error!');
+                });
+
             return result;
-            if (seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
-            }
         } catch (err) {
             throw err;
         }
@@ -71,10 +66,10 @@ class Tickets {
         const result = this.Model.update({
             capacity: capacity,
         }, {
-            where: {
-                id: id
-            }
-        });
+                where: {
+                    id: id,
+                },
+            });
 
         return result;
     }

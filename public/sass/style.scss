@@ -485,10 +485,10 @@
   position: relative;
   background: #fff;
   .text_field {
-    float: left;
-    width: 55%;
+    width: 100%;
     line-height: 55px;
     height: 55px;
+    margin-bottom: 16px;
     padding: 0 25px;
     font-size: 16px;
     border-radius: 4px 0 0 4px;
@@ -497,7 +497,8 @@
     border: 1px solid #dcdcdc;
   }
   .search__select {
-    float: left;
+    display: inline-block;
+    margin-right: 16px;
     width: 222px;
   }
   .select--field {
@@ -506,7 +507,6 @@
     padding: 0 52px 0 20px;
     height: 57px;
     border:1px solid #dcdcdc;
-    border-left: 0;
     margin-top: -1px;
     color: #555;
   }

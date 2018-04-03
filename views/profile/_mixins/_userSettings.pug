@@ -23,48 +23,18 @@ mixin user-settings-personalInfo()
         sup *
         |                                             
         input#emailad.text_field(placeholder='contact@somemail.com', name='email', value='' + email, type='text')
-    |                                         
-    .col-md-6
-        .form-group
-            label(for='password') New Password 
-            |
-            sup *
-            |                                                     
+    | 
+    .row                                        
+        .col-md-6
+            .form-group
+                label(for='password') New Password 
+                    sup *                                                     
             input#password.text_field(placeholder='enter new password', name='passwordMain', value='' + passwordMain, type='password')
-        |                                             
-    .col-md-6
-        .form-group
-            label(for='conpassword') Confirm New Password
-            |  
-            sup *
-            |                                                     
+        .col-md-6
+            .form-group
+                label(for='conpassword') Confirm New Password
+                    sup *
             input#conpassword.text_field(placeholder='re-enter new password', name='passwordSecondary', value='' + passwordSecondary type='password')
-    |                                         
-    .form-group
-            label(for='country')
-            | Country 
-            sup *
-            |                                             
-            .select-wrap.select-wrap2
-                select#country.text_field(name='country')
-                    option(selected='selected') #{country}
-                    option(value='') Select one
-                    |                                                     
-                    option(value='bangladesh') Bangladesh
-                    |                                                     
-                    option(value='india') India
-                    |                                                     
-                    option(value='uruguye') Uruguye
-                    |                                                     
-                    option(value='australia') Australia
-                    |                                                     
-                    option(value='neverland') Neverland
-                    |                                                     
-                    option(value='atlantis') Atlantis
-                |                                                 
-                span.lnr.lnr-chevron-down
-            |
-
 mixin user-settings-emailSettings()
     .custom_checkbox
         .custom_checkbox

@@ -26,13 +26,18 @@ const EventController = require('./event.controller');
 const init = (app, data) => {
     const router = new Router();
     const controller = new EventController(data);
+
     router
         .get('/create', async (req, res, next) => {
             const context = {};
 
-            // if (!req.user) {
-            //     return res.redirect('/login');
-            // }
+            if (!req.user) {
+                return res.redirect('/login');
+            }
+
+            if (req.user.role !== 'Artist') {
+                return res.redirect('/profile');
+            }
 
             context.countries = await controller.getCountries();
             context.categories = await controller.getCategories();
@@ -40,16 +45,24 @@ const init = (app, data) => {
             return res.render('./event/create', context);
         })
         .post('/create', [upload.any(), async (req, res, next) => {
-            let eventData = await req.body;
-            // console.log(req);
             if (!req.user) {
-                res.redirect('/login');
+                return res.redirect('/login');
             }
-            const userID = await req.user.id;
+
+            if (req.user.role !== 'Artist') {
+                return res.redirect('/profile');
+            }
+
+            let eventData = req.body;
+
+            const userID = req.user.id;
+
             try {
                 if (req.files.length === 1) {
                     const hashedFileName = await req.files[0].filename;
-                    eventData = await Object.assign(eventData, { 'coverPhoto': hashedFileName });
+                    eventData = await Object
+                        .assign(eventData, { 'coverPhoto': hashedFileName });
+
                     await controller.createEvent(userID, eventData);
                 } else {
                     throw new Error('Please upload a cover photo');
@@ -57,7 +70,8 @@ const init = (app, data) => {
             } catch (err) {
                 res.status(400).json({ 'err': err.message });
             }
-            res.status(200).json({ 'success': true });
+
+            return res.status(200).json({ 'success': true });
         }])
         .get('/:id', async (req, res) => {
             const eventID = req.params.id;
@@ -92,7 +106,6 @@ const init = (app, data) => {
                 placename: eventInfo.Location.name,
                 category: eventInfo.Category.name,
                 subcategories: eventInfo.Subcategory.title,
-                hours: '21:30',
             };
 
             const context = {

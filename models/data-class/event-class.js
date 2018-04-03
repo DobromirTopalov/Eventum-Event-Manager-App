@@ -2,8 +2,7 @@ class Event {
     constructor(date = '', coverPhoto = '', locationName = '',
         location_country = '', location_city = '',
         location_address = '', title = '', description = '', category = '',
-        subcateogry = '', prices = '', capacity = '', time = '') {
-
+        subcateogry = '', price = '', capacity = '', time = '') {
         this.setDate(date);
         this.setTime(time);
 
@@ -45,10 +44,9 @@ class Event {
             this.subcateogry = category;
         }
 
-        if (prices.length > 0) {
-            this.setPrices(prices);
+        if (price.length > 0) {
+            this.setPrice(price);
         }
-        //   this.setCoverPhoto(coverPhoto);
     }
 
     setDate(date) {
@@ -109,13 +107,8 @@ class Event {
 
     setTitle(title) {
         title = title.trim();
-        const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
-        const titleRegex = /^[a-zA-Z ]*$/;
 
-        if (!title.length
-            || !title
-            || (title.length > 100)
-        ) {
+        if (!title.length || !title || (title.length > 100)) {
             throw new Error('Title is of invalid length');
         }
 
@@ -125,10 +118,7 @@ class Event {
     setDescription(description) {
         description = description.trim();
 
-        if (!description.length
-            || !description
-            || (description.length > 8000)
-        ) {
+        if (!description.length || !description || description.length > 8000) {
             throw new Error('Description is of invalid length');
         }
 
@@ -148,18 +138,15 @@ class Event {
         }
     }
 
-    setPrices(prices) {
+    setPrice(price) {
         const priceRegex = /^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/;
 
-        if (!prices.length
-            || !prices
-            || (prices.length > 12)
-        ) {
+        if (!price.length || !price || (price.length > 12)) {
             throw new Error('Price is too big');
         }
 
-        if (prices.match(priceRegex)) {
-            this.prices = prices;
+        if (price.match(priceRegex)) {
+            this.price = price;
         } else {
             throw new Error('Price is not of valid format');
         }
@@ -168,10 +155,7 @@ class Event {
     setCapacity(capacity) {
         const capacityRegex = /^[0-9]{1,30}$/;
 
-        if (!capacity.length
-            || !capacity
-            || (capacity.length > 12)
-        ) {
+        if (!capacity.length || !capacity || capacity.length > 12) {
             throw new Error('Capacity is too big');
         }
 
@@ -191,7 +175,7 @@ class Event {
         finalDate.setFullYear(dateFormatted[2]);
         finalDate.setHours(Number(this.time.substring(0, 2))-3);
         finalDate.setMinutes(Number(this.time.substring(3, 5)));
-        // console.log(finalDate)
+
         return finalDate;
     }
 
@@ -227,8 +211,8 @@ class Event {
         return this.category || null;
     }
 
-    getPrices() {
-        return this.prices || null;
+    getPrice() {
+        return this.price || null;
     }
 
     getCapacity() {
@@ -245,7 +229,7 @@ class Event {
             'title': this.getTitle(),
             'description': this.getDescription(),
             'category': this.getCategory(),
-            'prices': this.getPrices(),
+            'prices': this.getPrice(),
         };
     }
 }

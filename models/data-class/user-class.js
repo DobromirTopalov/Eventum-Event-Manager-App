@@ -3,7 +3,7 @@ class User {
         password = '', name = '', city = '', country = '',
         profilePicture = '', coverPhoto = '', socialProfileLinkOne = '',
         socialProfileLinkTwo = '', socialProfileLinkThree = '',
-        address = '', webpage = '', bio = '') {
+        address = '', webpage = '', bio = '', role ='') {
         this.setUsername(username);
         this.setEmail(email);
         this.setPassword(password);
@@ -11,47 +11,56 @@ class User {
         if (city.length > 0) {
             this.setCity(city);
         }
+
         if (address.length > 0) {
             this.setAddress(address);
         }
+
         if (country.length > 0) {
             this.setCountry(country);
         }
+
         if (profilePicture.length > 0) {
             this.setProfilePicture(profilePicture);
         }
+
         if (coverPhoto.length > 0) {
             this.setCoverPhoto(coverPhoto);
         }
+
         if (socialProfileLinkOne.length > 0) {
             this.setSocialProfileLink(socialProfileLinkOne);
         }
+
         if (socialProfileLinkTwo.length > 0) {
             this.setSocialProfileLink(socialProfileLinkTwo);
         }
+
         if (socialProfileLinkThree.length > 0) {
             this.setSocialProfileLink(socialProfileLinkThree);
         }
+
         if (webpage.length > 0) {
             this.setWebpage(webpage);
         }
+
         if (bio.length > 0) {
             this.setBio(bio);
+        }
+
+        if (role.length > 0) {
+            this.role = role;
         }
     }
     setUsername(username) {
         const usernameRegex = /^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$/;
-        const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         username = username.trim();
 
-        if (!username.length
-            || !username
-            || (username.length <= 3)
-            || (username.length > 30)
-            // || (username.match(symbolRestrictRegex))
-        ) {
+        if (!username.length || !username || (username.length <= 3)
+            || (username.length > 30)) {
             throw new Error('Invalid username length');
         }
+
         if (username.match(usernameRegex)) {
             this.username = username;
         } else {
@@ -62,10 +71,8 @@ class User {
     setEmail(email) {
         email = email.trim();
         const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-        if (!email.length
-            || !email
-            || (email.length > 100)
-        ) {
+
+        if (!email.length || !email || (email.length > 100)) {
             throw new Error('Invalid email length');
         }
 
@@ -78,14 +85,9 @@ class User {
 
     setName(name) {
         name = name.trim();
-        const symbolRestrictRegex = /[!$%^&*()+|~=`{}\[\]:";'<>?,.\/]/;
         const nameRegex = /^[a-zA-Z ]{1,100}$/;
 
-        if (!name.length
-            || !name
-            || (name.length > 100)
-        ) {
-            console.log(name);
+        if (!name.length || !name || (name.length > 100)) {
             throw new Error('Invalid name length');
         }
 
@@ -97,20 +99,14 @@ class User {
     }
 
     setPassword(password) {
-        const passwordRegex = `^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$`;
+        // const passwordRegex = `^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$`;
 
-        if (!password.length || !password || password.length > 32) {
+        if (!password.length || !password || password.length > 32 ||
+            password.length < 6) {
             throw new Error('Invalid password length');
         }
 
         this.password = password;
-
-        // if (password.match(passwordRegex)) {
-        //     this.password = password;
-        // } else {
-        //     throw new Error(`Password does not match
-        //         all the security requirements`);
-        // }
     }
 
     setCountry(country) {
@@ -132,12 +128,10 @@ class User {
     setAddress(address) {
         address = address.trim();
         const alphaRegex = /^[a-zA-Z]+$/;
-        if (!address.length
-            || !address
-            || (address.length > 100)
-        ) {
+        if (!address.length || !address || (address.length > 100)) {
             throw new Error('Address is too long ');
         }
+
         if (address.match(alphaRegex)) {
             this.address = address;
         } else {
@@ -181,9 +175,7 @@ class User {
         const urlRegex = `/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?
             (\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/`;
 
-        if (!coverPhoto.length
-            || !coverPhoto
-        ) {
+        if (!coverPhoto.length || !coverPhoto) {
             throw new Error('The cover photo is not correct');
         }
 
@@ -209,22 +201,16 @@ class User {
     setWebpage(webpage) {
         webpage = webpage.trim();
 
-        // const urlRegex = `/(ftp|http|https):\/\/(\w+:{0,1}
-        //     \w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/`;
-
         if (!webpage.length || !webpage) {
             throw new Error('Website is a not a valid URL');
         }
 
-        // if (webpage.match(urlRegex)) {
-            this.webpage = webpage;
-        // } else {
-            // throw new Error('Website is a not valid URL');
-        // }
+        this.webpage = webpage;
     }
 
     setBio(bio) {
         bio = bio.trim();
+
         if (!bio.length || !bio || (bio.length > 600)) {
             throw new Error('Bio is too long ');
         } else {
@@ -272,6 +258,11 @@ class User {
     getBio() {
         return this.bio || null;
     }
+
+    getRole() {
+        return this.role || null;
+    }
+
     getAllInfo() {
         return {
             'username': this.getUsername(),

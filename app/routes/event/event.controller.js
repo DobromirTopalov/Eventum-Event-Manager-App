@@ -19,7 +19,6 @@ class EventController {
 
     async createEvent(userId, eventData) {
         try {
-            console.log(userId);
             const thisEvent = new EventObject(eventData.date, '',
                 eventData.placeName, eventData.country, eventData.city,
                 eventData.address, eventData.title, eventData.description,
@@ -32,6 +31,11 @@ class EventController {
                 capacity: thisEvent.getCapacity(),
                 date: thisEvent.getDate(),
                 userId: userId,
+            };
+
+            const ticketSeqObject = {
+                price: thisEvent.getPrice(),
+                capacity: thisEvent.getCapacity(),
             };
 
             const country = await this.data
@@ -69,11 +73,15 @@ class EventController {
             eventSeqObject.locationId = location;
             eventSeqObject.coverPhoto = eventData.coverPhoto;
 
-            return await this.data.events.addNewEvent(eventSeqObject);
+            const newEvent = await this.data.events.addNewEvent(eventSeqObject);
+            await this.data.tickets.addNewTicket(ticketSeqObject, newEvent.id);
+
+            return true;
         } catch (err) {
             throw err;
         }
     }
+
     async addEventCoverPic(id, coverPhoto) {
         try {
             await this.data.events.addEventCoverPic(id, coverPhoto);
