@@ -2,17 +2,17 @@ const {
     expect,
 } = require('chai');
 const chai = require('chai');
-const  chaiAsPromised = require('chai-as-promised');
+const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
 
-const sinon = require('sinon')
+const sinon = require('sinon');
 const UserData = require('../app/data/users.data');
-const UserController = require('../app/routes/register/register.controller')
+const UserController = require('../app/routes/register/register.controller');
 let userArray = [];
 const userInfoArray = [];
-let data = {};
+const data = {};
 const fakeUserData = {
     users: {
         findById(id) {
@@ -54,11 +54,11 @@ const fakeUserData = {
 };
 
 describe('UserController', () => {
-    let emailSpy = sinon.stub(fakeUserData.users, 'findByEmail')
+    const emailSpy = sinon.stub(fakeUserData.users, 'findByEmail')
     .returns(null);
-    let usernameSpy = sinon.stub(fakeUserData.users, 'findByUsername')
+    const usernameSpy = sinon.stub(fakeUserData.users, 'findByUsername')
     .returns(null);
-    let fakes = sinon.collection;
+    const fakes = sinon.collection;
 
     let Model = null;
     beforeEach(() => {
@@ -74,7 +74,6 @@ describe('UserController', () => {
         fakes.restore();
         emailSpy.reset();
         usernameSpy.reset();
-        
     });
     describe('createUser', () => {
         describe('when only username  is passed', () => {
@@ -89,7 +88,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid email length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid email length');
                 // .and.be.an.instanceOf(UserError.EmptyUsername);
             });
         });
@@ -105,7 +105,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid username length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid username length');
             });
         });
         describe('when only email  is passed', () => {
@@ -120,14 +121,17 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid username length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid username length');
             });
         });
         describe('when only username is too long', () => {
             it('expect to throw invalid username length', async () => {
                 const testUser = {};
                 testUser.email = 'peter@gmail.com';
-                testUser.username = 'abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg';
+                testUser.username =
+                `abcdefgabcdefgabcdefgabcdefgab
+                cdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg`;
                 const controller = new UserController(fakeUserData);
 
                 const func = async () => {
@@ -135,11 +139,13 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid username length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid username length');
             });
         });
         describe('when only email  is passed', () => {
-            it('expect to throw Username includes symbols that are not allowed', async () => {
+            it(`expect to throw Username includes 
+            symbols that are not allowed`, async () => {
                 const testUser = {};
                 testUser.username = 'ee@2231';
                 const controller = new UserController(fakeUserData);
@@ -149,7 +155,9 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Username includes symbols that are not allowed');
+                .to.eventually.be.rejected
+                .and.has.property('message',
+                'Username includes symbols that are not allowed');
             });
         });
         describe('when only email  is passed', () => {
@@ -164,7 +172,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid password length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid password length');
             });
         });
         describe('when only email  is passed', () => {
@@ -180,7 +189,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'The two passwords do not match');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'The two passwords do not match');
             });
         });
         describe('when no name is passed', () => {
@@ -197,7 +207,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Invalid name length');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Invalid name length');
             });
         });
         describe('when email not valid format', () => {
@@ -214,15 +225,17 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Email is not of valid format');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'Email is not of valid format');
             });
         });
 
         describe('when name not only letters', () => {
-            it('expect to throw Name includes symbols that are not allowed', async () => {
+            it(`expect to throw Name includes 
+            symbols that are not allowed`, async () => {
                 const testUser = {};
                 testUser.username = 'asdadada';
-                testUser.name = 's#$'
+                testUser.name = 's#$';
                 testUser.email = 'peter@peter.co';
                 testUser.password = '12345678';
                 testUser.passwordRepeat = '12345678';
@@ -233,7 +246,9 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'Name includes symbols that are not allowed');
+                .to.eventually.be.rejected
+                .and.has.property('message',
+                'Name includes symbols that are not allowed');
             });
         });
 
@@ -241,9 +256,8 @@ describe('UserController', () => {
         describe('when username already exists in database', () => {
             it('expect to throw This username is already taken', async () => {
                 const testUser = {};
-                
                 testUser.username = 'userDefault';
-                testUser.name = 'lolo'
+                testUser.name = 'lolo';
                 testUser.email = 'peter@peter.co';
                 testUser.password = '12345678';
                 testUser.passwordRepeat = '12345678';
@@ -270,18 +284,18 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'This username is already taken');
+                .to.eventually.be.rejected.and.has.property('message',
+                'This username is already taken');
             });
         });
         describe('when email already exists in database', () => {
             it('expect to throw This email is already taken', async () => {
                 const testUser = {};
                 testUser.username = 'newUsername';
-                testUser.name = 'lolo'
+                testUser.name = 'lolo';
                 testUser.email = 'user@gmail.com';
                 testUser.password = '12345678';
                 testUser.passwordRepeat = '12345678';
-                
                 userArray = [{
                     username: 'userDefault',
                     email: 'user@gmail.com',
@@ -289,8 +303,6 @@ describe('UserController', () => {
                     name: 'noname',
                     role: 'User',
                     }];
-
-                
                 emailSpy
                     .returns({
                         dataValues: {
@@ -298,7 +310,7 @@ describe('UserController', () => {
                         },
                     });
                 usernameSpy
-                    .returns(null);    
+                    .returns(null);
                 const controller = new UserController(fakeUserData);
 
                 const func = async () => {
@@ -306,7 +318,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'This email is already taken');
+                .to.eventually.be.rejected.and.has.property('message',
+                'This email is already taken');
             });
         });
         describe('when everything is correct', () => {
@@ -336,7 +349,6 @@ describe('UserController', () => {
                 // .and.be.an.instanceOf(UserError.EmptyUsername);
             });
         });
-
     });
     describe('updateUser', () => {
         describe('when everything is correct', () => {
@@ -389,7 +401,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'The two passwords do not match');
+                .to.eventually.be.rejected.and.has.property('message',
+                'The two passwords do not match');
             });
         });
         describe('when the username is changed to different', () => {
@@ -445,7 +458,8 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'This username is already taken');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'This username is already taken');
             });
         });
         describe('when the username and email is changed to different', () => {
@@ -472,11 +486,13 @@ describe('UserController', () => {
                 };
 
                 return await expect(func())
-                .to.eventually.be.rejected.and.has.property('message', 'This email is already taken');
+                .to.eventually.be.rejected
+                .and.has.property('message', 'This email is already taken');
             });
         });
 
-        describe('when the username and email is changed to different no repeats', () => {
+        describe(`when the username and email
+         is changed to different no repeats`, () => {
             it('expect to fulfill', async () => {
                 const testUser = {};
                 testUser.id = 1;
@@ -500,7 +516,8 @@ describe('UserController', () => {
                 .to.eventually.be.fulfilled;
             });
         });
-        describe('when the username and email is changed to different no repeats', () => {
+        describe(`when the username and email is
+         changed to different no repeats`, () => {
             it('expect to fulfill', async () => {
                 const testUser = {};
                 testUser.id = 1;
@@ -554,5 +571,5 @@ describe('UserController', () => {
                 // .and.be.an.instanceOf(UserError.EmptyUsername);
             });
         });
+    });
 });
-
