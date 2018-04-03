@@ -31,11 +31,11 @@ class Tickets {
                     EventId: EventId,
                 })
                 .save()
-                .catch(err => {
-                    seqError = err; //sequelize error handling issue with save
+                .catch((err) => {
+                    seqError = err;
                 });
             if (seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('Unexpected error!')
+                throw new Error('Unexpected error!');
             }
         } catch (err) {
             throw err;
@@ -46,22 +46,17 @@ class Tickets {
         try {
             let seqError;
             const result = this.Model.update({
-                //   price: ticketObject.getPrice(),
-                //   capacity: ticketObject.getCapacity(),
                 price: price,
                 capacity: cap,
                 EventId: eventId,
             }, {
                 where: {
-                    id: id
-                }
+                    id: id,
+                },
             }).catch((err) => {
                 seqError = err;
             });
             return result;
-            if (seqError && seqError.name === 'SequelizeValidationError') {
-                throw new Error('We are experiencing a problem with your registration. Try again later or contact our teams!')
-            }
         } catch (err) {
             throw err;
         }
@@ -72,8 +67,8 @@ class Tickets {
             capacity: capacity,
         }, {
             where: {
-                id: id
-            }
+                id: id,
+            },
         });
 
         return result;

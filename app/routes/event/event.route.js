@@ -49,7 +49,9 @@ const init = (app, data) => {
             try {
                 if (req.files.length === 1) {
                     const hashedFileName = await req.files[0].filename;
-                    eventData = await Object.assign(eventData, { 'coverPhoto': hashedFileName });
+                    eventData = await Object
+                        .assign(eventData, { 'coverPhoto': hashedFileName });
+
                     await controller.createEvent(userID, eventData);
                 } else {
                     throw new Error('Please upload a cover photo');

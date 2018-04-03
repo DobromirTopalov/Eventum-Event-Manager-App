@@ -16,13 +16,17 @@ block content
                                 select#categories.select--field(name='category')
                                     option(value='') All Categories
                                     each category in categories
-                                        option(value='' + category) #{category}
+                                        option(value='' + category.name) #{category.name}
                                 span.lnr.lnr-chevron-down#category
                             .search__select.select-wrap
-                                select#cities.select--field(name='city')
+                                select#country-input.select--field(name='country')
+                                    option(value='') Country
+                                    each country in countries
+                                            option(value='' + country.name) #{country.name}
+                                span.lnr.lnr-chevron-down#city
+                            .search__select.select-wrap
+                                select#city-input.select--field(name='city')
                                     option(value='') City
-                                    each city in cities
-                                            option(value='' + city) #{city}
                                 span.lnr.lnr-chevron-down#city 
                             button.search-btn.btn--lg#search Search Now
             p
@@ -33,10 +37,10 @@ block content
                             .product__thumbnail
                                 img#event-coverPhoto(src='' + eventCard.coverPhoto, alt='Product Image')
                                 .prod_btn
-                                    a.transparent.btn--sm.btn--round(href='' + eventCard.eventInfo) Event Info
-                                    a.transparent.btn--sm.btn--round(href='' + eventCard.authorProfile) Author Profile
+                                    a.transparent.btn--sm.btn--round(href='/event/' + eventCard.eventId) Event Info
+                                    a.transparent.btn--sm.btn--round(href='/profile/' + eventCard.username) Author Profile
                             .product-desc
-                                a.product_title(href='' + eventCard.eventInfo)
+                                a.product_title(href='/event/' + eventCard.eventId)
                                     h4#event-title #{eventCard.title}
                                 .row
                                     .col-md-8
@@ -58,25 +62,7 @@ block content
                                 p#event-description
                                     | #{eventCard.description}
                             .product-purchase
-                                .price_love
-                                    span#event-ticketPrice #{eventCard.ticketPrice}
-                                    p
-                                        span#event-followers.lnr.lnr-heart
-                                        | #{eventCard.followers}
-                                .sell
-                                    p
-                                        span.lnr.lnr-cart
-                                        span#event-capacity #{eventCard.capacity}
-        .row
-            .col-md-12
-                .pagination-area
-                    nav.navigation.pagination(role='navigation')
-                        .nav-links
-                            a.prev.page-numbers(href='#')
-                                span.lnr.lnr-arrow-left
-                            a.page-numbers.current(href='#') 1
-                            a.page-numbers(href='#') 2
-                            a.page-numbers(href='#') 3
-                            a.next.page-numbers(href='#')
-                                span.lnr.lnr-arrow-right
+
+block extrastuff
+    script(src='/static/js/city.js')
 

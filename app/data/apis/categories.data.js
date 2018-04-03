@@ -1,5 +1,5 @@
 const {
-    Subcategory
+    Subcategory,
 } = require('../../../models/database/models');
 
 class Category {
@@ -24,7 +24,7 @@ class Category {
                 {
                     model: Subcategory,
                     attributes: ['title'],
-                }
+                },
             ],
         });
 
@@ -34,8 +34,8 @@ class Category {
     getByName(category) {
         const result = this.Model.findOne({
             where: {
-                name: category
-            }
+                name: category,
+            },
         });
 
         return result;

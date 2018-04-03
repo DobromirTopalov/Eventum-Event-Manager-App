@@ -12,6 +12,7 @@
   box-shadow: 0 2px 4px rgba(108,111,115,0.1);
   margin-bottom: 30px;
   .product__thumbnail{
+    min-height: 210px;
     img{
       border-radius: 4px 4px 0 0;
       width: 100%;
@@ -27,7 +28,7 @@
       border-radius: 4px 4px 0 0;
       width: 100%;
       top: 0;
-      @include gradient;
+      background-image: linear-gradient(to right, #000, #0674ec);
       left: 0;
     }
   }

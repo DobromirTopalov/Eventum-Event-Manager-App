@@ -1,9 +1,9 @@
 const {
-    Country
+    Country,
 } = require('./../../models/database/models');
 
 class CityData {
-    constructor (Model) {
+    constructor(Model) {
         this.Model = Model;
     }
 
@@ -14,9 +14,9 @@ class CityData {
                 {
                     model: Country,
                     where: {
-                        name: country
+                        name: country,
                     },
-                }
+                },
             ],
         });
 

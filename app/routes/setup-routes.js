@@ -1,11 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 
-const init = (app, data) => {
-    app.get('/', async (req, res) => {
-        const context = {};
+const HomeController = require('./home/home.controller');
 
-        res.render('./home/home', { context });
+const init = (app, data) => {
+    const controller = new HomeController(data);
+
+    app.get('/', async (req, res) => {
+        const categories = await controller.getAllCategories();
+        const countries = await controller.getAllCountries();
+
+        const context = {
+            categories,
+            countries,
+        };
+
+        res.render('./home/home', context );
     });
 
     /* dynamically load all routes */
