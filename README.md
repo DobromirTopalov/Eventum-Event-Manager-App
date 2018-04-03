@@ -31,17 +31,22 @@ There are many ideas that still have not been implemented, but are going to be p
 
 ## Dependancies
 
+  * array-union
+  * arrify
   * bcrypt
-  * chai-as-promised
-  * chart.js
+  * body-parser
+  * bootstrap
+  * connect-flash
   * cookie-parser
   * express
   * express-session
-  * mysql2
-  * passport
-  * passport-local
-  * lodash
+  * is-path-cwd
+  * is-path-inside
   * morgan
+  * multer
+  * mysql2
+  * node-sass
+  * passport
   * pug
   * sequelize
   * sequelize-auto-migrations
