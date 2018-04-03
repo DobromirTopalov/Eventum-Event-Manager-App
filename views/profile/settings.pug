@@ -13,10 +13,10 @@ block content
     - var passwordSecondary = account.password;
     - var country = account.country;
     - var address = account.address;
-    - var coverPicName = account.coverPhoto;
-    - var profilePicName = account.avatar;
+    - var coverPicName = account.UserInfo.coverPhoto;
+    - var profilePicName = account.UserInfo.avatar;
     
-    .dashboard-area
+    .dashboard-areacd 
         .dashboard_contents
             .container
                 .row
@@ -42,7 +42,7 @@ block content
                                                 +user-settings-personalInfo()
                                             else
                                                 +artist-settings-personalInfo()
-
+                                    |
                             .col-md-6
                                 .information_module
                                     a.toggle_title(href='#collapse3', role='button', data-toggle='collapse', aria-expanded='false', aria-controls='collapse1')
@@ -50,7 +50,7 @@ block content
                                             | Profile Image &amp; Cover 
                                             span.lnr.lnr-chevron-down
                                     |                                 
-                                    #collapse3.information__set.profile_images.toggle_module.collapse
+                                    #collapse3.information__set.profile_images.toggle_module.collapse.in
                                         .information_wrapper
                                             .profile_image_area
                                                 img#profileImg(src='/static/uploads/'+ profilePicName, height="100", width="100", alt='Author profile area')

@@ -9,11 +9,11 @@ const UserController = require('../register/register.controller');
 const EncryptController = require('../../../controllers/EncryptingController');
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: function(req, file, cb) {
         cb(null,
             path.join(__dirname, '..', '..', '..', 'public', 'uploads'));
     },
-    filename: async (req, file, cb) => {
+    filename: async function(req, file, cb) {
         cb(null,
             await EncryptController.imageName(file.originalname + Date.now())
             + path.extname(file.originalname));
@@ -33,9 +33,9 @@ const init = (app, data) => {
             }
 
             const countries = await controller.getAllCountries();
-
             const account = req.user;
             account.countries = countries;
+            console.log(account);
 
             return res.render('./profile/settings', { account });
         })
@@ -43,13 +43,14 @@ const init = (app, data) => {
             if (!req.user) {
                 return res.redirect('/login');
             }
-
+   
+            
             const userData = req.body;
-            userData.role = req.user.role;
             const userID = req.user.id;
 
             if (Object.keys(userData).length !== 0) {
                 try {
+                    userData.role = req.user.role;
                     await controller.updateUser(userID, userData);
                 } catch (err) {
                     res.status(400).json({ 'err': err.message });

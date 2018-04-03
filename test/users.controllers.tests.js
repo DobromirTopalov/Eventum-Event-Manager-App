@@ -411,8 +411,8 @@ describe('UserController', () => {
                 testUser.username = 'newUsername';
                 testUser.name = 'lolo';
                 testUser.email = 'nouser@gmail.co';
-                testUser.password = '1d8';
-                testUser.passwordRepeat = '1d8';
+                testUser.password = '1d8667';
+                testUser.passwordRepeat = '1d8667';
 
                 userArray = [{
                     id: 2,
@@ -430,7 +430,6 @@ describe('UserController', () => {
 
                 return await expect(func())
                 .to.eventually.to.be.fulfilled;
-                // .and.be.an.instanceOf(UserError.EmptyUsername);
             });
         });
         describe('when the username is changed to different', () => {
@@ -440,8 +439,8 @@ describe('UserController', () => {
                 testUser.username = 'userDefault';
                 testUser.name = 'lolo';
                 testUser.email = 'nouser@gmail.co';
-                testUser.password = '1d8';
-                testUser.passwordRepeat = '1d8';
+                testUser.password = '1d8rrrr';
+                testUser.passwordRepeat = '1d8rrrr';
 
                 usernameSpy
                     .returns({
@@ -469,8 +468,8 @@ describe('UserController', () => {
                 testUser.username = 'userDefault';
                 testUser.name = 'lolo';
                 testUser.email = 'nouser@gmail.co';
-                testUser.password = '1d8';
-                testUser.passwordRepeat = '1d8';
+                testUser.password = '1d8123123';
+                testUser.passwordRepeat = '1d8123123';
 
                 emailSpy
                     .returns({
@@ -499,8 +498,8 @@ describe('UserController', () => {
                 testUser.username = 'userDefault';
                 testUser.name = 'lolo';
                 testUser.email = 'nouser@gmail.co';
-                testUser.password = '1d8';
-                testUser.passwordRepeat = '1d8';
+                testUser.password = '1d1231238';
+                testUser.passwordRepeat = '1d1231238';
 
                 emailSpy
                     .returns(null);
@@ -524,8 +523,8 @@ describe('UserController', () => {
                 testUser.username = 'userDefault';
                 testUser.name = 'lolo';
                 testUser.email = 'nouser@gmail.co';
-                testUser.password = '1d8';
-                testUser.passwordRepeat = '1d8';
+                testUser.password = '1d8123213';
+                testUser.passwordRepeat = '1d8123213';
                 testUser.country = '3213';
 
                 emailSpy

@@ -164,8 +164,8 @@ $(document).ready(function(e) {
             checkEmail(obj.$email);
             checkAddress(obj.$address);
             checkWebsite(obj.$webpage);
-            checkCoverPhoto(obj.$coverPhoto);
-            checkCoverPhoto(obj.$coverImg);
+            // checkCoverPhoto(obj.$coverPhoto);
+            // checkCoverPhoto(obj.$coverImg);
             checkBiography(obj.$authBio);
             checkSocialProfileLink(obj.$socialProf1);
             checkSocialProfileLink(obj.$socialProf2);
