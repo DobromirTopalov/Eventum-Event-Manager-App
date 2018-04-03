@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node ./app/server.js",
     "add-migration": "cd models/database && node ../../node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "migrate": "cd models/database && ../../node_modules/.bin/sequelize db:migrate",
-    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha test/**/*.test.js",
+    "test": "./node_modules/.bin/nyc --all ./node_modules/.bin/mocha ./test/**/*.js",
     "test-watch": "nodemon --exec 'npm test'",
     "add-seeders": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
@@ -18,6 +19,8 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
@@ -28,12 +31,14 @@
     "multer": "^1.3.0",
     "mysql2": "^1.5.3",
     "node-sass": "^4.7.2",
+    "nyc": "^11.6.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "sequelize": "^4.37.3",
     "sequelize-auto-migrations": "^1.0.2",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "sinon": "^4.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

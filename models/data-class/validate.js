@@ -4,6 +4,7 @@ const checkPassword = (passwordOne, passwordTwo) => {
   }
   return false;
 };
+module.exports = checkPassword;
 
 // check email in DB
 // check username in DB
