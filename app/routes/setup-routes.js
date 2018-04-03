@@ -23,7 +23,7 @@ const init = (app, data) => {
         fs.readdirSync(routepath)
             .filter((filename) => {
                 if (filename.slice(-3) !== '.js') {
-                    const filePath = routepath + '\\' + filename;
+                    const filePath = routepath + '/' + filename;
                     dfsDirectory(filename, filePath);
                 }
                 if (filename !== path.basename(__filename)) {
@@ -41,7 +41,7 @@ const init = (app, data) => {
             });
     };
 
-    const folder = __dirname.split('\\');
+    const folder = __dirname.split('/');
     const lastSlash = folder.length - 1;
     const fullroute = __dirname;
 
