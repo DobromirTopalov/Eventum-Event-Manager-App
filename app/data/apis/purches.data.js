@@ -1,3 +1,14 @@
+const {
+    Event,
+    Location,
+    City,
+    Country,
+    Category,
+    Subcategory,
+    User,
+    UserInfo,
+} = require('../../../models/database/models');
+
 class Purches {
   constructor(Model) {
       this.Model = Model;
@@ -19,6 +30,57 @@ class Purches {
       });
 
       return result;
+  }
+
+  getAllByUser(id) {
+    const result = this.Model.findAll({
+        where: {
+            UserId: id,
+        },
+        include: {
+            model: Event,
+        },
+    });
+
+    return result;
+  }
+
+  getAllByUserFullEvent(id) {
+    const result = this.Model.findAll({
+        where: {
+            UserId: id,
+        },
+        include: {
+            model: Event,
+            include: [
+                {
+                    model: Location,
+                    include: [
+                        {
+                            model: City,
+                            include: {
+                                model: Country,
+                            },
+                        },
+                    ],
+                },
+                {
+                    model: User,
+                    include: {
+                        model: UserInfo,
+                    },
+                },
+                {
+                    model: Category,
+                },
+                {
+                    model: Subcategory,
+                },
+            ],
+        },
+    });
+
+    return result;
   }
 
   async addNewPurches(quantity, UserId, EventId, TicketId, BillingInfoId) {

@@ -1,178 +1,33 @@
 mixin user-event()
-    .row
-        .col-md-6.col-sm-6
-            .product.product--card
-                .product__thumbnail
-                    img(src='/static/images/p4.jpg', alt='Product Image')
-                    .prod_btn
-                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
-                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
-                .product-desc
-                    a.product_title(href='#')
-                        h4 Yannan Na nakka muka
-                    ul.titlebtm
-                        li
-                            img.auth-img(src='/static/images/auth3.jpg', alt='author image')
-                            p
-                                a(href='#') AazzTech
-                        li.product_cat
-                            a(href='#')
-                                img(src='images/cathtm.png', alt='category image')
-                                | Plugin
-                    p
-                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
-                        | the mattis, leo quam aliquet congue.
-                .product-purchase
-                    .price_love
-                        span $10
-                        p
-                            span.lnr.lnr-heart
-                            |  48
-                    .rating.product--rating
-                        ul
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star-half-o
-                    .sell
-                        p
-                            span.lnr.lnr-cart
-                            span 50
-        .col-md-6.col-sm-6
-            .product.product--card
-                .product__thumbnail
-                    img(src='images/p2.jpg', alt='Product Image')
-                    .prod_btn
-                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
-                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
-                .product-desc
-                    a.product_title(href='#')
-                        h4 Mccarther Coffee Shop
-                    ul.titlebtm
-                        li
-                            img.auth-img(src='images/auth2.jpg', alt='author image')
-                            p
-                                a(href='#') AazzTech
-                        li.product_cat
-                            a(href='#')
-                                img(src='images/catword.png', alt='category image')
-                                | wordpress
-                    p
-                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
-                        | the mattis, leo quam aliquet congue.
-                .product-purchase
-                    .price_love
-                        span $10
-                        p
-                            span.lnr.lnr-heart
-                            |  48
-                    .rating.product--rating
-                        ul
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star-half-o
-                    .sell
-                        p
-                            span.lnr.lnr-cart
-                            span 50
-        .col-md-6.col-sm-6
-            .product.product--card
-                .product__thumbnail
-                    img(src='images/p2.jpg', alt='Product Image')
-                    .prod_btn
-                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
-                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
-                .product-desc
-                    a.product_title(href='#')
-                        h4 Mccarther Coffee Shop
-                    ul.titlebtm
-                        li
-                            img.auth-img(src='images/auth2.jpg', alt='author image')
-                            p
-                                a(href='#') AazzTech
-                        li.product_cat
-                            a(href='#')
-                                img(src='images/catword.png', alt='category image')
-                                | wordpress
-                    p
-                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
-                        | the mattis, leo quam aliquet congue.
-                .product-purchase
-                    .price_love
-                        span $10
-                        p
-                            span.lnr.lnr-heart
-                            |  48
-                    .rating.product--rating
-                        ul
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star-half-o
-                    .sell
-                        p
-                            span.lnr.lnr-cart
-                            span 50
-        .col-md-6.col-sm-6
-            .product.product--card
-                .product__thumbnail
-                    img(src='images/p6.jpg', alt='Product Image')
-                    .prod_btn
-                        a.transparent.btn--sm.btn--round(href='single-product.html') More Info
-                        a.transparent.btn--sm.btn--round(href='single-product.html') Live Demo
-                .product-desc
-                    a.product_title(href='#')
-                        h4 The of the century
-                    ul.titlebtm
-                        li
-                            img.auth-img(src='images/auth.jpg', alt='author image')
-                            p
-                                a(href='#') AazzTech
-                        li.product_cat
-                            a(href='#')
-                                img(src='images/catph.png', alt='Category Image')
-                                | PSD
-                    p
-                        | Nunc placerat mi id nisi interdum mollis. Praesent pharetra, justo ut scelerisque
-                        | the mattis, leo quam aliquet congue.
-                .product-purchase
-                    .price_love
-                        span $10
-                        p
-                            span.lnr.lnr-heart
-                            |  48
-                    .rating.product--rating
-                        ul
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star
-                            li
-                                span.fa.fa-star-half-o
-                    .sell
-                        p
-                            span.lnr.lnr-cart
-                            span 50
+    .row#event-list
+        each eventCard in account.eventInfo
+            .col-md-6.col-sm-6
+                .product.product--card
+                    .product__thumbnail
+                        img#event-coverPhoto(src='' + eventCard.coverPhoto, alt='Product Image')
+                        .prod_btn
+                            a.transparent.btn--sm.btn--round(href='/event/' + eventCard.eventId) Event Info
+                            a.transparent.btn--sm.btn--round(href='/profile/' + eventCard.username) Author Profile
+                    .product-desc
+                        a.product_title(href='/event/' + eventCard.eventId)
+                            h4#event-title #{eventCard.title}
+                        .row
+                            .col-md-8
+                                ul.titlebtm
+                                    li
+                                        img.auth-img#event-author(src='' + eventCard.authorImg, alt='author image', width='30px')
+                                        p
+                                            a(href='' + eventCard.authorProfile) #{eventCard.name}
+                                    li.product_cat
+                                        span.lnr.lnr-book
+                                        each category in eventCard.categories
+                                            a(href='#')
+                                                | #{category.name}
+                            .col-md-4
+                                |#{eventCard.city}
+
+                        p#event-date
+                            | Date of event: #{eventCard.date} 
+                        p#event-description
+                            | #{eventCard.description}
+                    .product-purchase
