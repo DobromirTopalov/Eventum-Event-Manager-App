@@ -38,12 +38,12 @@ block content
                                             input#email1.text_field(placeholder='Email address', value='contact@somemail.com', name='email', type='text')
                                         |                                         
                                         .form-group
-                                            label(for='country1')
+                                            label(for='country-input')
                                                 | Country 
                                                 sup *
                                             |                                             
                                             .select-wrap.select-wrap2
-                                                select#country1.text_field(name='country')
+                                                select#country-input.text_field(name='country')
                                                     option(value='') Select one
                                                     |                                                             
                                                     each country in countries
@@ -58,11 +58,11 @@ block content
                                         .form-group
                                             .row
                                                 .col-md-6
-                                                    label(for='city')
+                                                    label(for='city-input')
                                                         | City / State 
                                                         sup *
                                                     .select-wrap.select-wrap2
-                                                        select#city.text_field(name='city')
+                                                        select#city-input.text_field(name='city')
                                                             option(value='') Select one                                                       
                                                         span.lnr.lnr-chevron-down
                                                 .col-md-6
@@ -88,3 +88,5 @@ block content
                                 #messagediv
                             .col-md-10.col-md-offset-8                                                      
                                 button.btn.btn--round.btn--default#confirmOrder(type='button') Confirm Order
+block extrastuff
+    script(src='/static/js/city.js')

@@ -24,14 +24,18 @@ const upload = multer({ storage: storage });
 
 const init = (app, data) => {
     const router = new Router();
-    const userController = new UserController(data);
+    const controller = new UserController(data);
+
     router
         .get('/', async (req, res, next) => {
             if (!req.user) {
                 return res.redirect('/login');
             }
 
+            const countries = await controller.getAllCountries();
+
             const account = req.user;
+            account.countries = countries;
 
             return res.render('./profile/settings', { account });
         })
@@ -46,7 +50,7 @@ const init = (app, data) => {
 
             if (Object.keys(userData).length !== 0) {
                 try {
-                    await userController.updateUser(userID, userData);
+                    await controller.updateUser(userID, userData);
                 } catch (err) {
                     res.status(400).json({ 'err': err.message });
                 }
@@ -56,13 +60,13 @@ const init = (app, data) => {
                 const hashedFileName = await req.files[0].filename;
 
                 if (req.files[0].fieldname === 'profilePhoto') {
-                    await userController
+                    await controller
                         .updateUserProfilePic(userID, hashedFileName);
                     res.end();
                 }
 
                 if (req.files[0].fieldname === 'coverPhoto') {
-                    await userController
+                    await controller
                         .updateUserCoverPic(userID, hashedFileName);
                     res.end();
                 }

@@ -258,4 +258,3 @@ $(document).ready(function(e) {
         });
     });
 });
-/* eslint-enable */

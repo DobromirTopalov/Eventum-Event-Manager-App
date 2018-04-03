@@ -5,6 +5,11 @@ class UserController {
         this.data = data;
     }
 
+    async getAllCountries() {
+        const result = await this.data.country.getAll();
+
+        return result;
+    }
     async createUser(userData) {
         let thisUser = null;
         try {
@@ -66,7 +71,7 @@ class UserController {
             }
 
             await this.data.users.updateUserData(userID, thisUser);
-            await this.data.users.createTicket(userID, thisUser);
+            // await this.data.users.createTicket(userID, thisUser);
         } catch (err) {
             throw err;
         }
