@@ -114,7 +114,7 @@ module.exports = {
             name: 'Luxembourg',
             CountryId: 16,
         }, {
-            name: 'Żabbar',
+            name: 'Zabbar',
             CountryId: 17,
         }, {
             name: 'Groningen',
