@@ -40,12 +40,13 @@ const init = (app, data) => {
             return res.render('./event/create', context);
         })
         .post('/create', [upload.any(), async (req, res, next) => {
-            let eventData = await req.body;
-            // console.log(req);
+            let eventData = req.body;
             if (!req.user) {
                 res.redirect('/login');
             }
-            const userID = await req.user.id;
+
+            const userID = req.user.id;
+
             try {
                 if (req.files.length === 1) {
                     const hashedFileName = await req.files[0].filename;

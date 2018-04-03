@@ -121,7 +121,7 @@ class UsersData extends Data {
                     email: userObject.getEmail(),
                     password: userObject.getPassword(),
                     name: userObject.getName(),
-                    role: 'User',
+                    role: userObject.getRole(),
                     UserInfoId: id,
                 },
                 { where: { id: id } }
