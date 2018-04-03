@@ -10,7 +10,7 @@ Team assignment project @ Telerik Alpha Academy - JS track
 | 2.    |  Yavor Stoychev     |
 | 3.	  |  Dobromir Topalov   |
 
-## App Description - demo link
+## App Description - https://eventum-event-manager-app.herokuapp.com/
 
 Eventum is a standart web application for browsing, searching, managing(CRUD) events of different categories or types. There is a register system which allows you to sign up as an artist, or - user, otherwise you are treated like a guest. Guests can **browse**, **search**, **inspect-artists end events**.Our users extends guest functionality with **purchase ticket option**, **cart**, **profile panel** where each user can change their info, as well check his event history or see his **checkout page** to buy tickets for his friends. What makes the artist more attractive is its control over events - **create**, **update**, **delete**, whatever you'd say.
 
