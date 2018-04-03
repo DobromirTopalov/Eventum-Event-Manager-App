@@ -21,6 +21,51 @@ class EventData {
         return result;
     }
 
+    getAllEventsByUser(id) {
+        const result = this.Model.findAll({
+            where: {
+                UserId: id,
+            },
+        });
+
+        return result;
+    }
+
+    getAllEventsByUserFull(id) {
+        const result = this.Model.findAll({
+            where: {
+                UserId: id,
+            },
+            include: [
+                {
+                    model: Location,
+                    include: [
+                        {
+                            model: City,
+                            include: {
+                                model: Country,
+                            },
+                        },
+                    ],
+                },
+                {
+                    model: User,
+                    include: {
+                        model: UserInfo,
+                    },
+                },
+                {
+                    model: Category,
+                },
+                {
+                    model: Subcategory,
+                },
+            ],
+        });
+
+        return result;
+    }
+
     getEventInfoById(id) {
         const result = this.Model.findOne({
             where: {
@@ -58,23 +103,23 @@ class EventData {
 
     getEventInfoByQuery(keywords, city, country, category) {
         let keywordsQuery = keywords.split(' ');
-        keywordsQuery = keywordsQuery.map(function (item) {
+        keywordsQuery = keywordsQuery.map((item) => {
             return {
                 $like: '%' + item + '%',
             };
         });
         // let cityQuery = city.split(' ');
-        const cityQuery = city.split(' ').map(function (item) {
+        const cityQuery = city.split(' ').map((item) => {
             return {
                 $like: '%' + item + '%',
             };
         });
-        const countryQuery = country.split(' ').map(function (item) {
+        const countryQuery = country.split(' ').map((item) => {
             return {
                 $like: '%' + item + '%',
             };
         });
-        const categoryQuery = category.split(' ').map( (item) => {
+        const categoryQuery = category.split(' ').map((item) => {
             return {
                 $like: '%' + item + '%',
             };
@@ -82,7 +127,7 @@ class EventData {
 
         const result = this.Model.findAll({
             where: {
-                describe: { $or: keywordsQuery }
+                describe: { $or: keywordsQuery },
             },
             required: true,
             include: [
@@ -126,6 +171,7 @@ class EventData {
         });
         return result;
     }
+
     getAllEventsInfo() {
         const result = this.Model.findAll({
             include: [
@@ -173,6 +219,7 @@ class EventData {
 
         return result;
     }
+
     async addEventCoverPic(id, coverImg) {
         const result = this.Model.update({
             coverPhoto: coverImg,
@@ -182,10 +229,12 @@ class EventData {
 
         return result;
     }
+
     async deleteEventById(id) {
         const result = this.Model.destroy({
             where: { id: id },
         });
+
         return result;
     }
 }

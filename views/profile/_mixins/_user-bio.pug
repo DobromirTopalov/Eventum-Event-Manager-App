@@ -6,14 +6,11 @@ mixin user-bio()
                     p Visited Events
                 else
                     p Events 
-                h3 4,369
+                h3 #{account.eventInfo.length || 0}
         .col-md-4.col-sm-4
             .author-info.pcolorbg
-                if account.role == 'User'
-                    p Comments
-                else
-                    p Role
-                h3 36,957
+                p Role
+                h3 #{account.role}
         if account.role == 'Artist'
             .col-md-4.col-sm-4
                 .author-info.scolorbg
