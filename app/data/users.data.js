@@ -32,7 +32,31 @@ class UsersData extends Data {
 
         return result;
     }
+    getUsersByQuery(keywords, type) {
+        let keywordsQuery = keywords.split(' ');
+        keywordsQuery = keywordsQuery.map((item) => {
+            return {
+                $like: '%' + item + '%',
+            };
+        });
+        const typeQuery = type.split(' ').map((item) => {
+            return {
+                $like: '%' + item + '%',
+            };
+        });
+        const result = this.Model.findAll({
+            where: {
+                name: { $or: keywordsQuery },
+                role: { $or: typeQuery },
+            },
+            required: true,
+            include: {
+                model: UserInfo,
+            },
+        });
 
+        return result;
+    }
     findByUsername(username) {
         const result = this.Model.findOne({
             where: {

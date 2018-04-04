@@ -28,6 +28,23 @@ class SearchController {
 
         return result;
     }
+    async userQuery(keywordsQ = '', typeQ = '') {
+        const allUsers = await this.data
+            .users.getUsersByQuery(keywordsQ, typeQ);
+
+        const result = allUsers.map((user) => {
+            return {
+                username: user.username,
+                name: user.name,
+                avatar: '/static/uploads/' + user.UserInfo.avatar,
+                biography: user.UserInfo.biography,
+                role: user.role,
+            };
+        });
+
+        return result;
+    }
+
 
     async getAllCities() {
         const result = await this.data.city.getAll();

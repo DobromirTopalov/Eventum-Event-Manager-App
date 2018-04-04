@@ -1,0 +1,42 @@
+extends ../_layout
+
+block content
+
+    section
+    .container
+        .row
+        .search-area
+        .container
+            .row#search-box-possition
+                .col-sm-12
+                    .search_box
+                        form(action='/users', method="GET")
+                            input.text_field#keywords(type='text', name='keywords', placeholder='Search for events...')
+                            .search__select.select-wrap
+                                select#usertype.select--field(name='usertype')
+                                    option(value='') User type
+                                    option(value='User') User
+                                    option(value='Artist') Artist
+                                span.lnr.lnr-chevron-down
+                            button.search-btn.btn--lg#searchuser Search Now
+            p
+            .row#user-list
+                each userCard in users
+                    .col-md-4.col-sm-6
+                        .product.product--card
+                            .product-desc
+                                a.product_title(href='/profile/' + userCard.username)
+                                    h4#event-title #{userCard.name}
+                                .row
+                                    .col-md-8
+                                        ul.titlebtm
+                                            li
+                                                img.auth-img#user-pic(src='' + userCard.avatar, alt='user image', width='30px')
+                                    .col-md-4
+                                        p #{userCard.role}
+                                .row
+                                    p#event-description
+                                        |#{userCard.biography}
+
+block extrastuff
+
